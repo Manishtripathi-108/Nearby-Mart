@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback_ratings', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->tinyInteger('rating');
-            $table->text('comment')->nullable();
+            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
+            $table->string('address');
+            $table->string('street_address')->nullable();
+            $table->string('city', 50);
+            $table->string('phone', 20);
+            $table->boolean('is_default')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feedback_ratings');
+        Schema::dropIfExists('addresses');
     }
 };

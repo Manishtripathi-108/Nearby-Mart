@@ -14,11 +14,8 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->where('user_type', 'Store Owner')->constrained()->cascadeOnDelete();
-            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('address_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('address');
-            $table->string('street_address');
-            $table->string('city');
             $table->string('phone', 20);
             $table->string('email', 50);
             $table->timestamps();

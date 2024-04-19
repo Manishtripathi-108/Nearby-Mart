@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('address_id')->constrained()->cascadeOnDelete();
+            $table->unsignedTinyInteger('no_of_items');
+            $table->unsignedInteger('total_amount');
             $table->enum('delivery_method', ['Home Delivery', 'Store Pickup'])->default('Home Delivery');
-            $table->timestamp('order_date')->useCurrent();
-            $table->enum('order_status', ['pending', 'processing', 'completed', 'cancelled'])->default('pending');
-            $table->date('delivery_date')->nullable();
             $table->timestamps();
         });
     }
