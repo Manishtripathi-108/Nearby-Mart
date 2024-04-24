@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->where('user_type', 'Store Owner')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('address_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('phone', 20);
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */

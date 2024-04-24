@@ -11,6 +11,7 @@ class Store extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'user_id',
         'address_id',
@@ -18,6 +19,9 @@ class Store extends Model
         'phone',
         'email',
     ];
+
+    // Eager loading: products, businessHours
+    protected $with = ['products', 'businessHours'];
 
 
     // relationships: user (belongsTo), address (belongsTo), products (hasMany), businessHours (hasMany)

@@ -10,6 +10,7 @@ class Payment extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'order_id',
         'amount',
@@ -17,6 +18,9 @@ class Payment extends Model
         'payment_status',
         'completed_date',
     ];
+
+    // Eager loading: order
+    protected $with = ['order'];
 
     // relationships: order (belongsTo)
     public function order(): BelongsTo

@@ -10,6 +10,7 @@ class BusinessHour extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'store_id',
         'day',

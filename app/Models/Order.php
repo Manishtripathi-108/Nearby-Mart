@@ -12,6 +12,7 @@ class Order extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'user_id',
         'address_id',
@@ -19,6 +20,9 @@ class Order extends Model
         'total_amount',
         'delivery_method',
     ];
+
+    // Eager loading: orderItems, payment, address
+    protected $with = ['orderItems', 'payment', 'address'];
 
     // relationships: user (belongsTo), orderItems (hasMany), payment (HasOne), address (belongsTo)
     public function user(): BelongsTo
