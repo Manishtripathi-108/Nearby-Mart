@@ -10,8 +10,10 @@
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-r from-blue-200  to-purple-200 w-full h-full">
+<livewire:navbar/>
+<livewire:landing-page/>
 
-    <div class="fixed   w-full h-16 text-black flex pl-20 pr-20 items-center justify-end content-around md:">
+    <!-- <div class="fixed   w-full h-16 text-black flex pl-20 pr-20 items-center justify-end content-around md:">
     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3 ">
                         @if (Route::has('login'))
                             <nav class="-mx-3 flex flex-1 justify-end ">
@@ -76,6 +78,6 @@
 
        <div class=" fixed bg-red-500 top-1/2 left-1/2 w-600 h-7000 transform -translate-x-1/2 -translate-y-1/2">
          
-      </div>
+      </div> -->
 </body>
 </html>
