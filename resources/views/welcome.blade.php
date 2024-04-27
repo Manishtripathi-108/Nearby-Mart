@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
 <script src="https://cdn.tailwindcss.com"></script>
+@livewireStyles
 </head>
 <body class="bg-gradient-to-r from-blue-200  to-purple-200 w-full h-full">
-<livewire:navbar/>
+         
 <livewire:landing-page/>
 
     <!-- <div class="fixed   w-full h-16 text-black flex pl-20 pr-20 items-center justify-end content-around md:">
@@ -79,5 +80,7 @@
        <div class=" fixed bg-red-500 top-1/2 left-1/2 w-600 h-7000 transform -translate-x-1/2 -translate-y-1/2">
          
       </div> -->
+
+      
 </body>
 </html>
