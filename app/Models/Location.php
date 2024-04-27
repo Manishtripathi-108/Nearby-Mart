@@ -21,7 +21,7 @@ class Location extends Model
     ];
 
     // relationships: address (hasMany)
-    public function address(): HasMany
+    public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
     }

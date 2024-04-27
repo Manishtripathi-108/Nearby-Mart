@@ -20,7 +20,7 @@ class Payment extends Model
     ];
 
     // Eager loading: order
-    protected $with = ['order'];
+    // protected $with = ['order'];
 
     // relationships: order (belongsTo)
     public function order(): BelongsTo

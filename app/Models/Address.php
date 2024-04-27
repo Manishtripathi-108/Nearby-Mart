@@ -39,7 +39,7 @@ class Address extends Model
         return $this->hasOne(Store::class);
     }
 
-    public function order(): HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }

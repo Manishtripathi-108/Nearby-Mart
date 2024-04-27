@@ -16,14 +16,13 @@ class OrderItem extends Model
         'product_id',
         'quantity',
         'unit_price',
-        'unit_discount',
         'total_amount',
         'order_status',
         'item_delivery_date',
     ];
 
     // Eager loading: order, product
-    protected $with = ['order', 'product'];
+    // protected $with = ['order', 'product'];
 
     // relationships: order (belongsTo), product (belongsTo)
     public function order(): BelongsTo

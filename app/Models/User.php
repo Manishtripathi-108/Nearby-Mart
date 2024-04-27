@@ -44,7 +44,7 @@ class User extends Authenticatable
     }
 
     // Eager loading: userDetail
-    protected $with = ['userDetail'];
+    // protected $with = ['userDetail'];
 
 
     // The name attribute should be capitalized
@@ -78,7 +78,7 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function feedbackRating(): HasMany
+    public function feedbackRatings(): HasMany
     {
         return $this->hasMany(FeedbackRating::class);
     }

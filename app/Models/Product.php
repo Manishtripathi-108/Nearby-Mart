@@ -32,7 +32,7 @@ class Product extends Model
     ];
 
     // Eager loading: store, feedbackRatings
-    protected $with = ['store', 'feedbackRatings'];
+    // protected $with = ['store', 'feedbackRatings'];
 
     // relationships: store (belongsTo), category (belongsTo), hasMany (orderItems, carts, feedbackRatings)
     public function store(): BelongsTo

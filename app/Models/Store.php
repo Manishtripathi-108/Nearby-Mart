@@ -21,7 +21,7 @@ class Store extends Model
     ];
 
     // Eager loading: products, businessHours
-    protected $with = ['products', 'businessHours'];
+    // protected $with = ['products', 'businessHours'];
 
 
     // relationships: user (belongsTo), address (belongsTo), products (hasMany), businessHours (hasMany)
@@ -30,7 +30,7 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function address(): BelongsTo
+    public function addresses(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }

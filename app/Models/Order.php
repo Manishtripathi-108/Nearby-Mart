@@ -22,7 +22,7 @@ class Order extends Model
     ];
 
     // Eager loading: orderItems, payment, address
-    protected $with = ['orderItems', 'payment', 'address'];
+    // protected $with = ['orderItems', 'payment', 'address'];
 
     // relationships: user (belongsTo), orderItems (hasMany), payment (HasOne), address (belongsTo)
     public function user(): BelongsTo
