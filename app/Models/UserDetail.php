@@ -10,6 +10,7 @@ class UserDetail extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'user_id',
         'profile_picture',

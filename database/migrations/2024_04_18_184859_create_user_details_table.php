@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('profile_picture')->default('profile.png');
-            $table->timestamp('dob')->nullable();
+            $table->date('dob')->nullable();
             $table->string('phone', 20);
             $table->enum('user_type', ['Customer', 'Store Owner', 'Admin'])->default('Customer')->index();
             $table->timestamps();

@@ -10,16 +10,19 @@ class OrderItem extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'order_id',
         'product_id',
         'quantity',
         'unit_price',
-        'unit_discount',
         'total_amount',
         'order_status',
         'item_delivery_date',
     ];
+
+    // Eager loading: order, product
+    // protected $with = ['order', 'product'];
 
     // relationships: order (belongsTo), product (belongsTo)
     public function order(): BelongsTo

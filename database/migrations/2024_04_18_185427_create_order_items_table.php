@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->unsignedInteger('quantity');
             $table->decimal('unit_price', 10, 2);
-            $table->decimal('unit_discount', 10, 2)->default(0);
             $table->decimal('total_amount', 10, 2);
             $table->enum('order_status', ['Pending', 'Processing', 'Delivered', 'Cancelled'])->default('Pending');
             $table->date('item_delivery_date')->nullable();
