@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Near-by Mart</title>
-
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
-<script src="https://cdn.tailwindcss.com"></script>
-@livewireStyles
-</head>
-<body class="bg-gradient-to-r from-blue-200  to-purple-200 w-full h-full">
-<livewire:navbar/>
+<x-layout>
 <section class="py-6 dark:bg-gray-100 dark:text-gray-900 ">
 	<div class="container mx-auto flex flex-col justify-center p-4 space-y-8 md:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row">
 		<div class="flex flex-col space-y-4 text-center lg:text-left">
@@ -26,6 +13,4 @@
 		</div>
 	</div>
 </section>
- 
-</body>
-</html>
+</x-layout>
