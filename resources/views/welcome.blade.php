@@ -11,76 +11,58 @@
 @livewireStyles
 </head>
 <body class="bg-gradient-to-r from-blue-200  to-purple-200 w-full h-full">
-         
-<livewire:landing-page/>
+<main>
 
-    <!-- <div class="fixed   w-full h-16 text-black flex pl-20 pr-20 items-center justify-end content-around md:">
-    <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3 ">
-                        @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end ">
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black border-2 rounded-sm ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white dark:border-white dark:border-opacity-50"
-                                    >
-                                        Log in
-                                    </a>
+<section
+>
+  <!-- <div
+    class="absolute inset-0 bg-white/75 sm:bg-transparent sm:from-white/95 sm:to-white/25 ltr:sm:bg-gradient-to-r rtl:sm:bg-gradient-to-l"
+  > 
+</div> -->
+<div class="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
+    <img
+      class="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none  lg:h-full"
+      src="images/Online-Shopping.png"
+      alt=""
+      width="890px"
+      height="750px"
+    />
+  </div>
+  <div
+    class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-3 lg:flex lg:h-screen lg:items-center lg:px-8 md:item-center"
+  >
+    <div class="max-w-xl text-center ltr:sm:text-left rtl:sm:text-right backdrop-opacity-10 backdrop-invert bg-white/30 p-10 ">
+      <h1 class="text-3xl font-extrabold sm:text-5xl">
+        Welcome to
 
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black border-2 rounded ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
-                        @endif
-                    </header> 
+        <strong class="block font-extrabold text-blue-700"> Nearby Mart. </strong>
+      </h1>
+
+      <p class="mt-4 max-w-lg sm:text-xl/relaxed text-center">
+	  Your one-stop destination for digital commerce where you can sell and shop with ease.Turn your products into profits by setting up your digital store on Nearby Mart. Reach a wider audience and showcase your offerings effortlessly.From everyday essentials to unique finds, explore a vast array of products from sellers near and far. Find what you need, when you need it.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-4 text-center items-center justify-center">
+        <a
+        
+          href="/login"
+          class="block w-full rounded bg-blue-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+        >
+          Login
+</a>
+
+        <a
+        href="/home"
+          class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-blue-600 shadow hover:text-blue-700 focus:outline-none focus:ring active:text-blue-500 sm:w-auto transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+        >
+          Skip
+</a>
+      </div>
+
     </div>
-             <div class="h-full w-full flex flex-col justify-center items-center table-column">
-             @if (Route::has('login'))
-                            <nav class="-mx-3 flex flex-1 justify-end">
-                                @auth
-                                    <a
-                                        href="{{ url('/dashboard') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </a>
-                                @else
-                                    <a
-                                        href="{{ route('login') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Log in
-                                    </a>
-
-                                    @if (Route::has('register'))
-                                        <a
-                                            href="{{ route('register') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </a>
-                                    @endif
-                                @endauth
-                            </nav>
-                        @endif
-             </div>
-
-       <div class=" fixed bg-red-500 top-1/2 left-1/2 w-600 h-7000 transform -translate-x-1/2 -translate-y-1/2">
-         
-      </div> -->
-
+  </div>
+</section>
+</main>
       
 </body>
 </html>

@@ -1,131 +1,62 @@
-<nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
-    <!-- Primary Navigation Menu -->
-   <!-- component -->
-<div class="bg-white">
-	<nav class="relative px-4 py-4 flex justify-between items-center pr-6">
-		<a class="text-3xl font-bold leading-none pl-6" href="#">
-		   <img src="images/Nearby Logo.png" alt="" width="60px" height="60px">
-		</a>
-		<div class="lg:hidden">
-			<button class="navbar-burger flex items-center text-blue-600 p-3">
-				<svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-					<title>Mobile menu</title>
-					<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
-				</svg>
-			</button>
-		</div>
-		<ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-			<li><nav-link class="text-sm text-gray-400 hover:text-gray-500 active:text-blue-600 font-bold focus:text-blue-600 transform ease-in-out duration-200" href="/home-page">Home</nav-link></li>
-			<li class="text-gray-300">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-				</svg>
-			</li>
-			<li><a class="text-sm text-gray-400 hover:text-gray-500 active:text-blue-600 font-bold focus:text-blue-600 transform ease-in-out duration-200" href="/about-page">About us</a></li>
-			<li class="text-gray-300">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-				</svg>
-			</li>
-			<li><nav-link class="text-sm text-gray-400 hover:text-gray-500 active:text-blue-600 font-bold focus:text-blue-600 transform ease-in-out duration-200" href="/contact-page">Contact</nav-link></li>
-		</ul>
-		<a
-		wire:click="login"
-		class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" >Sign In</a>
-		<a 
-		wire:click="register"
-		class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" >Sign up</a>
-	</nav>
-	<div class="navbar-menu relative z-50 hidden">
-		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-		<nav class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
-			<div class="flex items-center mb-8">
-				<a class="mr-auto text-3xl font-bold leading-none" href="#">
-					<img src="images/Nearby Logo.png" alt="" width="40px" height="40px">
-				</a>
-				<button class="navbar-close">
-					<svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-					</svg>
-				</button>
-			</div>
-			<div>
-				<ul>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Home</a>
-					</li>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">About Us</a>
-					</li>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Services</a>
-					</li>
-					<li class="mb-1">
-						<a class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Pricing</a>
-					</li>
-					<li class="mb-1">
-						<a 
-						wire:click="contact"
-						class="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="\contact">Contact</a>
-					</li>
-				</ul>
-			</div>
-			<div class="mt-auto">
-				<div class="pt-6">
-					<button 
-					wire:click="login"
-					class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</button>
-					<button 
-					wire:click="register"
-					class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</button>
-				</div>
-				<!-- <p class="my-4 text-xs text-center text-gray-400">
-					<span>Copyright © 2021</span>
-				</p> -->
-			</div>
-		</nav>
-	</div>
-	<script>
-// Burger menus
-document.addEventListener('DOMContentLoaded', function() {
-    // open
-    const burger = document.querySelectorAll('.navbar-burger');
-    const menu = document.querySelectorAll('.navbar-menu');
 
-    if (burger.length && menu.length) {
-        for (var i = 0; i < burger.length; i++) {
-            burger[i].addEventListener('click', function() {
-                for (var j = 0; j < menu.length; j++) {
-                    menu[j].classList.toggle('hidden');
-                }
-            });
-        }
-    }
 
-    // close
-    const close = document.querySelectorAll('.navbar-close');
-    const backdrop = document.querySelectorAll('.navbar-backdrop');
+      <!-- navbar -->
+    <nav class="min-h-16 justify-center item center flex flex-row">
+      <div class="px-5 xl:px-12 py-6 flex w-full">
+          <!-- #region -->
+		  		  <a class="flex items-center" href="#">
+			<!-- <img class="h-12 w-15" src="images/Nearby Logo.png" alt="logo" /> -->
+			<span class="text-2xl font-bold ml-2 text-blue-600">Nearby Mart</span>  </a>      
+	
+        <!-- Nav Links -->
+        <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+          <li><a class="hover:text-gray-600 text-gray-500" href="/home">Home</a></li>
+          <li><a class="hover:text-gray-600 text-gray-500" href="/about">About us</a></li>
 
-    if (close.length) {
-        for (var i = 0; i < close.length; i++) {
-            close[i].addEventListener('click', function() {
-                for (var j = 0; j < menu.length; j++) {
-                    menu[j].classList.toggle('hidden');
-                }
-            });
-        }
-    }
-
-    if (backdrop.length) {
-        for (var i = 0; i < backdrop.length; i++) {
-            backdrop[i].addEventListener('click', function() {
-                for (var j = 0; j < menu.length; j++) {
-                    menu[j].classList.toggle('hidden');
-                }
-            });
-        }
-    }
-});
-</script>
+          <li><a class="hover:text-gray-600 text-gray-500" href="/contact">Contact</a></li>
+          
+        </ul>
+        <!-- Header Icons -->
+        <div class="hidden xl:flex items-center space-x-5 items-center">
+          <a class="hover:text-gray-600 text-gray-500" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </a>
+          <a class="flex items-center hover:text-gray-600 text-gray-500" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            <span class="flex absolute -mt-5 ml-4">
+              <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
+                </span>
+              </span>
+          </a>
+          <!-- Sign In / Register      -->
+          <a class="flex items-center hover:text-gray-600 text-gray-500" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+          </a>
+          
+        </div>
+      </div>
+      <!-- Responsive navbar -->
+      <a class="xl:hidden flex mr-6 items-center" href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span class="flex absolute -mt-5 ml-4">
+          <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-pink-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
+          </span>
+        </span>
+      </a>
+      <a class="navbar-burger self-center mr-12 xl:hidden" href="#">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+      </a>
+    </nav>
 </div>
-</nav>
