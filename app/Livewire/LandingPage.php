@@ -13,7 +13,7 @@ class LandingPage extends Component
 
     public function skip(){
 
-        return redirect()->route('layout');
+        return redirect()->route('layouts.layout');
     }
     public function render()
     {

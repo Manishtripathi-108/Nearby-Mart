@@ -14,7 +14,7 @@ class Navbar extends Component
         return redirect()->route('register');
     }
     public function contact(){
-        return redirect()->route('livewire.contact');
+        return redirect()->route('contact-page');
     }
     public function render()
     {

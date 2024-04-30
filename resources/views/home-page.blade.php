@@ -1,4 +1,7 @@
-<x-layout>
+@extends('layouts.layout')
+
+@section('content')
+
 <section class="py-6 dark:bg-gray-100 dark:text-gray-900 ">
 	<div class="container mx-auto flex flex-col justify-center p-4 space-y-8 md:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row">
 		<div class="flex flex-col space-y-4 text-center lg:text-left">
@@ -13,4 +16,6 @@
 		</div>
 	</div>
 </section>
-</x-layout>
+
+
+@endsection

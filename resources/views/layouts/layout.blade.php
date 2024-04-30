@@ -13,6 +13,7 @@
 <body class="bg-gradient-to-r from-blue-200  to-purple-200 w-full h-full">
 <livewire:navbar/>
 
+@yield('content')
 
 </body>
 </html>
