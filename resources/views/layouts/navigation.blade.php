@@ -53,10 +53,20 @@
           </span>
         </span>
       </a>
-      <a class="navbar-burger self-center mr-12 xl:hidden" href="#">
+      <a class="navbar-burger self-center mr-12 xl:hidden" id="navbar"  href="#">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
       </a>
     </nav>
 </div>
+
+<!-- Responsive navbar -->
+<div class="hidden xl:hidden" id="navbar">
+  <ul class="flex flex-col items-center">
+    <li><a class="hover:text-gray-600 text-gray-500" href="/home">Home</a></li>
+    <li><a class="hover:text-gray-600 text-gray-500" href="/about">About us</a></li>
+    <li><a class="hover:text-gray-600 text-gray-500" href="/contact">Contact</a></li>
+    <li><a class="hover:text-gray-600 text-gray-500" href="#">Sign In</a></li>
+  </ul>
+</div>  

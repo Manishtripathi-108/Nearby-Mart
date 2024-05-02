@@ -3,55 +3,68 @@
 use App\Http\Controllers\Aboutcontroller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-// use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\BusinessHourController;
+
 
 Route::get('/',function(){
     return view('welcome');
 });
 
+Route::get('/layout',function(){
+    return view('layout.app');
+});
+//Authetication Routes
 Route::get('/login',[AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('/register',[RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register',[RegisteredUserController::class, 'store'])->name('signup');
+Route::post('/login',[AuthenticatedSessionController::class, 'store'])->name('login');
 
-Route::get('/layout',function(){
-    return view('layouts.app')->name('layout');});
 
- Route::get('/home',[HomeController::class, 'index'])->name('home');
+//Basic Routes
+Route::get('/home',[HomeController::class, 'index'])->name('home');
 Route::get('/about',[Aboutcontroller::class, 'index'])->name('about');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Route::get('/home-page', function () {
-//     return view('home-page');
-// })->name('home-page');
+//Store Routes
 
-// Route::get('/about', function () {
-//     return view('livewire.about');
-// });
+Route::get('/store',function(){
+       return view('store');
+});
+Route::get('/store/{storeId}', [StoreController::class, 'show'])->name('store.show');
+Route::get('/store/{storeId}/edit', [StoreController::class, 'edit'])->name('store.edit');
+Route::put('/store/{storeId}', [StoreController::class, 'update'])->name('store.update');
+Route::post('/store/{storeId}/product', [StoreController::class, 'addProduct'])->name('store.product.add');
+Route::delete('/store/{storeId}/product/{productId}', [StoreController::class, 'deleteProduct'])->name('store.product.delete');
 
-// Route::get('/services', function () {
-//     return view('livewire.services');
-// });
 
-// Route::get('/layout', function () {
-//     return view('layouts.layout');
-// })->name('layout');
+//location Routes
+Route::get('/locations/{locationId}', [LocationController::class, 'show'])->name('location.show');
+Route::get('/locations/{locationId}/edit', [LocationController::class, 'edit'])->name('location.edit');
+Route::put('/locations/{locationId}', [LocationController::class, 'update'])->name('location.update');
+Route::delete('/locations/{locationId}', [LocationController::class, 'destroy'])->name('location.destroy');
 
-// Route::get('/contact-page', function () {
-//     return view('contact-page');
-// });
+//Cart Routes
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
 
-// Route::get('/about-page', function () {
-//     return view('about-page');
-// });
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
+//BusinessHours Routes
+Route::get('/business_hours', [BusinessHourController::class, 'index'])->name('business_hours.index');
+Route::post('/business_hours', [BusinessHourController::class, 'store'])->name('business_hours.store');
+Route::put('/business_hours/{businessHour}', [BusinessHourController::class, 'update'])->name('business_hours.update');
+Route::delete('/business_hours/{businessHour}', [BusinessHourController::class, 'destroy'])->name('business_hours.destroy');
+
+
+
+
 
 
 // Route::get('/dashboard', function () {

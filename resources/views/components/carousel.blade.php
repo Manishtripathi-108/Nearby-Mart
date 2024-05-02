@@ -7,8 +7,8 @@ function loopSlider(){
         switch(cont)
         {
         case 0:{
-            $("#slider-1").fadeOut(400);
-            $("#slider-2").delay(400).fadeIn(400);
+            $("#slider-1").fadeOut(200);
+            $("#slider-2").delay(200).fadeIn(200);
             $("#sButton1").removeClass("bg-purple-800");
             $("#sButton2").addClass("bg-purple-800");
         cont=1;
@@ -18,8 +18,8 @@ function loopSlider(){
         case 1:
         {
         
-            $("#slider-2").fadeOut(400);
-            $("#slider-1").delay(400).fadeIn(400);
+            $("#slider-2").fadeOut(200);
+            $("#slider-1").delay(200).fadeIn(200);
             $("#sButton2").removeClass("bg-purple-800");
             $("#sButton1").addClass("bg-purple-800");
            
