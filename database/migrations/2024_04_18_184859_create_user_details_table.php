@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('profile_picture')->default('profile.png');
             $table->timestamp('dob')->nullable();
             $table->string('phone', 20);
-            $table->enum('user_type', ['Customer', 'Store Owner', 'Admin'])->default('Customer')->index();
+            $table->enum('user_type', ['customer', 'Store-Owner', 'admin'])->default('Customer')->index();
             $table->timestamps();
         });
     }

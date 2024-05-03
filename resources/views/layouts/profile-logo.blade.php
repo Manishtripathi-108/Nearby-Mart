@@ -20,6 +20,7 @@
                 Account
               </a>
             </li>
+            @if(Auth::user)
             <li class="font-medium">
               <a href="#" class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700">
                 <div class="mr-3">

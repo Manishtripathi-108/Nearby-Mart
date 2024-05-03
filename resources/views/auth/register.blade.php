@@ -17,8 +17,8 @@
         </div>
 
         <div class="mt-4">
-        <x-input-label for="User-type" :value="__('User type')" />
-            <select class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full' id='User-type' name="User-type">
+        <x-input-label for="user_type" :value="__('user_type')" />
+            <select class='border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm w-full' id='user_type' name="user_type">
                 <option value="user">Select</option>
                 <option value="store_owner">Store Owner</option>
                 <option value="customer">Customer</option>

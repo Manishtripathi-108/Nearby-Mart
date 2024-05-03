@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\UserDetail;
 
 class RegisteredUserController extends Controller
 {
@@ -33,18 +34,25 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'User-type'=>['required','string','max:255','in:admin,customer,store_owner']
+            'user_type'=>['required','string','max:255','in:admin,customer,store_owner']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'User-type'=>$request['User-type']
+            'user_type'=>$request['user_type']
 
         ]);
 
+        $userDetail=UserDetail::create([
+            'user_id' => $user->id,
+            'user_type' => $request['user_type']
+            
+        ]);
+        
         event(new Registered($user));
+        event(new Registered($userDetail));
 
         Auth::login($user);
 

@@ -17,7 +17,7 @@ class StoreController extends Controller
     public function show($storeId)
     {
         $store = Store::findOrFail($storeId);
-        return view('store.show', compact('store'));
+        return view('store.store', compact('store'));
     }
 
     public function edit($storeId)

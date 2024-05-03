@@ -35,7 +35,7 @@ Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 //Store Routes
 
 Route::get('/store',function(){
-       return view('store');
+       return view('store.store');
 });
 Route::get('/store/{storeId}', [StoreController::class, 'show'])->name('store.show');
 Route::get('/store/{storeId}/edit', [StoreController::class, 'edit'])->name('store.edit');
