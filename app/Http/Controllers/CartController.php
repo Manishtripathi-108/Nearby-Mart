@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -34,22 +35,44 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Item added to cart successfully.');
     }
 
+    // public function add(Request $request, Product $product)
+    // {
+    //     $request->validate([
+    //         'product_id' => 'required|exists:products,id',
+    //         'quantity' => 'required|numeric|min:1',
+    //     ]);
+    //     // Assuming you have a Cart model representing the user's cart
+    //     $cart = Cart::where('user_id', auth()->id())->first();
+
+    //     // If the cart doesn't exist, create a new one
+    //     if (!$cart) {
+    //         $cart = new Cart();
+    //         $cart->user_id = auth()->id();
+    //         $cart->save();
+    //     }
+
+    //     // Add the product to the cart
+    //     $cart->products()->attach($product->id);
+
+    //     return redirect()->back()->with('success', 'Product added to cart successfully.');
+    // }
+
     // Method to update item quantity in the cart
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, Cart $cartItem)
     {
         $request->validate([
             'quantity' => 'required|numeric|min:1',
         ]);
 
-        $cart->update(['quantity' => $request->quantity]);
+        $cartItem->update(['quantity' => $request->quantity]);
 
         return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
     }
 
     // Method to remove an item from the cart
-    public function destroy(Cart $cart)
+    public function destroy(Cart $cartItem)
     {
-        $cart->delete();
+        $cartItem->delete();
         return redirect()->route('cart.index')->with('success', 'Item removed from cart successfully.');
     }
 }

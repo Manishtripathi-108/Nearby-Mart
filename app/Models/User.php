@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function stores()
     {
-        return $this->hasMany(Store::class)->where('user_type', 'store_owner');
+        return $this->hasMany(Store::class)->where('user_type', 'Store-owner');
     }
 
     public function orders()

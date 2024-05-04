@@ -2,14 +2,44 @@
 <x-app-layout>
 
  @include('components.carousel')
-<div>{{$name}}</div>
+
  <div class="flex flex-row justify-evenly"><h2></h2></div>
 
 <div class="flex flex-row flex-wrap items-center justify-evenly">
 
-    @for($i=0;$i<10;$i++)
-    <!-- component -->
-   <!-- component -->
+  @foreach($products as $product)
+  <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
+  <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
+    <img
+      src="{{ $product->image }}"
+      alt="card-image" class="object-cover w-full h-full" />
+  </div>
+  <div class="p-6">
+    <div class="flex items-center justify-between mb-2">
+      <p class="block font
+      -sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+        {{ $product->name }}
+      </p>
+      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
+        ${{ $product->price }}
+      </p>
+    </div>
+    <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
+      {{ $product->description }}
+    </p>
+  </div>
+  <div class="p-6 pt-0">
+  <form action="{{ route('cart.store') }}" method="POST">
+    @csrf
+    <input type="hidden" name="product_id" value="{{ $product->id }}">
+    <input type="number" name="quantity" value="1" min="1">
+    <button type="submit">Add to Cart</button>
+</form>
+  </div>
+</div>
+  @endforeach
+    <!-- @for($i=0;$i<10;$i++)
+   
    <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
   <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
     <img
@@ -38,7 +68,7 @@
     </button>
   </div>
 </div>
-@endfor
+@endfor -->
 </div>
    
 </x-app-layout>

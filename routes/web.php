@@ -10,7 +10,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\BusinessHourController;
-
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/',function(){
     return view('welcome');
@@ -24,6 +26,21 @@ Route::get('/login',[AuthenticatedSessionController::class, 'create'])->name('lo
 Route::get('/register',[RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register',[RegisteredUserController::class, 'store'])->name('signup');
 Route::post('/login',[AuthenticatedSessionController::class, 'store'])->name('login');
+Route::delete('/logout',[AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+//forgot-password Routes
+// Display the password reset link request form
+Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+
+// Handle the password reset link request submission
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+
+
+//Reset-password Routes
+// Display the password reset form
+Route::get('/reset-password', [NewPasswordController::class, 'create'])->name('password.reset');
+// Handle the new password request
+Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
 
 
 //Basic Routes
@@ -37,11 +54,11 @@ Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 Route::get('/store',function(){
        return view('store.store');
 });
-Route::get('/store/{storeId}', [StoreController::class, 'show'])->name('store.show');
-Route::get('/store/{storeId}/edit', [StoreController::class, 'edit'])->name('store.edit');
-Route::put('/store/{storeId}', [StoreController::class, 'update'])->name('store.update');
-Route::post('/store/{storeId}/product', [StoreController::class, 'addProduct'])->name('store.product.add');
-Route::delete('/store/{storeId}/product/{productId}', [StoreController::class, 'deleteProduct'])->name('store.product.delete');
+Route::get('/store/{userId}', [StoreController::class, 'show'])->name('store.show');
+Route::get('/store/{userId}/edit', [StoreController::class, 'edit'])->name('store.edit');
+Route::put('/store/{userId}', [StoreController::class, 'update'])->name('store.update');
+Route::post('/store/{userId}/product', [StoreController::class, 'addProduct'])->name('store.product.add');
+Route::delete('/store/{userId}/product/{productId}', [StoreController::class, 'deleteProduct'])->name('store.product.delete');
 
 
 //location Routes
@@ -54,7 +71,7 @@ Route::delete('/locations/{locationId}', [LocationController::class, 'destroy'])
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::delete('/cart/{cartItem}', [CartController::class, 'delete'])->name('cart.delete');
 
 //BusinessHours Routes
 Route::get('/business_hours', [BusinessHourController::class, 'index'])->name('business_hours.index');
@@ -63,7 +80,16 @@ Route::put('/business_hours/{businessHour}', [BusinessHourController::class, 'up
 Route::delete('/business_hours/{businessHour}', [BusinessHourController::class, 'destroy'])->name('business_hours.destroy');
 
 
+//products Routes
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
+// Routes for creating, updating, and deleting products
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
 

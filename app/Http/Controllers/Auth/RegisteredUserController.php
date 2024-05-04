@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\UserDetail;
-
+use App\Models\Store;
 class RegisteredUserController extends Controller
 {
     /**
@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'user_type'=>['required','string','max:255','in:admin,customer,store_owner']
+            'user_type'=>['required','string','in:Admin,Customer,Store-owner']
         ]);
 
         $user = User::create([
@@ -47,15 +47,23 @@ class RegisteredUserController extends Controller
 
         $userDetail=UserDetail::create([
             'user_id' => $user->id,
+            'phone' => 'null',
             'user_type' => $request['user_type']
-            
+
         ]);
-        
+
+        $Store=Store::create([
+            'user_id' => $user->id,
+        ]);
+                
         event(new Registered($user));
         event(new Registered($userDetail));
+        event(new Registered($Store));
+      
+
 
         Auth::login($user);
 
-        return redirect(route('auth.login', absolute: false));
+        return redirect(route('login', absolute: false));
     }
 }
