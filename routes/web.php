@@ -22,6 +22,7 @@ Route::get('/',function(){
 Route::get('/layout',function(){
     return view('layout.app');
 });
+
 //Authetication Routes
 Route::get('/login',[AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('/register',[RegisteredUserController::class, 'create'])->name('register');

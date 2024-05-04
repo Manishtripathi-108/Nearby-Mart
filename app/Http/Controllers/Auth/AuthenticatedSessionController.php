@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
               
         $user = $request->user();
 
-        return redirect()->intended(route('home',compact($user),absolute:false));
+        return redirect()->intended(route('home',['user'=>$user],absolute:false));
     }
 
     /**

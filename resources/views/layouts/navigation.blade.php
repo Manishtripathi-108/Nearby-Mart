@@ -42,7 +42,8 @@
                     </span>
                 </a>
                 <!-- Sign In / Register      -->
-                <div x-data="{ isOpen: true }" class="relative inline-block ">
+                @if(Auth::check())
+                <div x-data="{ isOpen: false }" class="relative inline-block ">
                     <!-- Dropdown toggle button -->
                     <button @click="isOpen = !isOpen"
                         class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none">
@@ -97,14 +98,14 @@
 
                         <hr class="border-gray-200 dark:border-gray-700 ">
 
-                     
-                       @if(auth()->user()->role == 'Store-owner')
-                       <a href="/store"
+
+                        @if(auth()->user()->role == 'Store-owner')
+                        <a href="/store"
                             class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                           Store
+                            Store
                         </a>
                         @endif
-                      
+
 
                         <a href="#"
                             class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -117,16 +118,27 @@
                             class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                             Help
                         </a>
-                        <a href="#"
-                            class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            Sign Out
-                        </a>
+                        <form action="{{route('logout')}}" method="POST" >
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Sign Out" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                    </form>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
+    @else
+    <div class="hidden xl:flex items-center space-x-5 items-center">
+        <a class="hover:text-gray-600 text-gray-500" href="{{route('login')}}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+  <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+</svg>
+
+        </a>
+        </div>
+        @endif
     <!-- Responsive navbar -->
     <a class="xl:hidden flex mr-6 items-center " href="/cart">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500" fill="none"
