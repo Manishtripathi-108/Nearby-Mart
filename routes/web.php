@@ -13,6 +13,7 @@ use App\Http\Controllers\BusinessHourController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 Route::get('/',function(){
     return view('welcome');
@@ -28,19 +29,22 @@ Route::post('/register',[RegisteredUserController::class, 'store'])->name('signu
 Route::post('/login',[AuthenticatedSessionController::class, 'store'])->name('login');
 Route::delete('/logout',[AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+
+
 //forgot-password Routes
 // Display the password reset link request form
 Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
-
 // Handle the password reset link request submission
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
-
 
 //Reset-password Routes
 // Display the password reset form
 Route::get('/reset-password', [NewPasswordController::class, 'create'])->name('password.reset');
 // Handle the new password request
 Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
+
+//profile Routes
+Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
 
 
 //Basic Routes
@@ -54,7 +58,7 @@ Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 Route::get('/store',function(){
        return view('store.store');
 });
-Route::get('/store/{userId}', [StoreController::class, 'show'])->name('store.show');
+// Route::get('/store/{userId}', [StoreController::class, 'show'])->name('store.show');
 Route::get('/store/{userId}/edit', [StoreController::class, 'edit'])->name('store.edit');
 Route::put('/store/{userId}', [StoreController::class, 'update'])->name('store.update');
 Route::post('/store/{userId}/product', [StoreController::class, 'addProduct'])->name('store.product.add');

@@ -1,74 +1,466 @@
-
 <x-app-layout>
 
- @include('components.carousel')
-
- <div class="flex flex-row justify-evenly"><h2></h2></div>
-
-<div class="flex flex-row flex-wrap items-center justify-evenly">
-
-  @foreach($products as $product)
-  <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
-  <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
-    <img
-      src="{{ $product->image }}"
-      alt="card-image" class="object-cover w-full h-full" />
-  </div>
-  <div class="p-6">
-    <div class="flex items-center justify-between mb-2">
-      <p class="block font
-      -sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-        {{ $product->name }}
-      </p>
-      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-        ${{ $product->price }}
-      </p>
-    </div>
-    <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-      {{ $product->description }}
-    </p>
-  </div>
-  <div class="p-6 pt-0">
-  <form action="{{ route('cart.store') }}" method="POST">
-    @csrf
-    <input type="hidden" name="product_id" value="{{ $product->id }}">
-    <input type="number" name="quantity" value="1" min="1">
-    <button type="submit">Add to Cart</button>
-</form>
-  </div>
-</div>
-  @endforeach
-    <!-- @for($i=0;$i<10;$i++)
    
-   <div class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
-  <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
-    <img
-      src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-      alt="card-image" class="object-cover w-full h-full" />
-  </div>
-  <div class="p-6">
-    <div class="flex items-center justify-between mb-2">
-      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-        Apple AirPods
-      </p>
-      <p class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-        $95.00
-      </p>
+
+    @include('components.carousel')
+    <!-- Product categories -->
+    <div class="flex item-center m-10">
+        <h1 class="text-2xl font-bold">Categories</h1>
     </div>
-    <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-      With plenty of talk and listen time, voice-activated Siri access, and an
-      available wireless charging case.
-    </p>
-  </div>
-  <div class="p-6 pt-0">
-    <button
-      class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
-      type="button">
-      Add to Cart
-    </button>
-  </div>
-</div>
-@endfor -->
-</div>
-   
+    @include('components.products-category')
+
+    <div class="container mt-5">
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+
+
+                <div class="card">
+
+                    <div class="image-container">
+
+                        <div class="first">
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <span class="discount">-25%</span>
+                                <span class="wishlist"><i class="fa fa-heart-o"></i></span>
+
+
+                            </div>
+                        </div>
+
+                        <img src="https://i.imgur.com/8JIWpnw.jpg" class="img-fluid rounded thumbnail-image">
+
+
+                    </div>
+
+
+                    <div class="product-detail-container p-2">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <h5 class="dress-name">White traditional long dress</h5>
+
+                            <div class="d-flex flex-column mb-2">
+
+                                <span class="new-price">$3.99</span>
+                                <small class="old-price text-right">$5.99</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+
+                            <div class="color-select d-flex ">
+
+                                <input type="button" name="grey" class="btn creme">
+                                <input type="button" name="red" class="btn red ml-2">
+                                <input type="button" name="blue" class="btn blue ml-2">
+
+                            </div>
+
+                            <div class="d-flex ">
+
+                                <span class="item-size mr-2 btn" type="button">S</span>
+                                <span class="item-size mr-2 btn" type="button">M</span>
+                                <span class="item-size btn" type="button">L</span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+                            <div>
+                                <i class="fa fa-star-o rating-star"></i>
+                                <span class="rating-number">4.8</span>
+                            </div>
+
+                            <span class="buy">BUY +</span>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="mt-3">
+                    <div class="card voutchers">
+
+                        <div class="voutcher-divider">
+
+                            <div class="voutcher-left text-center">
+                                <span class="voutcher-name">Monday Happy</span>
+                                <h5 class="voutcher-code">#MONHPY</h5>
+
+                            </div>
+                            <div class="voutcher-right text-center border-left">
+                                <h5 class="discount-percent">20%</h5>
+                                <span class="off">Off</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-3">
+
+
+
+                <div class="card">
+
+                    <div class="image-container">
+
+                        <div class="first">
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <span class="discount">-25%</span>
+                                <span class="wishlist"><i class="fa fa-heart-o"></i></span>
+
+
+                            </div>
+                        </div>
+
+                        <img src="https://i.imgur.com/PtepOpe.jpg" class="img-fluid rounded thumbnail-image">
+
+
+                    </div>
+
+
+                    <div class="product-detail-container p-2">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <h5 class="dress-name">Long sleeve denim jacket</h5>
+
+                            <div class="d-flex flex-column mb-2">
+
+                                <span class="new-price">$3.99</span>
+                                <small class="old-price text-right">$5.99</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+
+                            <div class="color-select d-flex ">
+
+                                <input type="button" name="grey" class="btn creme">
+
+                                <input type="button" name="darkblue" class="btn darkblue ml-2">
+
+                            </div>
+
+                            <div class="d-flex ">
+
+                                <span class="item-size mr-2 btn" type="button">S</span>
+                                <span class="item-size mr-2 btn" type="button">M</span>
+                                <span class="item-size btn" type="button">L</span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+                            <div>
+                                <i class="fa fa-star-o rating-star"></i>
+                                <span class="rating-number">4.8</span>
+                            </div>
+
+                            <span class="buy">BUY +</span>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+                <div class="mt-3">
+                    <div class="card voutchers">
+
+                        <div class="voutcher-divider">
+
+                            <div class="voutcher-left text-center">
+                                <span class="voutcher-name">Payday Surprise</span>
+                                <h5 class="voutcher-code">#SRPSPYDY</h5>
+
+                            </div>
+                            <div class="voutcher-right text-center border-left">
+                                <h5 class="discount-percent">20%</h5>
+                                <span class="off">Off</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-3">
+
+
+
+                <div class="card">
+
+                    <div class="image-container">
+
+                        <div class="first">
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <span class="discount">-25%</span>
+                                <span class="wishlist"><i class="fa fa-heart-o"></i></span>
+
+
+                            </div>
+                        </div>
+
+                        <img src="https://i.imgur.com/ePJKs8Q.jpg" class="img-fluid rounded thumbnail-image">
+
+
+                    </div>
+
+
+                    <div class="product-detail-container p-2">
+
+                        <div class="d-flex justify-content-between ">
+
+                            <h5 class="dress-name">Hush Puppies</h5>
+
+                            <div class="d-flex flex-column mb-2">
+
+                                <span class="new-price">$3.99</span>
+                                <small class="old-price text-right">$5.99</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+
+                            <div class="color-select d-flex ">
+
+                                <input type="button" name="grey" class="btn creme">
+                                <input type="button" name="yellow" class="btn yellow ml-2">
+                                <input type="button" name="blue" class="btn blue ml-2">
+
+                            </div>
+
+                            <div class="d-flex ">
+
+                                <span class="item-size mr-2 btn" type="button">S</span>
+                                <span class="item-size mr-2 btn" type="button">M</span>
+                                <span class="item-size btn" type="button">L</span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+                            <div>
+                                <i class="fa fa-star-o rating-star"></i>
+                                <span class="rating-number">4.2</span>
+                            </div>
+
+                            <span class="buy">BUY +</span>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="mt-3">
+                    <div class="card voutchers">
+
+                        <div class="voutcher-divider">
+
+                            <div class="voutcher-left text-center">
+                                <span class="voutcher-name">First order</span>
+                                <h5 class="voutcher-code">#HPYFRST</h5>
+
+                            </div>
+                            <div class="voutcher-right text-center border-left">
+                                <h5 class="discount-percent">20%</h5>
+                                <span class="off">Off</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-md-3">
+
+
+
+                <div class="card">
+
+                    <div class="image-container">
+
+                        <div class="first">
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <span class="discount">-25%</span>
+                                <span class="wishlist"><i class="fa fa-heart-o"></i></span>
+
+
+                            </div>
+                        </div>
+
+                        <img src="https://i.imgur.com/snffLH3.jpg" class="img-fluid rounded thumbnail-image">
+
+
+                    </div>
+
+
+                    <div class="product-detail-container p-2">
+
+                        <div class="d-flex justify-content-between ">
+
+                            <h5 class="dress-name">Athens skirt </h5>
+
+                            <div class="d-flex flex-column mb-2">
+
+                                <span class="new-price">$3.99</span>
+                                <small class="old-price text-right">$5.99</small>
+                            </div>
+
+                        </div>
+
+
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+
+                            <div class="color-select d-flex ">
+
+                                <input type="button" name="grey" class="btn creme">
+                                <input type="button" name="red" class="btn red ml-2">
+                                <input type="button" name="blue" class="btn blue ml-2">
+
+                            </div>
+
+                            <div class="d-flex ">
+                                <span class="item-size mr-2 btn" type="button">S</span>
+                                <span class="item-size mr-2 btn" type="button">M</span>
+                                <span class="item-size btn" type="button">L</span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center pt-1">
+                            <div>
+                                <i class="fa fa-star-o rating-star"></i>
+                                <span class="rating-number">3.8</span>
+                            </div>
+                            <span class="buy">BUY +</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="card voutchers">
+                        <div class="voutcher-divider">
+                            <div class="voutcher-left text-center">
+                                <span class="voutcher-name">Vegetarian Food</span>
+                                <h5 class="voutcher-code">#VEGANLOVE</h5>
+                            </div>
+                            <div class="voutcher-right text-center border-left">
+                                <h5 class="discount-percent">20%</h5>
+                                <span class="off">Off</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

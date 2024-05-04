@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
-use App\Models\Product;
+
 
 class CartController extends Controller
 {
     // Method to show the cart
     public function index()
     {
-        $cartItems = auth()->user()->cart()->with('product')->get();
-        return view('cart.index', compact('cartItems'));
+        $cartItems = Auth()->user()->carts()->with('product')->get();
+        return view('product.cart', compact('cartItems'));
     }
 
     // Method to add an item to the cart

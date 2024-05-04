@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use App\Models\UserDetail;
 use App\Models\Store;
+use App\Models\Address;
 class RegisteredUserController extends Controller
 {
     /**
@@ -52,13 +53,12 @@ class RegisteredUserController extends Controller
 
         ]);
 
-        $Store=Store::create([
-            'user_id' => $user->id,
-        ]);
+       
+
                 
         event(new Registered($user));
         event(new Registered($userDetail));
-        event(new Registered($Store));
+       
       
 
 

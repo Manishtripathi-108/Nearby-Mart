@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Models\Product;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\ProductController;
 class StoreController extends Controller
 {
     // public function index()
@@ -35,23 +35,26 @@ class StoreController extends Controller
 
     public function addProduct(Request $request, $userId)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'price' => 'required|numeric',
+        // ]);
 
-        $store = Store::findOrFail($userId);
+        // $store = Store::findOrFail($userId);
 
-        $product = new Product([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
-        ]);
+        // $product = new Product([
+        //     'name' => $request->input('name'),
+        //     'description' => $request->input('description'),
+        //     'price' => $request->input('price'),
+        // ]);
 
-        $store->products()->save($product);
+        // $store->products()->save($product);
+          
+        ProductController::class->store($request);
+        
 
-        return redirect()->route('store.show', $store->id)->with('success', 'Product added successfully.');
+        return redirect()->route('store.show')->with('success', 'Product added successfully.');
     }
 
     public function deleteProduct($userId, $productId)
