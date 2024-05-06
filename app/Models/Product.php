@@ -11,8 +11,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'store_id',
+        'category_id',
         'photo_main',
         'photo_1',
         'photo_2',
@@ -21,7 +23,7 @@ class Product extends Model
         'price',
         'discount',
         'discount_type',
-        'availability',
+        'available',
         'description',
         'stock',
         'units_sold',
@@ -29,10 +31,18 @@ class Product extends Model
         'sold_by',
     ];
 
-    // relationships: store (belongsTo), orderItems (hasMany), carts (hasMany), feedbackRatings (hasMany)
+    // Eager loading: store, feedbackRatings
+    // protected $with = ['store', 'feedbackRatings'];
+
+    // relationships: store (belongsTo), category (belongsTo), hasMany (orderItems, carts, feedbackRatings)
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function OrderItems(): HasMany

@@ -11,6 +11,7 @@ class Store extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'user_id',
         'address_id',
@@ -19,6 +20,9 @@ class Store extends Model
         'email',
     ];
 
+    // Eager loading: products, businessHours
+    // protected $with = ['products', 'businessHours'];
+
 
     // relationships: user (belongsTo), address (belongsTo), products (hasMany), businessHours (hasMany)
     public function user(): BelongsTo
@@ -26,7 +30,7 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function address(): BelongsTo
+    public function addresses(): BelongsTo
     {
         return $this->belongsTo(Address::class);
     }

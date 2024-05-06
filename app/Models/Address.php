@@ -12,11 +12,12 @@ class Address extends Model
 {
     use HasFactory;
 
+    // The attributes that are mass assignable.
     protected $fillable = [
         'user_id',
         'location_id',
-        'address',
-        'street_address',
+        'address_line_one',
+        'address_line_two',
         'city',
         'phone',
         'is_default',
@@ -38,7 +39,7 @@ class Address extends Model
         return $this->hasOne(Store::class);
     }
 
-    public function order(): HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }

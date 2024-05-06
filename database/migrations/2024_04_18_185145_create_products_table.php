@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id')->constrained()->cascadeOnDelete();
-            $table->string('photo_main')->default('no-photo.jpg');
-            $table->string('photo_1')->default('no-photo.jpg');
-            $table->string('photo_2')->default('no-photo.jpg');
+            $table->string('photo_main')->default('add-product.jpg');
+            $table->string('photo_1')->nullable();
+            $table->string('photo_2')->nullable();
             $table->string('name');
             $table->tinyInteger('rating')->default(0);
             $table->decimal('price', 10, 2);
             $table->decimal('discount', 10, 2)->nullable();
             $table->enum('discount_type', ['Fixed', 'Percentage'])->nullable();
-            $table->enum('availability', ['Available', 'Unavailable']);
+            $table->boolean('available')->default(true);
             $table->text('description')->nullable();
             $table->unsignedInteger('stock');
             $table->unsignedInteger('units_sold')->default(0);

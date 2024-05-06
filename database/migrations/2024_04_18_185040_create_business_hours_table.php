@@ -18,6 +18,9 @@ return new class extends Migration
             $table->time('open_time');
             $table->time('close_time');
             $table->timestamps();
+
+            // Add a unique constraint on store_id and day columns
+            $table->unique(['store_id', 'day']);
         });
     }
 

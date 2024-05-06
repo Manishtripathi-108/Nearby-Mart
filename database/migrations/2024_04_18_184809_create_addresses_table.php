@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('location_id')->constrained()->cascadeOnDelete();
-            $table->string('address');
-            $table->string('street_address')->nullable();
+            $table->string('address_line_one');
+            $table->string('address_line_two')->nullable();
             $table->string('city', 50);
             $table->string('phone', 20);
             $table->boolean('is_default')->default(false);
