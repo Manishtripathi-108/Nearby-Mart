@@ -26,8 +26,8 @@
     <!-- buttons -->
     <div class="flex-initial">
         <div class="flex justify-end items-center relative">
-
             <div class="flex mr-4 items-center">
+
                 <!-- Wishlist -->
                 <a class="py-2 px-2 hover:text-blue-600 text-gray-500" href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,17 +48,19 @@
 
                 <!-- Profile -->
                 @if (Auth::check())
-                <div class="relative inline-block group ml-2">
+                <div x-data="{ openProfileDropdown: false }" @click.away="openProfileDropdown = false" class="relative inline-block ml-2">
+
                     <!-- Dropdown toggle button -->
-                    <button class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring-blue-300 focus:ring focus:outline-none">
+                    <button @click="openProfileDropdown = !openProfileDropdown" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border rounded-md focus:border-blue-500 focus:outline-none">
                         <span class="mx-1">{{ auth()->check() ? auth()->user()->name : '' }}</span>
-                        <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none">
                             <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
                         </svg>
                     </button>
 
                     <!-- Dropdown menu -->
-                    <div class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl transition-opacity duration-150 ease-in-out opacity-0 group-focus-within:opacity-100 focus:outline-none">
+                    <div x-show="openProfileDropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl focus:outline-none">
+
                         <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform hover:bg-gray-100">
                             <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
                             <div class="mx-1">
@@ -126,6 +128,7 @@
                     </div>
                 </a>
                 @endif
+
             </div>
         </div>
     </div>
