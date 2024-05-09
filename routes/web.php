@@ -77,6 +77,9 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{cartItem}', [CartController::class, 'delete'])->name('cart.delete');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
+Route::get('/partials/cart_total', [CartController::class, 'cartTotal'])->name('cart.total');
 
 //BusinessHours Routes
 Route::get('/business_hours', [BusinessHourController::class, 'index'])->name('business_hours.index');

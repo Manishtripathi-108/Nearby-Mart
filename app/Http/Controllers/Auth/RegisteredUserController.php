@@ -52,9 +52,7 @@ class RegisteredUserController extends Controller
             'user_type' => $request['user_type']
 
         ]);
-
        
-
                 
         event(new Registered($user));
         event(new Registered($userDetail));
