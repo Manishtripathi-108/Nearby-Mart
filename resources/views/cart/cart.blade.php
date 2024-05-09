@@ -6,18 +6,18 @@
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
-        @endif
+            @endif
             <ul class="flex flex-col divide-y dark:divide-gray-300">
                 @if($cartItems->count() == 0)
                 <li class="flex flex-col py-6 sm:flex-row sm:justify-between">
-                    <h1 class="font-semibold text-xl">  No item in your cart</h1>
+                    <h1 class="font-semibold text-xl"> No item in your cart</h1>
                 </li>
                 @else
 
                 @foreach($cartItems as $item)
                 @include('partials.cart_item', ['item' => $item])
                 @endforeach
-               
+
                 @endif
 
             </ul>
@@ -33,12 +33,11 @@
             </div>
             <div class="flex justify-end space-x-4">
 
-                <a href="{{ route('cart.checkout') }}"
-                    class="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
+                <a href="{{ route('cart.checkout') }}" class="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
                     <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
                 </a>
             </div>
         </div>
     </div>
-    
+
 </x-app-layout>

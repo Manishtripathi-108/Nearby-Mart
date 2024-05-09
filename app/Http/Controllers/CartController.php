@@ -38,7 +38,8 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Item added to cart successfully.');
     }
 
-    public function add(Request $request, Product $product){
+    public function add(Request $request, Product $product)
+    {
 
         $request->validate([
             'product_id' => 'required|exists:products,id',
