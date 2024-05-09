@@ -86,7 +86,7 @@
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Store-Owner
+                      Store Owner
                     </div>
                   </div>
                   <hr>
