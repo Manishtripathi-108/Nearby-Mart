@@ -62,7 +62,7 @@
                     <div x-show="openProfileDropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl focus:outline-none">
 
                         <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform hover:bg-gray-100">
-                            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
+                            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="{{auth()->user()->image}}" alt="jane avatar">
                             <div class="mx-1">
                                 <h1 class="text-sm font-semibold text-gray-700 ">{{ auth()->check() ? auth()->user()->name : '' }}</h1>
                                 <p class="text-sm text-gray-500 ">{{ auth()->check() ? auth()->user()->email : 'janedoe@example.com' }}</p>
