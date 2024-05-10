@@ -23,34 +23,36 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
+    // 
     public function store(Request $request)
     {
         $request->validate([
-            
-            'photo_main' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'name' => 'required|string|max:255',
-            'rating' => 'nullable|numeric|min:0|max:5',
+            'store_id' => 'required|exists:stores,id',
+            'photo_main' => 'required|string',
+            'photo_1' => 'nullable|string',
+            'photo_2' => 'nullable|string',
+            'name' => 'required|string',
+            'rating' => 'nullable|integer|min:0|max:5',
             'price' => 'required|numeric|min:0',
             'discount' => 'nullable|numeric|min:0',
-            'discount_type' => 'nullable|string|in:percentage,amount',
-            'availability' => 'required|string|in:in_stock,out_of_stock',
+            'discount_type' => 'nullable|in:Fixed,Percentage',
+            'available' => 'required|boolean',
             'description' => 'nullable|string',
             'stock' => 'required|integer|min:0',
             'units_sold' => 'nullable|integer|min:0',
-            'measure' => 'nullable|string|max:255',
-            'sold_by' => 'nullable|string|max:255',
+            'measure' => 'required|integer|min:0',
+            'sold_by' => 'required|in:kg,g,lb,pcs,units,each,ml,l,fl oz',
         ]);
 
         $product = Product::create(
-            $request->all(
-            ),
-    );
-        
-    $product->addMedia($request->file('photo_main'));
-    $product->save();
-    
+            $request->all(),
+        );
 
-     
+        $product->addMedia($request->file('photo_main'));
+        $product->save();
+
+
+
 
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');
@@ -59,19 +61,21 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            
-            'photo_main' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'name' => 'required|string|max:255',
-            'rating' => 'nullable|numeric|min:0|max:5',
+            'store_id' => 'required|exists:stores,id',
+            'photo_main' => 'required|string',
+            'photo_1' => 'nullable|string',
+            'photo_2' => 'nullable|string',
+            'name' => 'required|string',
+            'rating' => 'nullable|integer|min:0|max:5',
             'price' => 'required|numeric|min:0',
             'discount' => 'nullable|numeric|min:0',
-            'discount_type' => 'nullable|string|in:percentage,amount',
-            'availability' => 'required|string|in:in_stock,out_of_stock',
+            'discount_type' => 'nullable|in:Fixed,Percentage',
+            'available' => 'required|boolean',
             'description' => 'nullable|string',
             'stock' => 'required|integer|min:0',
             'units_sold' => 'nullable|integer|min:0',
-            'measure' => 'nullable|string|max:255',
-            'sold_by' => 'nullable|string|max:255',
+            'measure' => 'required|integer|min:0',
+            'sold_by' => 'required|in:kg,g,lb,pcs,units,each,ml,l,fl oz',
         ]);
 
         $product->update($request->all());

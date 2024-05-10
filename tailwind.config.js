@@ -7,7 +7,6 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
-        './resources/js/**/*.vue',
     ],
 
     theme: {
@@ -15,11 +14,6 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-             backgroundImage: {
-                      'hero-pattern': "url('/images/Image People connect.jpg')",
-                      
-                    }
-              
         },
     },
 

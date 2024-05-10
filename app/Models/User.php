@@ -56,6 +56,17 @@ class User extends Authenticatable
         );
     }
 
+    // Define boot method to attach model event listeners
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Attach a creating event listener to create a userDetail record
+        static::created(function ($user) {
+            $user->userDetail()->create();
+        });
+    }
+
     // relationships: userDetail (hasOne), carts (hasMany), stores (hasMany), orders (hasMany), 
     // feedbackRating (hasMany), addresses (hasMany)
     public function userDetail(): HasOne
@@ -70,7 +81,7 @@ class User extends Authenticatable
 
     public function stores(): HasMany
     {
-        return $this->hasMany(Store::class)->where('user_type', 'Store-owner');
+        return $this->hasMany(Store::class)->where('user_type', 'Store Owner');
     }
 
     public function orders(): HasMany
