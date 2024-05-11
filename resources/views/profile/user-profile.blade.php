@@ -74,14 +74,14 @@
 
             <!--Your location-->
             <div
-                class="flex justify-center flex-row h-30 w-full  border-2 rounded-lg items-center transition eas-in-out delay-2  hover:border-3 hover:border-blue-400">
+                class="flex justify-center p-4 flex-row h-30 w-full  border-2 rounded-lg items-center transition eas-in-out delay-2  hover:border-3 hover:border-blue-400">
                 <div class="w-24 h-auto m-2 p-2">
                     <img src="{{ asset('images/profile/location.jpeg') }}" alt="user"
                         class="h-cover w-full bg-blend-screen">
                 </div>
                 <div class="flex-col justify-center items-center">
                     <h2 class="text-2xl font-bold">Your Address</h2>
-                    <pfass="text-sm">Edit your address for orders and gifts</p>
+                    <p class="text-sm">Edit your address for orders and gifts</p>
                 </div>
             </div>
 
@@ -111,7 +111,7 @@
     <div class="  flex flex-col h-auto  space-y-4 ">
         <h2 class="text-2xl font-bold p-2 ml-8">Related to items you viewed</h2>
         <!--product card-slider-->
-        <div class="hidden relative flex-col md:flex flex-nowrap space-x-4 items-center justify-evenly m-8 ">
+        <div class="hidden relative flex-row md:flex flex-nowrap space-x-4 items-center justify-evenly m-8 ">
             <!--left slider-button-->
             <div class="flex absolute left-2 top-1/2 transform -translate-y-1/2 items-center">
                 <button id="prev" class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center">
@@ -132,7 +132,30 @@
             </div>
 
             <!--product cards-->
+            @for($i=0;$i<6;$i++)
+             <!-- product - start -->
+                    <div>
+                        <a href="#" class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?auto=format&q=75&fit=crop&crop=top&w=600&h=700"
+                                loading="lazy" alt="Photo by Nick Karvounis"
+                                class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                        </a>
 
+                        <div class="flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4">
+                            <div class="flex flex-col">
+                                <a href="#"
+                                    class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg">Cool
+                                    Outfit</a>
+                                <span class="text-sm text-gray-500 lg:text-base">by Cool Brand</span>
+                            </div>
+
+                            <div class="flex flex-col items-end">
+                                <span class="font-bold text-gray-600 lg:text-lg">$29.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product - end -->
+                    @endfor
 
 
         </div>
@@ -142,9 +165,9 @@
         <div class="  flex flex-col h-auto  space-y-4 ">
             <h2 class="text-2xl font-bold p-2 ml-8">Your search history</h2>
             <!--product card-slider-->
-            <div class="hidden relative flex-col md:flex flex-nowrap space-x-4 items-center justify-evenly m-8 ">
+            <div class="hidden relative flex-row md:flex flex-nowrap space-x-4 items-center justify-evenly m-8 ">
                 <!--left slider-button-->
-                <div class="flex absolute left-2 top-1/2 transform -translate-y-1/2 items-center">
+                <div class="flex absolute left-2 top-1/2  transform -translate-y-1/2 items-center">
                     <button id="prev"
                         class="bg-gray-800 text-white rounded-full w-8 h-8 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -166,24 +189,29 @@
 
                 <!--product cards-->
 
-                <!-- product - start -->
-      <div>
-        <a href="#" class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100">
-          <img src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?auto=format&q=75&fit=crop&crop=top&w=600&h=700" loading="lazy" alt="Photo by Nick Karvounis" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-        </a>
+                @for($i=0;$i<6;$i++) <!-- product - start -->
+                    <div>
+                        <a href="#" class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100">
+                            <img src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?auto=format&q=75&fit=crop&crop=top&w=600&h=700"
+                                loading="lazy" alt="Photo by Nick Karvounis"
+                                class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+                        </a>
 
-        <div class="flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4">
-          <div class="flex flex-col">
-            <a href="#" class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg">Cool Outfit</a>
-            <span class="text-sm text-gray-500 lg:text-base">by Cool Brand</span>
-          </div>
+                        <div class="flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4">
+                            <div class="flex flex-col">
+                                <a href="#"
+                                    class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg">Cool
+                                    Outfit</a>
+                                <span class="text-sm text-gray-500 lg:text-base">by Cool Brand</span>
+                            </div>
 
-          <div class="flex flex-col items-end">
-            <span class="font-bold text-gray-600 lg:text-lg">$29.99</span>
-          </div>
-        </div>
-      </div>
-      <!-- product - end -->
+                            <div class="flex flex-col items-end">
+                                <span class="font-bold text-gray-600 lg:text-lg">$29.99</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product - end -->
+                    @endfor
 
             </div>
 
