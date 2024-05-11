@@ -60,6 +60,10 @@
     //delete account
     Route::delete('/delete-account',[ProfileController::class,'destroy'])->name('delete.user');
 
+    //your orders Route
+    Route::get('/your-orders',function(){
+         return view('orders.yourOrders');
+    })->name('your-orders');
 
 
 
