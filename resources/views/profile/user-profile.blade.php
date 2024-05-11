@@ -31,17 +31,20 @@
         <div class="flex-2 flex-col h-auto w-full m-10 p-3 justify-center item-center space-y-4 md:w-1/4">
 
             <!--Your profile-->
-            <div
-                class="flex justify-center flex-row h-30 w-full  border-2 rounded-lg items-center transition eas-in-out delay-2  hover:border-3 hover:border-blue-400">
-                <div class="w-24 h-auto m-2 p-2 ">
-                    <img src="{{ asset('images/profile/profile-edit.jpeg') }}" alt="user"
-                        class="h-cover w-full bg-blend-screen ">
+            <a href="{{route('edit.profile')}}">
+                <div
+                    class="flex justify-center flex-row h-30 w-full  border-2 rounded-lg items-center transition eas-in-out delay-2  hover:border-3 hover:border-blue-400">
+                    <div class="w-24 h-auto m-2 p-2 ">
+                        <img src="{{ asset('images/profile/profile-edit.jpeg') }}" alt="user"
+                            class="h-cover w-full bg-blend-screen ">
+                    </div>
+                    <div class="flex-col justify-center items-center">
+                        <h2 class="text-2xl font-bold">Edit Profile</h2>
+                        <p class="text-sm">Edit your personal details</p>
+                    </div>
                 </div>
-                <div class="flex-col justify-center items-center">
-                    <h2 class="text-2xl font-bold">Edit Profile</h2>
-                    <p class="text-sm">Edit your personal details</p>
-                </div>
-            </div>
+            </a>
+
 
             <!--Your order-->
             <div

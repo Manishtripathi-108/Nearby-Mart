@@ -3,6 +3,7 @@
     use App\Http\Controllers\AboutController;
     use App\Http\Controllers\HomeController;
     use App\Http\Controllers\ContactController;
+    use App\Http\Controllers\ProfileController;
     use App\Http\Controllers\StoreController;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\Auth\AuthenticatedSessionController;
@@ -14,6 +15,8 @@
     use App\Http\Controllers\Auth\PasswordResetLinkController;
     use App\Http\Controllers\ProductController;
     use App\Http\Controllers\UserController;
+    use App\Http\Controllers\PasswordController;
+    use App\Http\Controllers\Auth\VerifyEmailController;
 
     Route::get('/', function () {
         return view('welcome');
@@ -46,6 +49,18 @@
 
     //profile Routes
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+    Route::get('edit-profile',[ProfileController::class,'edit'])->name('edit.profile');
+      // Profile Update Route
+    Route::patch('/profile/update',[ProfileController::class,'update'])->name('profile.update');
+      // Email Verification Route
+    Route::post('/email/verification-notification',[ VerificationController::class, 'send'])->name('verification.send');
+    //update password 
+    Route::middleware(['auth'])->group(function () {Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');});
+
+    //delete account
+    Route::delete('/delete-account',[ProfileController::class,'destroy'])->name('delete.user');
+
+
 
 
     //Basic Routes
@@ -98,4 +113,3 @@
     Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-
