@@ -166,7 +166,24 @@
 
                 <!--product cards-->
 
+                <!-- product - start -->
+      <div>
+        <a href="#" class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100">
+          <img src="https://images.unsplash.com/photo-1523359346063-d879354c0ea5?auto=format&q=75&fit=crop&crop=top&w=600&h=700" loading="lazy" alt="Photo by Nick Karvounis" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
+        </a>
 
+        <div class="flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4">
+          <div class="flex flex-col">
+            <a href="#" class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg">Cool Outfit</a>
+            <span class="text-sm text-gray-500 lg:text-base">by Cool Brand</span>
+          </div>
+
+          <div class="flex flex-col items-end">
+            <span class="font-bold text-gray-600 lg:text-lg">$29.99</span>
+          </div>
+        </div>
+      </div>
+      <!-- product - end -->
 
             </div>
 
