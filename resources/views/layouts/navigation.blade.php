@@ -1,217 +1,136 @@
-<!-- navbar -->
-<nav>
-    <div class="min-h-16 justify-center item center flex flex-row ">
-        <div class="px-5 xl:px-12 py-6 flex w-full">
-            <!-- #region -->
-            <a class="flex items-center" href="#">
-                <!-- <img class="h-12 w-15" src="images/Nearby Logo.png" alt="logo" /> -->
-                <span class="text-2xl font-bold ml-2 text-blue-600">Nearby Mart</span>
-            </a>
+<nav class=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-16">
+    <!-- logo -->
+    <div class="inline-flex">
 
-            <!-- Nav Links -->
-            <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                <li><a class="{{request()-> is('home')? 'text-blue-600':'hover:text-gray-600 text-gray-500'}}hover:text-gray-600 text-gray-500 "
-                        href="/home">Home</a></li>
-                <li><a class="{{request()-> is('about')? 'text-blue-600':'hover:text-gray-600 text-gray-500'}}hover:text-gray-600 text-gray-500"
-                        href="/about">About us</a></li>
+        <a href="/">
+            <div class="hidden md:block">
+                <div class="flex items-center">
+                    <x-application-logo class="block h-9 w-auto" />
+                    <span class="text-2xl font-bold ml-2 text-blue-600">
+                        Nearby Mart
+                    </span>
+                </div>
+            </div>
 
-                <li><a class="{{request()-> is('contact')? 'text-blue-600':'hover:text-gray-600 text-gray-500'}}hover:text-gray-600 text-gray-500"
-                        href="/contact">Contact</a></li>
+            <div class="block md:hidden">
+                <x-application-logo class="block h-9 w-auto" />
+            </div>
+        </a>
+    </div>
+    <!-- end logo -->
 
-            </ul>
-            <!-- Header Icons -->
-            <div class="hidden xl:flex items-center space-x-5 items-center">
-                <a class="hover:text-gray-600 text-gray-500" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    <!-- search bar -->
+    <livewire:search-bar />
+    <!-- end search bar -->
+
+    <!-- buttons -->
+    <div class="flex-initial">
+        <div class="flex justify-end items-center relative">
+            <div class="flex mr-4 items-center">
+
+                <!-- Wishlist -->
+                <a class="py-2 px-2 hover:text-blue-600 text-gray-500" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </a>
-                <a class="flex items-center hover:text-gray-600 text-gray-500" href="{{route('cart.index')}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+
+                <!-- Cart -->
+                <a class="flex py-2 px-2 items-center hover:text-blue-600 text-gray-500" href="">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                     <span class="flex absolute -mt-5 ml-4">
-                        <span
-                            class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500">
-                        </span>
+                        <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                     </span>
                 </a>
-                <!-- Sign In / Register      -->
-                @if(Auth::check())
-                <div x-data="{ isOpen: false }" class="relative inline-block ">
+
+                <!-- Profile -->
+                @if (Auth::check())
+                <div x-data="{ openProfileDropdown: false }" @click.away="openProfileDropdown = false" class="relative inline-block ml-2">
+
                     <!-- Dropdown toggle button -->
-                    <button @click="isOpen = !isOpen"
-                        class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:text-white dark:bg-gray-800 focus:outline-none">
-                        <span class="mx-1">@if(auth()->check())
-                            {{ auth()->user()->name }}
-                            @endif</span>
-                        <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z"
-                                fill="currentColor"></path>
+                    <button @click="openProfileDropdown = !openProfileDropdown" class="relative z-10 flex items-center p-2 text-sm text-gray-600 bg-white border rounded-md focus:border-blue-500 focus:outline-none">
+                        <span class="mx-1">{{ auth()->check() ? auth()->user()->name : '' }}</span>
+                        <svg class="w-5 h-5 mx-1" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 15.713L18.01 9.70299L16.597 8.28799L12 12.888L7.40399 8.28799L5.98999 9.70199L12 15.713Z" fill="currentColor"></path>
                         </svg>
                     </button>
 
                     <!-- Dropdown menu -->
-                    <div x-show="isOpen" @click.away="isOpen = false"
-                        x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-100"
-                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                        class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800">
-                        <a href="#"
-                            class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
-                                src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
-                                alt="jane avatar">
-                            <div class="mx-1">
-                                <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200">@if(auth()->check())
-                                    {{ auth()->user()->name }}
-                                    @endif</h1>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">
-                                    @if(auth()->check())
-                                <p>{{ auth()->user()->email }}</p>
-                                @else
-                                janedoe@exampl.com
+                    <div x-show="openProfileDropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl focus:outline-none">
 
-                                @endif </p>
+                        <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform hover:bg-gray-100">
+                            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
+                            <div class="mx-1">
+                                <h1 class="text-sm font-semibold text-gray-700 ">{{ auth()->check() ? auth()->user()->name : '' }}</h1>
+                                <p class="text-sm text-gray-500 ">{{ auth()->check() ? auth()->user()->email : 'janedoe@example.com' }}</p>
                             </div>
                         </a>
+                        <hr class="border-gray-200 ">
 
-                        <hr class="border-gray-200 dark:border-gray-700 ">
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
+                                    <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                                    </svg>
+                                    <span class="ml-3">Dashboard</span>
+                                </a>
+                            </li>
 
-                        <a href="/profile"
-                            class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            view profile
-                        </a>
+                            @if(auth()->user()->userDetail && auth()->user()->userDetail->user_type == 'Store Owner')
+                            <li>
+                                <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
+                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="flex-1 ml-3 whitespace-nowrap">Store</span>
+                                </a>
+                            </li>
+                            @endif
 
-                        <a href="settings"
-                            class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            Settings
-                        </a>
+                            <li>
+                                <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
+                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="flex-1 ml-3 whitespace-nowrap">Orders</span>
+                                </a>
+                            </li>
 
+                            <li>
+                                <form action="{{route('logout')}}" method="POST" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
+                                    @csrf
+                                    @method('DELETE')
+                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <input type="submit" value="Sign Out" class="flex-1 ml-3 whitespace-nowrap text-left">
+                                </form>
+                            </li>
 
-                        <hr class="border-gray-200 dark:border-gray-700 ">
-
-
-                        @if(auth()->user()->role == 'Store-owner')
-                        <a href="/store"
-                            class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            Store
-                        </a>
-                        @endif
-
-
-                        <a href="#"
-                            class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            Invite colleagues
-                        </a>
-
-                        <hr class="border-gray-200 dark:border-gray-700 ">
-
-                        <a href="#"
-                            class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                            Help
-                        </a>
-                        <form action="{{route('logout')}}" method="POST" >
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Sign Out" class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                    </form>
+                        </ul>
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
-    @else
-    <div class="hidden xl:flex items-center space-x-5 items-center">
-        <a class="hover:text-gray-600 text-gray-500" href="{{route('login')}}">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-  <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
-</svg>
-
-        </a>
-        </div>
-        @endif
-    <!-- Responsive navbar -->
-    <a class="xl:hidden flex mr-6 items-center " href="/cart">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-        <span class="flex absolute -mt-5 ml-4">
-            <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500">
-            </span>
-        </span>
-    </a>
-    <button class="navbar-burger self-center mr-12 xl:hidden" id="button1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-            <path fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
-                clip-rule="evenodd" />
-        </svg>
-
-    </button>
-    </div>
-    <!-- Responsive navbar -->
-    <div class=" fixed hidden xl:hidden  inset-0 bg-white " id="navbar">
-        <div class="flex justify-between  pl-12 py-6">
-            <a class="" href="#">
-                <!-- <img class="h-12 w-15" src="images/Nearby Logo.png" alt="logo" /> -->
-                <span class="text-2xl font-bold ml-2 text-blue-600">Nearby Mart</span>
-            </a>
-
-            <div class="flex flex-row">
-                <a class="xl:hidden flex mr-6 items-center " href="/cart">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-gray-600 text-gray-500"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <span class="flex absolute -mt-5 ml-4">
-                        <span
-                            class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500">
-                        </span>
-                    </span>
+                @else
+                <!-- Login btn -->
+                <a href="{{route('login')}}" class="ml-2 nav-login-btn">
+                    Login
+                    <div class="icon">
+                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+                        </svg>
+                    </div>
                 </a>
-                <button class="  navbar-burger self-center mr-12 xl:hidden top-2 right-3" id="button2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                        <path
-                            d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                    </svg>
+                @endif
 
-                </button>
             </div>
         </div>
-
-        <ul class="flex flex-col items-center space-y-12 mt-4 font-semibold font-heading">
-            <li><a class="hover:text-blue-600 text-gray-500 " href="/home">Home</a></li>
-            <li><a class="hover:text-blue-600 text-gray-500" href="/about">About us</a></li>
-            <li><a class="hover:text-blue-600 text-gray-500" href="/contact">Contact</a></li>
-            <li><a class="hover:text-blue-600 text-gray-500" href="#">Sign In</a></li>
-        </ul>
     </div>
+    <!-- end buttons -->
 </nav>
-<script>
-var navbar = document.getElementById('navbar');
-var account = document.getElementById('account-menu');
-document.getElementById('button1').addEventListener('click', function() {
-    navbar.classList.toggle('hidden');
-});
-document.getElementById('button2').addEventListener('click', function() {
-    navbar.classList.toggle('hidden');
-});
-
-document.getElementById('account').addEventListener('click', function() {
-    account.classList.toggle('hidden');
-});
-</script>

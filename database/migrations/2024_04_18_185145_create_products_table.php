@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('stock');
             $table->unsignedInteger('units_sold')->default(0);
-            $table->integer('measure');
+            $table->unsignedInteger('measure');
             $table->enum('sold_by', ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz']);
             $table->timestamps();
         });

@@ -12,5 +12,5 @@
     <div class="flex item-center m-10 ">
         <h1 class="text-2xl font-bold">Recent Added Products</h1>
     </div>
-     
+
 </x-app-layout>
