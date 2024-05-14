@@ -1,15 +1,15 @@
 <li class="flex flex-col py-6 sm:flex-row sm:justify-between">
 	<div class="flex w-full space-x-2 sm:space-x-4">
-		<img class="flex-shrink-0 object-cover w-20 h-20 dark:border- rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80" alt="Polaroid camera">
+		<img class="flex-shrink-0 object-cover w-20 h-20 rounded outline-none sm:w-32 sm:h-32 " src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80" alt="Polaroid camera">
 		<div class="flex flex-col justify-between w-full pb-4">
 			<div class="flex justify-between w-full pb-2 space-x-2">
 				<div class="space-y-1">
 					<h3 class="text-lg font-semibold leading-snug sm:pr-8">{{$item->product->name}}</h3>
-					<p class="text-sm dark:text-gray-600">{{$item->}}</p>
+					<p class="text-sm">{{$item->}}</p>
 				</div>
 				<div class="text-right">
 					<p class="text-lg font-semibold">{{$item->product->price}}</p>
-					<p class="text-sm line-through dark:text-gray-400"> </p>
+					<p class="text-sm line-through"> </p>
 				</div>
 			</div>
 			<div class="flex text-sm divide-x">

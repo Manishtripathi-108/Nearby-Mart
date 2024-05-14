@@ -35,10 +35,12 @@ class OrderItemFactory extends Factory
         return [
             'order_id' => $useExistingOrder ? Order::inRandomOrder()->value('id') : Order::factory(),
             'product_id' => $useExistingProduct ? Product::inRandomOrder()->value('id') : Product::factory(),
+            'product_image' => 'images/products/product.png',
+            'product_name' => $this->faker->word,
             'unit_price' => $price,
             'quantity' => $quantity,
             'total_amount' => $price * $quantity,
-            'order_status' => $this->faker->randomElement(['Pending', 'Processing', 'Delivered']),
+            'order_status' => $this->faker->randomElement(['Confirmed', 'Processing', 'Delivered', 'Cancelled']),
             'item_delivery_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
