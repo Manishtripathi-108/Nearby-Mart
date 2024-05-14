@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Store extends Model
 {
@@ -24,7 +25,7 @@ class Store extends Model
     // protected $with = ['products', 'businessHours'];
 
 
-    // relationships: user (belongsTo), address (belongsTo), products (hasMany), businessHours (hasMany)
+    // relationships: user (belongsTo), address (belongsTo), products (hasMany), businessHours (hasMany), orderItems (hasManyThrough)
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -42,5 +43,10 @@ class Store extends Model
     public function businessHours(): HasMany
     {
         return $this->hasMany(BusinessHour::class);
+    }
+
+    public function orderItems(): HasManyThrough
+    {
+        return $this->hasManyThrough(OrderItem::class, Product::class);
     }
 }
