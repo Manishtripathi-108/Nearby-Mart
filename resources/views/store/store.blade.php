@@ -92,50 +92,16 @@
                 </div>
             </div>
 
+            {{-- Recent Orders table --}}
+            <livewire:recent-orders />
+
             <div class="flex h-fit w-full gap-x-6 gap-y-10">
 
-                {{-- Recent Orders table --}}
-                <livewire:recent-orders />
-
                 {{-- Top products table --}}
-                <x-table class="w-[40%]" title="Top products" viewAllLink="true" link="">
+                @include('store.partials.best-selling-products-list', ['products' => $topProducts])
 
-                    <x-slot:thead>
-                        <x-table.th>Product</x-table.th>
-                        <x-table.th>Review</x-table.th>
-                        <x-table.th>sold</x-table.th>
-                        <x-table.th>profit</x-table.th>
-                    </x-slot:thead>
-
-                    <x-table.tr>
-                        <x-table.td type="1" content="OrderID1212" imageUrl="https://randomuser.me/api/portraits/women/79.jpg">orderItem</x-table.td>
-                        <x-table.td>5</x-table.td>
-                        <x-table.td>55</x-table.td>
-                        <x-table.td>₹55</x-table.td>
-                    </x-table.tr>
-                    <x-table.tr>
-                        <x-table.td type="1" content="OrderID1212" imageUrl="https://randomuser.me/api/portraits/women/79.jpg">item</x-table.td>
-                        <x-table.td>5</x-table.td>
-                        <x-table.td>55</x-table.td>
-                        <x-table.td>₹55</x-table.td>
-                    </x-table.tr>
-                </x-table>
+                {{-- Your Store table --}}
+                @include('store.partials.store-list', ['stores' => $stores])
 
             </div>
-
-            {{-- Your Store table --}}
-            <x-table title="Your Store" viewAllLink="true" link="">
-
-                <x-slot:thead>
-                    <x-table.th>Store Name</x-table.th>
-                    <x-table.th>Location</x-table.th>
-                    <x-table.th>Status</x-table.th>
-                    <x-table.th>Actions</x-table.th>
-                </x-slot:thead>
-
-                <x-table.td type="1">store Name</x-table.td>
-                <x-table.td>Location</x-table.td>
-                <x-table.td type="2" status="Open"></x-table.td>
-                <x-table.td type="3"></x-table.td>
-            </x-table>
 </x-app-layout>

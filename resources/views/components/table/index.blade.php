@@ -28,6 +28,8 @@
             @endisset
         </div>
 
+        <hr class="border border-gray-150">
+
         <div>
             <table class="w-full">
                 <thead>

@@ -100,7 +100,7 @@ class User extends Authenticatable
         return $this->hasMany(FeedbackRating::class);
     }
 
-    public function addresses(): HasMany
+    public function userAddresses(): HasMany
     {
         return $this->hasMany(Address::class);
     }
