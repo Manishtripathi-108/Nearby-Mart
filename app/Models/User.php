@@ -51,8 +51,8 @@ class User extends Authenticatable
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => ucwords($value),
-            set: fn (string $value) => ucwords($value)
+            get: fn(string $value) => ucwords($value),
+            set: fn(string $value) => ucwords($value)
         );
     }
 
@@ -65,6 +65,12 @@ class User extends Authenticatable
         static::created(function ($user) {
             $user->userDetail()->create();
         });
+    }
+
+    // Define a method to check if the user is a store owner
+    public function isStoreOwner(): bool
+    {
+        return $this->stores()->exists();
     }
 
     // relationships: userDetail (hasOne), carts (hasMany), stores (hasMany), orders (hasMany), 
@@ -81,7 +87,7 @@ class User extends Authenticatable
 
     public function stores(): HasMany
     {
-        return $this->hasMany(Store::class)->where('user_type', 'Store Owner');
+        return $this->hasMany(Store::class);
     }
 
     public function orders(): HasMany
@@ -100,7 +106,7 @@ class User extends Authenticatable
     }
 
     // relationship: products (belongsToMany) many to many relationship to products
-    public function products(): BelongsToMany
+    public function productsInCart(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'carts')->withPivot('quantity');
     }
