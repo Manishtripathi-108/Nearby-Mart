@@ -15,8 +15,8 @@ class AddressSeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 500;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            Address::factory(min($batchSize, $totalRecords - $i))->forLocation()->forUser()->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            Address::factory(min($batchSize, $totalRecords - $createdRecords))->forLocation()->forUser()->create();
         }
     }
 }

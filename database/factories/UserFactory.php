@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
-use App\Models\UserDetail;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -20,7 +19,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'profile_picture' => 'profile.png',
             'name' => fake()->name(),
+            'dob' => $this->faker->date(),
+            'phone' => $this->faker->phoneNumber,
+            'user_type' => $this->faker->randomElement(['Customer', 'Store Owner']),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
@@ -31,7 +34,7 @@ class UserFactory extends Factory
     // Indicate that the model's email address should be unverified.
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
@@ -48,11 +51,6 @@ class UserFactory extends Factory
             } while ($user_exists);
 
             $user->save();
-        })->afterCreating(function (User $user) {
-            // Create a user detail for the user if one does not exist
-            if (!UserDetail::where('user_id', $user->id)->exists()) {
-                UserDetail::factory(1)->create(['user_id' => $user->id]);
-            }
         });
     }
 }

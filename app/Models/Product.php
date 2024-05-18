@@ -36,7 +36,7 @@ class Product extends Model
     // protected $with = ['store', 'feedbackRatings'];
 
     // relationships: store (belongsTo), category (belongsTo), hasMany (orderItems, carts, feedbackRatings)
-    public function productStore(): BelongsTo
+    public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }

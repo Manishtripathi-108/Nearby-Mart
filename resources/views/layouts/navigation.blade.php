@@ -61,13 +61,14 @@
                         <!-- Dropdown menu -->
                         <div class="absolute right-0 z-20 mt-2 w-64 origin-top-right overflow-hidden rounded-md bg-white p-2 py-2 shadow-xl focus:outline-none" x-show="openProfileDropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
 
-                            <a class="-mt-2 flex transform items-center p-3 text-sm text-gray-600 transition-colors duration-300 hover:bg-gray-100" href="#">
-                                <img class="mx-1 h-9 w-9 flex-shrink-0 rounded-full object-cover" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
-                                <div class="mx-1">
-                                    <h1 class="text-sm font-semibold text-gray-700">{{ auth()->check() ? auth()->user()->name : '' }}</h1>
-                                    <p class="text-sm">{{ auth()->check() ? auth()->user()->email : '' }}</p>
+                            <div class="flex items-center gap-4 rounded-lg p-2 font-normal duration-300 hover:bg-gray-100">
+                                <img class="mx-1 h-9 w-9 flex-shrink-0 rounded-full object-cover" src="{{ auth()->check() ? auth()->user()->profile_photo : '' }}" alt="" loading="lazy">
+                                <div class="font-medium">
+                                    <div> {{ auth()->check() ? auth()->user()->name : '' }} </div>
+                                    <div class="text-xs text-gray-500">{{ auth()->check() ? auth()->user()->email : '' }}</div>
                                 </div>
-                            </a>
+                            </div>
+
                             <hr class="border-gray-200">
 
                             <ul class="space-y-2">
@@ -80,7 +81,7 @@
                                     </a>
                                 </li>
 
-                                @if (auth()->user()->userDetail && auth()->user()->userDetail->user_type == 'Store Owner')
+                                @if (auth()->user()->isStoreOwner())
                                     <li>
                                         <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="#">
                                             <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

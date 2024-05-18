@@ -15,8 +15,8 @@ class ProductSeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 1000;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            Product::factory(min($batchSize, $totalRecords - $i))->forStore()->hasFeedbackRatings(5)->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            Product::factory(min($batchSize, $totalRecords - $createdRecords))->forStore()->hasFeedbackRatings(5)->create();
         }
     }
 }

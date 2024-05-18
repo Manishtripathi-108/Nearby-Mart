@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->string('photo_main')->default('add-product.jpg');
             $table->string('photo_1')->nullable();
             $table->string('photo_2')->nullable();
