@@ -17,15 +17,8 @@ class PaymentFactory extends Factory
      */
     public function definition(): array
     {
-        // Randomly decide if we should use an existing order
-        $useExistingOrder = $this->faker->boolean(80);
-
-        if ($useExistingOrder && Order::count() === 0) {
-            $useExistingOrder = false;
-        }
-
         return [
-            'order_id' => $useExistingOrder ? Order::inRandomOrder()->value('id') : Order::factory(),
+            'order_id' => Order::factory(),
             'amount' => $this->faker->randomFloat(2, 1, 1000),
             'payment_method' => $this->faker->randomElement(['Credit Card', 'Debit Card', 'PayPal']),
             'payment_status' => $this->faker->randomElement(['Pending', 'Completed', 'Failed']),

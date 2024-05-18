@@ -15,8 +15,8 @@ class FeedbackRatingSeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 1000;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            FeedbackRating::factory(min($batchSize, $totalRecords - $i))->forProduct()->forUser()->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            FeedbackRating::factory(min($batchSize, $totalRecords - $createdRecords))->forProduct()->forUser()->create();
         }
     }
 }

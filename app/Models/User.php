@@ -17,13 +17,13 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    // The attributes that are mass assignable.
     protected $fillable = [
+        'profile_picture',
         'name',
+        'dob',
+        'phone',
+        'user_type',
         'email',
         'password',
     ];
@@ -43,16 +43,12 @@ class User extends Authenticatable
         ];
     }
 
-    // Eager loading: userDetail
-    // protected $with = ['userDetail'];
-
-
     // The name attribute should be capitalized
     protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => ucwords($value),
-            set: fn (string $value) => ucwords($value)
+            get: fn(string $value) => ucwords($value),
+            set: fn(string $value) => ucwords($value)
         );
     }
 
@@ -61,19 +57,29 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        // Attach a creating event listener to create a userDetail record
-        static::created(function ($user) {
-            $user->userDetail()->create();
-        });
     }
 
-    // relationships: userDetail (hasOne), carts (hasMany), stores (hasMany), orders (hasMany), 
-    // feedbackRating (hasMany), addresses (hasMany)
-    public function userDetail(): HasOne
+    // Define a method to check if the user is a store owner
+    public function isStoreOwner(): bool
     {
-        return $this->hasOne(UserDetail::class);
+        return ($this->user_type === 'Store Owner' || $this->user_type === 'Admin');
     }
 
+
+    // Extra Relationship: products (belongsToMany) many to many relationship to products
+    public function productsInCart(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'carts')->withPivot('quantity');
+    }
+
+    // Extra Relationship: orderProducts (hasManyThrough) one to many relationship to orderProducts
+    public function orderItems(): HasManyThrough
+    {
+        return $this->hasManyThrough(OrderItem::class, Order::class);
+    }
+
+    // relationships: carts (hasMany), stores (hasMany), orders (hasMany), 
+    // feedbackRating (hasMany), addresses (hasMany)
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class);
@@ -81,7 +87,7 @@ class User extends Authenticatable
 
     public function stores(): HasMany
     {
-        return $this->hasMany(Store::class)->where('user_type', 'Store Owner');
+        return $this->hasMany(Store::class);
     }
 
     public function orders(): HasMany
@@ -97,17 +103,5 @@ class User extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
-    }
-
-    // relationship: products (belongsToMany) many to many relationship to products
-    public function products(): BelongsToMany
-    {
-        return $this->belongsToMany(Product::class, 'carts')->withPivot('quantity');
-    }
-
-    // relationship: orderProducts (hasManyThrough) one to many relationship to orderProducts
-    public function orderItems(): HasManyThrough
-    {
-        return $this->hasManyThrough(OrderItem::class, Order::class);
     }
 }

@@ -20,6 +20,7 @@ class Product extends Model
         'photo_2',
         'name',
         'rating',
+        'profit',
         'price',
         'discount',
         'discount_type',
@@ -45,7 +46,7 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function OrderItems(): HasMany
+    public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }

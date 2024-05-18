@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->string('product_image')->default('images/products/product.png');
+            $table->string('product_name');
             $table->unsignedInteger('quantity');
             $table->decimal('unit_price', 10, 2);
             $table->decimal('total_amount', 10, 2);
-            $table->enum('order_status', ['Pending', 'Processing', 'Delivered', 'Cancelled'])->default('Pending');
+            $table->enum('order_status', ['Confirmed', 'Processing', 'Delivered', 'Cancelled'])->default('Processing');
             $table->date('item_delivery_date')->nullable();
             $table->timestamps();
         });
