@@ -6,7 +6,7 @@
             <div class="flex-1 flex-col h-auto m-10 p-3 rounded-lg border-2  space-y-4">
                 <div class="flex justify-center  items-end ">
                     <div class="w-24 h-auto m-2 p-2 rounded-full">
-                        <img src="" alt="user" class="h-cover w-full bg-blend-screen rounded-full">
+                        <img src="images/profile/Avatar/man-avatar.jpeg" alt="user" class="h-cover w-full bg-blend-screen rounded-full">
                     </div>
                 </div>
                 <div class="flex justify-center items-center">
