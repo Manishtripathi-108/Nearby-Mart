@@ -104,4 +104,6 @@
                 @include('store.partials.store-list', ['stores' => $stores])
 
             </div>
+        </div>
+    </div>
 </x-app-layout>
