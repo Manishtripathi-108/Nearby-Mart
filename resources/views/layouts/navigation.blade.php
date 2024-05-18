@@ -1,4 +1,4 @@
-<nav class="relative mx-auto flex h-16 w-full items-center justify-between bg-white px-8">
+<nav class=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-16">
     <!-- logo -->
     <div class="inline-flex">
 
@@ -71,15 +71,16 @@
 
                             <hr class="border-gray-200">
 
-                            <ul class="space-y-2">
-                                <li>
-                                    <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="#">
-                                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                                        </svg>
-                                        <span class="ml-3">Dashboard</span>
-                                    </a>
-                                </li>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="{{route('profile')}}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
+                                    <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                        <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                                    </svg>
+                                    <span class="ml-3">Your Account</span>
+                                </a>
+                            </li>
 
                                 @if (auth()->user()->isStoreOwner())
                                     <li>
