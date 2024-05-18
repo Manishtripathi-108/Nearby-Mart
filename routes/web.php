@@ -17,6 +17,8 @@
     use App\Http\Controllers\UserController;
     use App\Http\Controllers\PasswordController;
     use App\Http\Controllers\Auth\VerifyEmailController;
+    use App\Http\Controllers\Auth\VerificationController;
+    use App\Http\Controllers\AddressController;
 
     Route::get('/', function () {
         return view('welcome');
@@ -64,7 +66,9 @@
     Route::get('/your-orders',function(){
          return view('orders.yourOrders');
     })->name('your-orders');
-
+   
+    //address Routes 
+    Route::get('/address',[AddressController::class,'index'])->name('address.index');
 
 
     //Basic Routes
@@ -74,7 +78,6 @@
 
 
     //Store Routes
-
     Route::get('/store', function () {
         return view('store.store');
     });

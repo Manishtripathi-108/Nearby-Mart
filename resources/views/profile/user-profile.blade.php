@@ -120,6 +120,7 @@
             </div>
 
             <!--Your location-->
+            <a href="{{route('address.index')}}">
             <div
                 class="flex justify-center p-4 flex-row h-30 w-full  border-2 rounded-lg items-center transition eas-in-out delay-2  hover:border-3 hover:border-blue-400">
                 <div class="w-20 h-auto m-2 p-2">
@@ -131,6 +132,7 @@
                     <p class="text-sm ">Edit your address for orders and gifts</p>
                 </div>
             </div>
+            </a>
 
 
             <!--user seller accout if have-->
