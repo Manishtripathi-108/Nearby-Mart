@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex flex-col w-full md:1/2 h-auto justify-center items-center mt-10  ">
 
-        <div class="flex flex-col md:flex-row w-full h-auto justify-center items-center w-full md:w-1/2">
+        <div class="flex flex-col md:flex-row h-auto justify-center items-center w-full md:w-1/2">
             <h1 class="justify-center md:justify-start font-bold text-3xl text-gray-900 w-full">Your Orders</h1>
 
             <div class=" hidden md:flex flex-row justify-end items-center w-full">
