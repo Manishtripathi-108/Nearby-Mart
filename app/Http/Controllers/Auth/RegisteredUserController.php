@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use App\Models\UserDetail;
-use App\Models\Store;
-use App\Models\Address;
 
 class RegisteredUserController extends Controller
 {
@@ -45,14 +42,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $userDetail = UserDetail::create([
-            'user_id' => $user->id,
-            'phone' => 'null',
-            'user_type' => $request['user_type']
-        ]);
 
         event(new Registered($user));
-        event(new Registered($userDetail));
 
         Auth::login($user);
 

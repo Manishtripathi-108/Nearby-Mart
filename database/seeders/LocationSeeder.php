@@ -15,8 +15,8 @@ class LocationSeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 100;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            Location::factory(min($batchSize, $totalRecords - $i))->hasAddresses()->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            Location::factory(min($batchSize, $totalRecords - $createdRecords))->hasAddresses()->create();
         }
     }
 }

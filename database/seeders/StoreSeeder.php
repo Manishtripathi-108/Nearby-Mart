@@ -15,8 +15,8 @@ class StoreSeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 100;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            Store::factory(min($batchSize, $totalRecords - $i))->hasProducts(10)->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            Store::factory(min($batchSize, $totalRecords - $createdRecords))->hasProducts(10)->create();
         }
     }
 }

@@ -17,8 +17,8 @@ class CategorySeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 100;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            Category::factory(min($batchSize, $totalRecords - $i))->hasProducts()->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            Category::factory(min($batchSize, $totalRecords - $createdRecords))->hasProducts()->create();
         }
     }
 }

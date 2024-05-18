@@ -22,8 +22,8 @@ class BusinessHourSeeder extends Seeder
             $batchSize = 10;
             $totalRecords = 1000;
 
-            for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-                $businessHours = BusinessHour::factory(min($batchSize, $totalRecords - $i))->forStore()->make();
+            for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+                $businessHours = BusinessHour::factory(min($batchSize, $totalRecords - $createdRecords))->forStore()->make();
 
                 foreach ($businessHours as $businessHour) {
                     // Validate store_id and day

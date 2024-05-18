@@ -34,6 +34,7 @@ class ProductFactory extends Factory
             'photo_2' => 'images/products/product.png',
             'name' => $this->faker->sentence(3),
             'rating' => $this->faker->randomFloat(1, 1, 5),
+            'profit' => $this->faker->randomFloat(2, 1, 100),
             'price' => $this->faker->randomFloat(2, 1, 1000),
             'discount' => $this->faker->randomFloat(2, 1, 100),
             'discount_type' => $this->faker->randomElement(['Percentage', 'Fixed']),

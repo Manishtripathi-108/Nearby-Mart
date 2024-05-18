@@ -31,10 +31,11 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function addresses(): BelongsTo
+    public function storeAddresses(): BelongsTo
     {
-        return $this->belongsTo(Address::class);
+        return $this->belongsTo(Address::class, 'address_id');
     }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);
