@@ -3,10 +3,10 @@
 
         <div class="h-auto w-full flex-1 flex-col">
             <!--user profile-->
-            <div class="m-10 h-auto flex-1 flex-col space-y-4 rounded-lg border-2 p-3">
-                <div class="flex items-end justify-center">
-                    <div class="m-2 h-auto w-24 rounded-full p-2">
-                        <img class="h-cover w-full rounded-full bg-blend-screen" src="" alt="user">
+            <div class="flex-1 flex-col h-auto m-10 p-3 rounded-lg border-2  space-y-4">
+                <div class="flex justify-center  items-end ">
+                    <div class="w-24 h-auto m-2 p-2 rounded-full">
+                        <img src="images/profile/Avatar/man-avatar.jpeg" alt="user" class="h-cover w-full bg-blend-screen rounded-full">
                     </div>
                 </div>
                 <div class="flex items-center justify-center">
