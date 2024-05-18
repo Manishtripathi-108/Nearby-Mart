@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                 ->hasAddresses(3)
                 ->hasStores(2)
                 ->create([
-                    'profile_picture' => 'manish.jpg',
+                    'profile_picture' => 'images/profile/avatar/manish.jpg',
                     'name' => 'Manish Tripathi',
                     'dob' => '2000-01-01',
                     'phone' => '1234567890',

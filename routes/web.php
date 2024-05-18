@@ -1,16 +1,20 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\BusinessHourController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreProductController;
 use App\Http\Controllers\UserController;
@@ -42,6 +46,11 @@ Route::middleware(['guest'])->group(function () {
 // Profile Route
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+    Route::get('edit-profile', [ProfileController::class, 'edit'])->name('edit.profile');
+    Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/email/verification-notification', [VerifyEmailController::class, 'send'])->name('verification.send');
+    Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');
+    Route::delete('/delete-account', [ProfileController::class, 'destroy'])->name('delete.user');
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
@@ -78,17 +87,21 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('business_hours', BusinessHourController::class)->except(['create', 'edit']);
 });
 
-// dd routes
+// Your Orders Route and Address Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/your-orders', function () {
+        return view('orders.yourOrders');
+    })->name('your-orders');
+
+    Route::get('/address', [AddressController::class, 'index'])->name('address.index');
+});
+
+
+// Debugging Routes
 Route::get('/dd', function () {
     $user = auth()->user();
-
-    // Retrieve the user's stores along with their order items and associated products
-
     $store = $user->stores();
     dd($store);
-
-
     echo "<br>";
-
     dd("done");
 });

@@ -19,7 +19,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'profile_picture' => 'profile.png',
+            'profile_picture' => 'images/profile/Avatar/profile.png',
             'name' => fake()->name(),
             'dob' => $this->faker->date(),
             'phone' => $this->faker->phoneNumber,
