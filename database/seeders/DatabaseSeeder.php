@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             LocationSeeder::class,
             AddressSeeder::class,
-            UserDetailSeeder::class,
             StoreSeeder::class,
             BusinessHourSeeder::class,
             CategorySeeder::class,

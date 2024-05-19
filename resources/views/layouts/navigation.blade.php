@@ -61,30 +61,32 @@
                         <!-- Dropdown menu -->
                         <div class="absolute right-0 z-20 mt-2 w-64 origin-top-right overflow-hidden rounded-md bg-white p-2 py-2 shadow-xl focus:outline-none" x-show="openProfileDropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
 
-                            <a class="-mt-2 flex transform items-center p-3 text-sm text-gray-600 transition-colors duration-300 hover:bg-gray-100" href="#">
-                                <img class="mx-1 h-9 w-9 flex-shrink-0 rounded-full object-cover" src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200" alt="jane avatar">
-                                <div class="mx-1">
-                                    <h1 class="text-sm font-semibold text-gray-700">{{ auth()->check() ? auth()->user()->name : '' }}</h1>
-                                    <p class="text-sm">{{ auth()->check() ? auth()->user()->email : '' }}</p>
+                            <div class="flex items-center gap-4 rounded-lg p-2 font-normal duration-300 hover:bg-gray-100">
+                                <img class="mx-1 h-9 w-9 flex-shrink-0 rounded-full object-cover" src="{{ asset(auth()->check() ? auth()->user()->profile_photo : '') }}" alt="" loading="lazy">
+                                <div class="font-medium">
+                                    <div> {{ auth()->check() ? auth()->user()->name : '' }} </div>
+                                    <div class="text-xs text-gray-500">{{ auth()->check() ? auth()->user()->email : '' }}</div>
                                 </div>
-                            </a>
+                            </div>
+
                             <hr class="border-gray-200">
 
                             <ul class="space-y-2">
                                 <li>
-                                    <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="#">
+                                    <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="{{ route('profile') }}">
                                         <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                            <path d="M12 2a5 5 0 1 0 0 10 5 5 0 1 0 0-10z"></path>
+                                            <path d="M17 14h.352a3 3 0 0 1 2.976 2.628l.391 3.124A2 2 0 0 1 18.734 22H5.266a2 2 0 0 1-1.985-2.248l.39-3.124A3 3 0 0 1 6.649 14H7"></path>
                                         </svg>
-                                        <span class="ml-3">Dashboard</span>
+                                        <span class="ml-3">Your Account</span>
                                     </a>
                                 </li>
 
-                                @if (auth()->user()->userDetail && auth()->user()->userDetail->user_type == 'Store Owner')
+                                @if (auth()->user()->isStoreOwner())
                                     <li>
-                                        <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="#">
-                                            <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
+                                        <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="{{ route('store.index') }}">
+                                            <svg class="h-6 w-6 text-gray-400" fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 122.88 112.13">
+                                                <path d="M69.19,87.22A1.75,1.75,0,1,1,67.44,89a1.75,1.75,0,0,1,1.75-1.75Zm45.37-34.58v53a6.52,6.52,0,0,1-6.51,6.51H14.83a6.5,6.5,0,0,1-4.6-1.92h0a6.49,6.49,0,0,1-1.91-4.6V52.7a23.89,23.89,0,0,0,5.37.35v52.57a1.13,1.13,0,0,0,.34.8h0a1.12,1.12,0,0,0,.8.32h45V66.38a9.76,9.76,0,0,1,9.74-9.73H85.64a9.76,9.76,0,0,1,9.73,9.73v40.37h12.68a1.13,1.13,0,0,0,1.13-1.13V52.8a22.55,22.55,0,0,0,5.38-.16ZM64.33,106.75H90.85V66.38a5.26,5.26,0,0,0-5.22-5.22H69.55a5.26,5.26,0,0,0-5.22,5.22v40.37ZM30,64.09h16.1a2.27,2.27,0,0,1,2.27,2.26V90.28a2.27,2.27,0,0,1-2.27,2.26H30a2.27,2.27,0,0,1-2.27-2.26V66.35A2.27,2.27,0,0,1,30,64.09Zm13.84,4.52H32.25V88H43.84V68.61ZM106.09,46.4c-1.25-.59-4.33-1.39-5.3-2.35a12.25,12.25,0,0,1-2.12-2.88,12.25,12.25,0,0,1-2.12,2.88c-2.14,2.13-7,3.46-10.29,3.46S78.11,46.18,76,44.05a12.25,12.25,0,0,1-2.12-2.88,12.25,12.25,0,0,1-2.12,2.88c-2.14,2.13-7,3.46-10.29,3.46s-8.15-1.33-10.29-3.46A12.25,12.25,0,0,1,49,41.17a12.25,12.25,0,0,1-2.12,2.88c-2.14,2.13-7,3.46-10.29,3.46s-8.15-1.33-10.29-3.46a12.25,12.25,0,0,1-2.12-2.88,12.25,12.25,0,0,1-2.12,2.88c-1.41,1.4-5.12,2.46-7.08,3-3.95.48-8.61-.09-11.54-3A11.77,11.77,0,0,1,0,35.71V31.07H0a1.44,1.44,0,0,1,.17-.66L8.49,3.76C9.17,1.57,10.84.16,14.07,0h94.09c2.9.31,4.79,1.53,5.57,3.74l9,26.62a1.35,1.35,0,0,1,.19.63h0a.71.71,0,0,1,0,.14v4.58a11.77,11.77,0,0,1-3.47,8.34c-3.48,3.48-8.78,3.39-13.32,2.35Z" />
                                             </svg>
                                             <span class="ml-3 flex-1 whitespace-nowrap">Store</span>
                                         </a>
@@ -92,9 +94,11 @@
                                 @endif
 
                                 <li>
-                                    <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="#">
-                                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                    <a class="flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100" href="{{ route('your-orders') }}">
+                                        <svg class="h-6 w-6 text-gray-400" fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" stroke-width="2" x="0px" y="0px" viewBox="0 0 120.98 122.88">
+                                            <g>
+                                                <path d="M30.07,65.39l-0.71,20.73l-7.81-5.32l-7.81,4.41l1.61-22.22L4.29,61.47v46.58l40.74,4.63V67.05L30.07,65.39L30.07,65.39z M97.89,5.95c0.42-0.08,0.85,0,1.21,0.22c0.61,0.25,1.04,0.85,1.05,1.56l0.35,47.99l17.89,2.35v0c0.42-0.08,0.85,0,1.21,0.22 c0.61,0.25,1.04,0.85,1.05,1.56l0.35,49.19c0.03,0.6-0.27,1.2-0.82,1.53l-20.09,11.98c-0.28,0.21-0.64,0.34-1.02,0.34 c-0.09,0-0.19-0.01-0.27-0.02l-52.13-5.8c-0.13-0.01-0.25-0.03-0.37-0.06l-44.67-5.74c-0.9-0.04-1.61-0.79-1.61-1.69V59.55h0 c-0.02-0.67,0.36-1.32,1.01-1.6L24.55,47.6V13.24h0c-0.02-0.67,0.36-1.32,1.01-1.6l26.15-11.5l0,0c0.27-0.12,0.58-0.17,0.9-0.13 L97.89,5.95L97.89,5.95L97.89,5.95z M98.88,58.92l-15.72,9.38l15.61,1.99l14.95-9.42L98.88,58.92L98.88,58.92z M24.55,55.64V51.3 L7.87,58.63l9.57,1.22L24.55,55.64L24.55,55.64z M80.26,21.83v44.26l15.01-8.96l1.83-1.55l-0.32-44.16L80.26,21.83L80.26,21.83 L80.26,21.83z M75.96,67.18V21.4l-21.33-2.84L53.9,39.81l-7.81-5.32l-7.81,4.41l1.61-22.22l-11.96-1.53v46.58L75.96,67.18 L75.96,67.18L75.96,67.18z M73.35,6.15l-16.4,9.31l21.33,2.72l14.95-9.42L73.35,6.15L73.35,6.15L73.35,6.15z M41.99,13.54 l15.9-9.43l-5.24-0.69l-20.23,8.89L41.99,13.54L41.99,13.54z M100.75,73.94v44.26l16.85-10.05l-0.33-44.62L100.75,73.94 L100.75,73.94L100.75,73.94z M96.45,119.29V73.51l-21.33-2.84l-0.73,21.25l-7.81-5.32l-7.81,4.41l1.61-22.22l-11.06-1.08v46.58 L96.45,119.29L96.45,119.29L96.45,119.29z" />
+                                            </g>
                                         </svg>
                                         <span class="ml-3 flex-1 whitespace-nowrap">Orders</span>
                                     </a>

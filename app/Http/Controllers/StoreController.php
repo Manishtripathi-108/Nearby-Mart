@@ -25,9 +25,23 @@ class StoreController extends Controller implements HasMiddleware
     // Display a listing of the resource.
     public function index()
     {
-        $userStores = auth()->user()->stores;
+        $userStores = auth()->user()->stores()->with('products', 'storeAddresses')->get();
 
-        return view('store.store')->with('stores', $userStores);
+        // Unwrap and merge all products into a single collection
+        $allProducts = $userStores->flatMap(function ($store) {
+            return $store->products;
+        });
+
+        // To get the top 10 selling products from all stores
+        $topProducts = $allProducts->sortByDesc('units_sold')->take(10);
+
+        return view(
+            'store.store',
+            [
+                'stores' => $userStores,
+                'topProducts' => $topProducts
+            ]
+        );
     }
 
     // Show the form for creating a new resource.

@@ -20,6 +20,7 @@ class Product extends Model
         'photo_2',
         'name',
         'rating',
+        'profit',
         'price',
         'discount',
         'discount_type',

@@ -1,12 +1,30 @@
+{{--  Table data component  --
+    case:1 - for displaying image and text : $imageUrl, $content, $stars
+    case:2 - for displaying status : $statusColor, $statusIcon, $status
+    case:3 - for displaying button : $linkUrl, $btnName
+    case:4 - for displaying two buttons
+    default - for displaying text : $slot
+
+    type - for differentiating the content of the table data
+    imageUrl - for displaying image
+    statusColor - for changing the color of the status
+    statusIcon - for displaying the icon of the status
+    status - for displaying the status
+    linkUrl - for redirecting to the link
+    btnName - for displaying the button name
+    content - for displaying the case 1 lower content 
+--}}
+
 @props([
     'type' => 0,
     'imageUrl',
-    'statusColor' => 'green',
+    'stars',
+    'status' => '',
+    'content' => '',
+    'statusColor' => '',
     'statusIcon',
-    'status' => 'Delivered',
-    'linkUrl' => '#',
+    'linkUrl' => '',
     'btnName',
-    'content' => null,
 ])
 
 @php
@@ -41,9 +59,20 @@
             $statusIcon = 'closed-icon.svg';
             break;
 
+        case 'Available':
+            $statusColor = 'green';
+            break;
+
+        case 'Unavailable':
+            $statusColor = 'red';
+            break;
+
         default:
-            $statusColor = 'gray';
-            $statusIcon = 'error-icon.svg';
+            if ($status == '') {
+                $status = 'status not found';
+                $statusColor = 'gray';
+                $statusIcon = 'error-icon.svg';
+            }
     }
 @endphp
 
@@ -56,6 +85,19 @@
                 @endisset
                 <div class="font-medium">
                     <div>{{ $slot }}</div>
+
+                    {{-- Displaying stars --}}
+                    @isset($stars)
+                        <div class="flex items-center">
+                            @for ($i = 0; $i < $stars; $i++)
+                                <svg class="h-4 w-4 text-yellow-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M12 2l2.5 6.5H22l-5 4.5 2 7-6-4.5-6 4.5 2-7-5-4.5h7.5L12 2z"></path>
+                                </svg>
+                            @endfor
+                        </div>
+                    @endisset
+
+                    {{-- Displaying content --}}
                     @isset($content)
                         <div class="text-xs text-gray-500">{{ $content }}</div>
                     @endisset
@@ -67,9 +109,11 @@
     @case(2)
         <td class="px-4 py-3 text-xs">
             <span class="bg-{{ $statusColor }}-100 text-{{ $statusColor }}-800 inline-flex items-center gap-x-1.5 rounded-full px-2 py-1.5 text-xs font-medium leading-4">
-                <div class="h-6 w-6">
-                    <img class="svg-{{ $statusColor }}" src="{{ asset('icons/' . $statusIcon) }}" alt="">
-                </div>
+                @isset($statusIcon)
+                    <div class="h-6 w-6">
+                        <img class="svg-{{ $statusColor }}" src="{{ asset('icons/' . $statusIcon) }}" alt="">
+                    </div>
+                @endisset
                 {{ $status }}
             </span>
         </td>

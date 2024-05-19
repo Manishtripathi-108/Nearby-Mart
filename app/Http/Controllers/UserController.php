@@ -9,9 +9,11 @@ class UserController extends Controller
 {
     public function showProfile()
     {
-        $user = Auth::user(); // Retrieve the authenticated user
-        $userDetail = $user->userDetail; // Retrieve the user's details from the UserDetail model
+        $user = Auth::user();
+        $Address = $user->address;
+        $orders = $user->orders;
+        $location = $user->location;
 
-        return view('profile.user-profile', compact('user', 'userDetail'));
+        return view('profile.user-profile', compact('user', 'Address', 'orders', 'location'));
     }
 }

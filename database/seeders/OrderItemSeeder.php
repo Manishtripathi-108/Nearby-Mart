@@ -15,8 +15,8 @@ class OrderItemSeeder extends Seeder
         $batchSize = 10;
         $totalRecords = 1000;
 
-        for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-            OrderItem::factory(min($batchSize, $totalRecords - $i))->forOrder()->forProduct()->create();
+        for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+            OrderItem::factory(min($batchSize, $totalRecords - $createdRecords))->forOrder()->forProduct()->create();
         }
     }
 }

@@ -18,22 +18,14 @@ class PaymentSeeder extends Seeder
             $batchSize = 10;
             $totalRecords = 1000;
 
-            for ($i = 0; $i < $totalRecords; $i += $batchSize) {
-                $payments = Payment::factory(min($batchSize, $totalRecords - $i))->forOrder()->make();
+            for ($createdRecords = 0; $createdRecords < $totalRecords; $createdRecords += $batchSize) {
+                $payments = Payment::factory(min($batchSize, $totalRecords - $createdRecords))->make();
 
                 foreach ($payments as $payment) {
-                    // Validate that payment_id and order_id are unique within the collection of payments
-                    $validator = Validator::make($payment->toArray(), [
-                        'order_id' => 'unique:payments,order_id,' . $payment->order_id,
-                    ]);
-
-                    if ($validator->fails()) {
-                        // Skip saving this invalid record
-                        continue;
+                    // Validate that order_id is unique within the collection of payments
+                    if (Payment::where('order_id', $payment->order_id)->doesntExist()) {
+                        $payment->save();
                     }
-
-                    // Save the payment
-                    $payment->save();
                 }
             }
         });
