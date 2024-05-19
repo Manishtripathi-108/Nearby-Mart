@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class StoreController extends Controller implements HasMiddleware
 {
 
+    // Middleware for the StoreController
     public static function middleware(): array
     {
         return [
@@ -47,14 +48,28 @@ class StoreController extends Controller implements HasMiddleware
     // Show the form for creating a new resource.
     public function create()
     {
-        return view('store.create');
+        $addresses = auth()->user()->addresses()->with('location')->get();
+
+        $addresses = $addresses->map(function ($address) {
+            return [
+                'id' => $address->id,
+                'full_address' => $address->address_line_one
+                    . ', ' . $address->address_line_two
+                    . ', ' . $address->city
+                    . ', ' . $address->location->state
+                    . ', ' . $address->location->pincode,
+            ];
+        });
+
+        return view('store.create', ['addresses' => $addresses]);
     }
 
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'store_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:stores',
             'address_id' => [
                 'required',
                 function ($attribute, $value, $fail) {
@@ -63,17 +78,39 @@ class StoreController extends Controller implements HasMiddleware
                     }
                 },
             ],
-            'phone' => 'required|numeric',
-            'email' => 'required|email',
+            'phone' => 'required|regex:/^[0-9]{10,12}$/|max:12',
+            'days' => 'required|array',
+            'days.*' => 'in:monday,tuesday,wednesday,thursday,friday,saturday,sunday',
+            'start-time-*' => 'required|date_format:H:i',
+            'end-time-*' => 'required|date_format:H:i|after:start-time-*',
+        ], [
+            'start-time-*' => 'The :attribute field must be a valid time format (HH:MM)',
+            'end-time-*' => 'The :attribute field must be a valid time format (HH:MM) and must be after the start time',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $userID = auth()->user()->id;
-        User::where('id', $userID)->stores()
-            ->create($request->only(['name', 'address_id', 'phone', 'email']));
+        // Create the store
+        $store = auth()->user()->stores()
+            ->create([
+                'name' => $request->store_name,
+                'email' => $request->email,
+                'address_id' => $request->address_id,
+                'phone' => $request->phone,
+            ]);
+
+        // Create the business hours
+        foreach ($request->days as $day) {
+            $store->businessHours()->create([
+                'day' => $day,
+                'open_time' => $request->input("start-time-$day"),
+                'close_time' => $request->input("end-time-$day"),
+            ]);
+        }
+
+        // dd($store->businessHours()->get()->toArray());
 
         return redirect()->route('store.index')->with('success', 'Store created successfully!');
     }
