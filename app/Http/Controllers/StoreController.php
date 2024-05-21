@@ -73,7 +73,7 @@ class StoreController extends Controller implements HasMiddleware
             'address_id' => [
                 'required',
                 function ($attribute, $value, $fail) {
-                    if (auth()->user()->addresses->contains('id', $value) === false) {
+                    if (!auth()->user()->addresses->contains('id', $value)) {
                         $fail("The selected $attribute is invalid.");
                     }
                 },
@@ -81,25 +81,27 @@ class StoreController extends Controller implements HasMiddleware
             'phone' => 'required|regex:/^[0-9]{10,12}$/|max:12',
             'days' => 'required|array',
             'days.*' => 'in:monday,tuesday,wednesday,thursday,friday,saturday,sunday',
-            'start-time-*' => 'required|date_format:H:i',
-            'end-time-*' => 'required|date_format:H:i|after:start-time-*',
-        ], [
-            'start-time-*' => 'The :attribute field must be a valid time format (HH:MM)',
-            'end-time-*' => 'The :attribute field must be a valid time format (HH:MM) and must be after the start time',
         ]);
+
+        foreach ($request->days as $day) {
+            $validator->after(function ($validator) use ($request, $day) {
+                if ($request->input("start-time-$day") >= $request->input("end-time-$day")) {
+                    $validator->errors()->add("end-time-$day", "The end time must be after the start time.");
+                }
+            });
+        }
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
         // Create the store
-        $store = auth()->user()->stores()
-            ->create([
-                'name' => $request->store_name,
-                'email' => $request->email,
-                'address_id' => $request->address_id,
-                'phone' => $request->phone,
-            ]);
+        $store = auth()->user()->stores()->create([
+            'name' => $request->store_name,
+            'email' => $request->email,
+            'address_id' => $request->address_id,
+            'phone' => $request->phone,
+        ]);
 
         // Create the business hours
         foreach ($request->days as $day) {
@@ -109,8 +111,6 @@ class StoreController extends Controller implements HasMiddleware
                 'close_time' => $request->input("end-time-$day"),
             ]);
         }
-
-        // dd($store->businessHours()->get()->toArray());
 
         return redirect()->route('store.index')->with('success', 'Store created successfully!');
     }

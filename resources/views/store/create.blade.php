@@ -14,7 +14,7 @@
                 <!-- Store Name -->
                 <div class="mb-4">
                     <label class="mb-2 block text-sm font-medium text-gray-700" for="store_name">Store Name</label>
-                    <x-neomorphic-form.input class="w-full" id="store_name" name="store_name" type="text" value="{{ old('store_name', '') }}" placeholder="Store Name" required />
+                    <x-neomorphic-form.input class="@error('store_name') border-red-500 @enderror w-full" id="store_name" name="store_name" type="text" value="{{ old('store_name') }}" placeholder="Store Name" required />
                     @error('store_name')
                         <span class="text-sm text-red-500">{{ $message }}</span>
                     @enderror
@@ -24,7 +24,7 @@
                     <!-- Email -->
                     <div class="w-full">
                         <label class="mb-2 block text-sm font-medium text-gray-700" for="email">Email</label>
-                        <x-neomorphic-form.input class="w-full" id="email" name="email" type="email" value="{{ old('email', '') }}" placeholder="Store Email" required />
+                        <x-neomorphic-form.input class="@error('email') border-red-500 @enderror w-full" id="email" name="email" type="email" value="{{ old('email') }}" placeholder="Store Email" required />
                         @error('email')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -33,7 +33,7 @@
                     <!-- Phone Number -->
                     <div class="w-full">
                         <label class="mb-2 block text-sm font-medium text-gray-700" for="phone">Phone Number</label>
-                        <x-neomorphic-form.input class="w-full" id="phone" name="phone" type="text" value="{{ old('phone', '') }}" placeholder="Store Phone Number" required />
+                        <x-neomorphic-form.input class="@error('phone') border-red-500 @enderror w-full" id="phone" name="phone" type="text" value="{{ old('phone') }}" placeholder="Store Phone Number" required />
                         @error('phone')
                             <span class="text-sm text-red-500">{{ $message }}</span>
                         @enderror
@@ -43,7 +43,7 @@
                 <!-- Address -->
                 <div class="mb-4">
                     <label class="mb-2 block text-sm font-medium text-gray-700" for="address_id">Address</label>
-                    <x-neomorphic-form.select class="w-full" id="address_id" name="address_id">
+                    <x-neomorphic-form.select class="@error('address_id') border-red-500 @enderror w-full" id="address_id" name="address_id">
                         <option value="">Select Address</option>
                         @foreach ($addresses as $address)
                             <option value="{{ $address['id'] }}" @if (old('address_id') == $address['id']) selected @endif>
@@ -59,12 +59,8 @@
                 <!-- Business Hours -->
                 @include('store.partials.business-hours-form', [
                     'oldBusinessHours' => old('days', []),
-                    'oldStartTimes' => collect(old('days', []))->map(function ($day) {
-                            return old("start-time-$day", '09:00');
-                        })->toArray(),
-                    'oldEndTimes' => collect(old('days', []))->map(function ($day) {
-                            return old("end-time-$day", '18:00');
-                        })->toArray(),
+                    'oldStartTimes' => old(),
+                    'oldEndTimes' => old(),
                 ])
 
                 <!-- Submit Button -->
