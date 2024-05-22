@@ -26,6 +26,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/wishlist',function(){
+    return view('orders.wishList');
+})->name('wishlist');
+
 
 // Authentication Routes
 Route::middleware(['guest'])->group(function () {
@@ -50,8 +54,10 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/email/verification-notification', [VerifyEmailController::class, 'send'])->name('verification.send');
     Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');
+    Route::post('/upload-image',[ProfileController::class, 'upload'])->name('upload.image');
     Route::delete('/delete-account', [ProfileController::class, 'destroy'])->name('delete.user');
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
 });
 
 // Basic Routes
@@ -93,8 +99,20 @@ Route::middleware(['auth'])->group(function () {
         return view('orders.yourOrders');
     })->name('your-orders');
 
-    Route::get('/address', [AddressController::class, 'index'])->name('address.index');
+    
 });
+
+// Address Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/addresses', [AddressController::class, 'index'])->name('addresses.index');
+    Route::get('/addresses/create', [AddressController::class, 'create'])->name('addresses.create');
+    Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+    Route::get('/addresses/{id}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
+    Route::put('/addresses/{id}', [AddressController::class, 'update'])->name('addresses.update');
+    Route::patch('/addresses/{id}/default', [AddressController::class, 'setDefault'])->name('addresses.setDefault');
+    Route::delete('/addresses/{id}', [AddressController::class, 'destroy'])->name('addresses.destroy');
+});
+
 
 
 // Debugging Routes
