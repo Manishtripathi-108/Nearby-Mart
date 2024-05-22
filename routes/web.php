@@ -18,6 +18,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreProductController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
@@ -69,6 +70,12 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 // Store Routes
 Route::middleware(['auth'])->group(function () {
 
+    // Store Dashboard
+    Route::get('/store/dashboard', [StoreController::class, 'dashboard'])->name('store.dashboard');
+
+    // Store Update Business Hours
+    Route::put('/store/{store}/business-hours', [StoreController::class, 'updateBusinessHours'])->name('store.updateBusinessHours');
+
     // Store routes
     Route::resource('store', StoreController::class);
 
@@ -117,9 +124,17 @@ Route::middleware(['auth'])->group(function () {
 
 // Debugging Routes
 Route::get('/dd', function () {
-    $user = auth()->user();
-    $store = $user->stores();
+    $store = auth()->user()->stores()->create([
+        'name' => 'store_namexx',
+        'email' => 'emailcc',
+        'address_id' => '90',
+        'phone' => '36217836712',
+    ]);
+
+    // Debug and output
     dd($store);
     echo "<br>";
     dd("done");
+
+
 });

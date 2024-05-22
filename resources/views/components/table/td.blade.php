@@ -1,8 +1,9 @@
-{{--  Table data component  --
-    case:1 - for displaying image and text : $imageUrl, $content, $stars
-    case:2 - for displaying status : $statusColor, $statusIcon, $status
-    case:3 - for displaying button : $linkUrl, $btnName
-    case:4 - for displaying two buttons
+{{-- Table data component --}}
+{{-- 
+    case: 1 - for displaying image and text : $imageUrl, $content, $stars
+    case: 2 - for displaying status : $status, $statusIcon
+    case: 3 - for displaying button : $linkUrl, $btnName
+    case: 4 - for displaying two buttons
     default - for displaying text : $slot
 
     type - for differentiating the content of the table data
@@ -17,14 +18,14 @@
 
 @props([
     'type' => 0,
-    'imageUrl',
-    'stars',
+    'imageUrl' => null,
+    'stars' => null,
     'status' => '',
     'content' => '',
-    'statusColor' => '',
-    'statusIcon',
+    'statusColor' => 'gray', // 'gray', 'yellow', 'blue', 'green', 'red'
+    'statusIcon' => null,
     'linkUrl' => '',
-    'btnName',
+    'btnName' => '',
 ])
 
 @php
@@ -122,16 +123,19 @@
     @case(3)
         <td class="px-4 py-3 text-xs">
             <div class="inline-flex items-center rounded-md shadow-sm">
-                <a class="cursor-pointer rounded-lg border-b-[4px] border-blue-600 bg-blue-500 px-6 py-2 text-white transition-all hover:-translate-y-[1px] hover:border-b-[6px] hover:brightness-110 active:translate-y-[2px] active:border-b-[2px] active:brightness-90" href="{{ $linkUrl }}">
+                <a class="hover:border-b-6 cursor-pointer rounded-lg border-b-4 border-blue-600 bg-blue-500 px-6 py-2 text-white transition-all hover:-translate-y-1 hover:brightness-110 active:translate-y-2 active:border-b-2 active:brightness-90" href="{{ $linkUrl }}">
                     <span>
-                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            @if ($slot->isNotEmpty())
-                                {{ $slot }}
-                            @else
-                                <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke-linecap="round"></path>
-                            @endif
-                        </svg>
+                        @if (!isset($btnName))
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                @if ($slot->isNotEmpty())
+                                    {{ $slot }}
+                                @else
+                                    <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3 3 5 3H11" stroke-linecap="round"></path>
+                                @endif
+                            </svg>
+                        @endif
+
                         @isset($btnName)
                             {{ $btnName }}
                         @endisset
@@ -163,5 +167,5 @@
     @break
 
     @default
-        <td class="di px-4 py-3 text-sm">{{ $slot }}</td>
+        <td class="px-4 py-3 text-sm">{{ $slot }}</td>
 @endswitch

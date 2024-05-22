@@ -24,6 +24,20 @@ class Store extends Model
     // Eager loading: products, businessHours
     // protected $with = ['products', 'businessHours'];
 
+    // check if the store is open
+    public function isOpen(): bool
+    {
+        $day = now()->format('l');
+        $time = now()->format('H:i:s');
+
+        $businessHour = $this->businessHours()->where('day', $day)->first();
+
+        if (!$businessHour) {
+            return false;
+        }
+
+        return $time >= $businessHour->open_time && $time <= $businessHour->close_time;
+    }
 
     // relationships: user (belongsTo), address (belongsTo), products (hasMany), businessHours (hasMany), orderItems (hasManyThrough)
     public function user(): BelongsTo
@@ -31,7 +45,7 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function storeAddresses(): BelongsTo
+    public function storeAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'address_id');
     }
