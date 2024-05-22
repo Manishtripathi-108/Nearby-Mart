@@ -26,7 +26,7 @@ class StoreController extends Controller implements HasMiddleware
     // Store Dashboard
     public function dashboard()
     {
-        $userStores = auth()->user()->stores()->with('products', 'storeAddresses')->get();
+        $userStores = auth()->user()->stores()->with('products', 'storeAddress')->get();
 
         // Unwrap and merge all products into a single collection
         $allProducts = $userStores->flatMap(function ($store) {
@@ -48,7 +48,14 @@ class StoreController extends Controller implements HasMiddleware
     // Display a listing of the resource.
     public function index()
     {
-        return view('store.index')->with('stores', auth()->user()->stores);
+        $userStores = auth()->user()->stores()->with('storeAddress')->get();
+
+        return view(
+            'store.index',
+            [
+                'stores' => $userStores
+            ]
+        );
     }
 
     // Show the form for creating a new resource.
@@ -59,11 +66,7 @@ class StoreController extends Controller implements HasMiddleware
         $addresses = $addresses->map(function ($address) {
             return [
                 'id' => $address->id,
-                'full_address' => $address->address_line_one
-                    . ', ' . $address->address_line_two
-                    . ', ' . $address->city
-                    . ', ' . $address->location->state
-                    . ', ' . $address->location->pincode,
+                'full_address' => $address->getFullAddressAttribute(),
             ];
         });
 

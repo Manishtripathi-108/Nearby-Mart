@@ -45,7 +45,7 @@ class Store extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function storeAddresses(): BelongsTo
+    public function storeAddress(): BelongsTo
     {
         return $this->belongsTo(Address::class, 'address_id');
     }

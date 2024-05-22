@@ -11,7 +11,7 @@
     @foreach ($stores as $store)
         <x-table.tr>
             <x-table.td type="1">{{ $store->name }}</x-table.td>
-            <x-table.td>{{ $store->storeAddresses->first()->address_line_one }}</x-table.td>
+            <x-table.td>{{ $store->storeAddress->first()->getFullAddressAttribute() }}</x-table.td>
             <x-table.td type="2" status="{{ $store->isOpen() ? 'Open' : 'Closed' }}"></x-table.td>
             <x-table.td type="3" linkUrl="{{ route('store.show', $store) }}" btnName="Open">
             </x-table.td>

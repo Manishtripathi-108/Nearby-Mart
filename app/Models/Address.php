@@ -23,6 +23,16 @@ class Address extends Model
         'is_default',
     ];
 
+    // Full Address Attribute
+    public function getFullAddressAttribute(): string
+    {
+        return $this->address_line_one
+            . ', ' . $this->address_line_two
+            . ', ' . $this->city
+            . ', ' . $this->location->state
+            . ', ' . $this->location->pincode;
+    }
+
     // relationships: user (belongsTo), location (belongsTo), store (hasOne), order (hasOne)
     public function user(): BelongsTo
     {
