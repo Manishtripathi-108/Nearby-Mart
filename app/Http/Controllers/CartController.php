@@ -74,39 +74,39 @@ class CartController extends Controller
     //     return view('partials.cart_total', compact('total'));
     // }
 
-    public function checkout()
-    {
-        // Get the authenticated user
-        $user = auth()->user();
+    // public function checkout()
+    // {
+    //     // Get the authenticated user
+    //     $user = auth()->user();
 
-        // Retrieve the user's cart items
-        $cartItems = $user->carts()->with('product')->get();
+    //     // Retrieve the user's cart items
+    //     $cartItems = $user->carts()->with('product')->get();
 
-        // Create a new order
-        $order = new Order();
-        $order->user_id = $user->id;
-        $order->no_of_items = $cartItems->sum('quantity');
-        $order->total_amount = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
-        });
-        $order->save();
+    //     // Create a new order
+    //     $order = new Order();
+    //     $order->user_id = $user->id;
+    //     $order->no_of_items = $cartItems->sum('quantity');
+    //     $order->total_amount = $cartItems->sum(function ($item) {
+    //         return $item->product->price * $item->quantity;
+    //     });
+    //     $order->save();
 
-        // Move cart items to order items
-        foreach ($cartItems as $cartItem) {
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->product_id = $cartItem->product_id;
-            $orderItem->quantity = $cartItem->quantity;
-            $orderItem->unit_price = $cartItem->product->price;
-            $orderItem->total_amount = $cartItem->product->price * $cartItem->quantity;
-            $orderItem->save();
-        }
+    //     // Move cart items to order items
+    //     foreach ($cartItems as $cartItem) {
+    //         $orderItem = new OrderItem();
+    //         $orderItem->order_id = $order->id;
+    //         $orderItem->product_id = $cartItem->product_id;
+    //         $orderItem->quantity = $cartItem->quantity;
+    //         $orderItem->unit_price = $cartItem->product->price;
+    //         $orderItem->total_amount = $cartItem->product->price * $cartItem->quantity;
+    //         $orderItem->save();
+    //     }
 
-        // Clear the user's cart
-        $user->carts()->delete();
+    //     // Clear the user's cart
+    //     $user->carts()->delete();
 
-        return view('checkout', compact('order'));
-    }
+    //     return view('checkout.index', compact('order'));
+    // }
     public function update(Request $request, Cart $cartItem)
     {
         $request->validate([

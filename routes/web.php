@@ -19,6 +19,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
 
 
 // Welcome Page
@@ -82,6 +83,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
 
+//checkout Routes 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+});
 // BusinessHours Routes
 Route::middleware(['auth'])->group(function () {
     Route::resource('business_hours', BusinessHourController::class)->except(['create', 'edit']);
