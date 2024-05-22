@@ -1,30 +1,84 @@
 <x-app-layout>
-    <!-- edit.blade.php -->
+    <div class="flex w-full justify-normal gap-5">
+        {{-- Sidebar --}}
+        @include('store.partials.sidenav')
 
-    <form action="{{ route('store.update', $store->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+        {{-- Content --}}
+        <div class="flex w-full flex-col flex-wrap gap-x-6 gap-y-10 py-10 pr-6">
 
-        <!-- Name Input -->
-        <div class="form-group">
-            <label for="name">Store Name</label>
-            <input class="form-control" id="name" name="name" type="text" value="{{ old('name', $store->name) }}">
+            <x-neomorphic-form method="POST" action="{{ route('store.update', $store->id) }}">
+                @csrf
+                @method('PUT')
+
+                <h2 class="mb-6 text-center text-2xl font-bold">Update Store</h2>
+
+                <!-- Store Name -->
+                <div class="mb-4">
+                    <label class="mb-2 block text-sm font-medium text-gray-700" for="store_name">Store Name</label>
+                    <x-neomorphic-form.input class="w-full" id="store_name" name="store_name" type="text" value="{{ old('store_name', $store->store_name) }}" placeholder="Store Name" required />
+                    @error('store_name')
+                        <span class="text-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-4 flex justify-between gap-5">
+                    <!-- Email -->
+                    <div class="w-full">
+                        <label class="mb-2 block text-sm font-medium text-gray-700" for="email">Email</label>
+                        <x-neomorphic-form.input class="w-full" id="email" name="email" type="email" value="{{ old('email', $store->email) }}" placeholder="Store Email" required />
+                        @error('email')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="w-full">
+                        <label class="mb-2 block text-sm font-medium text-gray-700" for="phone">Phone Number</label>
+                        <x-neomorphic-form.input class="w-full" id="phone" name="phone" type="text" value="{{ old('phone', $store->phone) }}" placeholder="Store Phone Number" required />
+                        @error('phone')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-4">
+                    <label class="mb-2 block text-sm font-medium text-gray-700" for="address_id">Address</label>
+                    <x-neomorphic-form.select class="w-full" id="address_id" name="address_id">
+                        <option value="">Select Address</option>
+                        @foreach ($addresses as $address)
+                            <option value="{{ $address['id'] }}" @if (old('address_id', $store->address_id) == $address['id']) selected @endif>
+                                {{ $address['full_address'] }}
+                            </option>
+                        @endforeach
+                    </x-neomorphic-form.select>
+                    @error('address_id')
+                        <span class="text-sm text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Submit Button -->
+                <x-primary-button class="w-full" type="submit" buttonAttributes='w-full mt-6'>Update Store</x-primary-button>
+            </x-neomorphic-form>
+
+            <x-neomorphic-form method="POST" action="{{ route('store.updateBusinessHours', $store->id) }}">
+                @csrf
+                @method('PUT')
+
+                <h2 class="mb-6 text-center text-2xl font-bold">Update Store Business Hours</h2>
+
+                <!-- Business Hours -->
+                @include('store.partials.business-hours-form', [
+'businessHours' => '$businessHours', 
+                    'oldBusinessHours' => old('days', $store->business_hours_days),
+                    'oldStartTimes' => old('start-times', $store->business_hours_start_times),
+                    'oldEndTimes' => old('end-times', $store->business_hours_end_times),
+                ])
+
+                <!-- Submit Button -->
+                <x-primary-button class="w-full" type="submit" buttonAttributes='w-full mt-6'>Update Store Business Hours</x-primary-button>
+            </x-neomorphic-form>
+
         </div>
-
-        <!-- Phone Input -->
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input class="form-control" id="phone" name="phone" type="text" value="{{ old('phone', $store->phone) }}">
-        </div>
-
-        <!-- Email Input -->
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" id="email" name="email" type="email" value="{{ old('email', $store->email) }}">
-        </div>
-
-        <!-- Submit Button -->
-        <button class="btn btn-primary" type="submit">Update Store</button>
-    </form>
-
+    </div>
 </x-app-layout>
