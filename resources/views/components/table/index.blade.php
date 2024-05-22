@@ -1,8 +1,8 @@
 @props([
     'title' => '',
     'thead' => '',
-    'viewAllLink',
-    'link',
+    'viewAllLink' => false,
+    'link' => null,
     'icon' => '<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"></path>
                 <path d="M7.246 12.25h9"></path>
                 <path d="m11.746 7.75 4.5 4.5-4.5 4.5"></path>',
@@ -28,7 +28,7 @@
             @endisset
         </div>
 
-        <hr class="border border-gray-150">
+        <hr class="border-gray-150 border">
 
         <div>
             <table class="w-full">
