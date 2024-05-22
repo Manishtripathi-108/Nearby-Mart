@@ -24,6 +24,7 @@ class ProductController extends Controller
     // display details of a product
     public function details(Product $product)
     {
-        return view('product-details', compact('product'));
+        $reviews = $product->feedbackRatings()->with('user')->get();
+        return view('product-details', compact('product', 'reviews'));
     }
 }

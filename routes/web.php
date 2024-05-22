@@ -92,8 +92,10 @@ Route::middleware(['auth'])->group(function () {
 
 // Cart Routes
 Route::middleware(['auth'])->group(function () {
-    Route::resource('cart', CartController::class)->only(['index', 'store', 'update', 'destroy']);
-    Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/update/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/destroy/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 
 //checkout Routes 

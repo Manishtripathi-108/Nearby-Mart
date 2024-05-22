@@ -15,9 +15,7 @@
                 <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     @foreach ($products as $product)
                         <div>
-                            <a class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100" href="
-                            {{ route('products.show', $product->id) }}
-                            ">
+                            <a class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100" href="{{ route('products.show', $product->id) }}">
                                 <img class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" src="{{ asset('images/products/' . $product->photo_main) }}" loading="lazy" />
 
                                 @if ($product->discount)
@@ -34,7 +32,7 @@
                             </a>
                             <div class="flex items-start justify-between gap-2 rounded-b-lg bg-gray-100 p-4">
                                 <div class="flex flex-col">
-                                    <a class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg" href="#">{{ $product->name }}</a>
+                                    <a class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg" href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
                                     <span class="text-sm text-gray-500 lg:text-base">{{ $product->category->name }}</span>
                                 </div>
                                 <div class="flex flex-col items-end">
