@@ -62,7 +62,7 @@
                     <div x-show="openProfileDropdown" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl focus:outline-none">
 
                         <a href="#" class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform hover:bg-gray-100">
-                            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="{{auth()->user()->image}}" alt="jane avatar">
+                            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9" src="{{auth()->user()->profile_picture}}" alt="jane avatar">
                             <div class="mx-1">
                                 <h1 class="text-sm font-semibold text-gray-700 ">{{ auth()->check() ? auth()->user()->name : '' }}</h1>
                                 <p class="text-sm text-gray-500 ">{{ auth()->check() ? auth()->user()->email : 'janedoe@example.com' }}</p>
@@ -81,7 +81,7 @@
                                 </a>
                             </li>
 
-                            @if(auth()->user()->userDetail && auth()->user()->userDetail->user_type == 'Store Owner')
+                            @if(auth()->user()->user_type == 'Store Owner')
                             <li>
                                 <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
                                     <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
