@@ -10,9 +10,6 @@
                 <div class="flex min-w-[4rem] items-center">
                     <input class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500" id="{{ $day }}" name="days[]" type="checkbox" value="{{ $day }}" x-model="is{{ ucfirst($day) }}Checked">
                     <label class="ms-2 text-sm font-medium text-gray-900" for="{{ $day }}">{{ ucfirst($day) }}</label>
-                    @error('day')
-                        <span class="text-sm text-red-500">{{ $message }}</span>
-                    @enderror
                 </div>
 
                 <div class="flex w-[377px] flex-col items-center gap-x-1" x-show="is{{ ucfirst($day) }}Checked" x-cloak>
@@ -23,14 +20,16 @@
                                 <x-neomorphic-form.input class="py-2.5" id="start-time-{{ $day }}" name="start-time-{{ $day }}" type="time" value="{{ old('start-time-' . $day, '09:00') }}" required />
                             </div>
                         </div>
+                        @error("start-time-{$day}")
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
 
                         <div class="flex items-center gap-x-2">
                             <label for="end-time-{{ $day }}">End time:</label>
                             <div class="relative">
-                                <x-neomorphic-form.input class="@error('end-time-{$day}') border-red-500 @enderror py-2.5" id="end-time-{{ $day }}" name="end-time-{{ $day }}" type="time" value="{{ old('end-time-' . $day, '18:00') }}" required />
+                                <x-neomorphic-form.input class="py-2.5" id="end-time-{{ $day }}" name="end-time-{{ $day }}" type="time" value="{{ old('end-time-' . $day, '18:00') }}" required />
                             </div>
                         </div>
-
                     </div>
 
                     @error("end-time-{$day}")

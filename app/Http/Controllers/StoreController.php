@@ -23,8 +23,8 @@ class StoreController extends Controller implements HasMiddleware
         ];
     }
 
-    // Display a listing of the resource.
-    public function index()
+    // Store Dashboard
+    public function dashboard()
     {
         $userStores = auth()->user()->stores()->with('products', 'storeAddresses')->get();
 
@@ -37,12 +37,18 @@ class StoreController extends Controller implements HasMiddleware
         $topProducts = $allProducts->sortByDesc('units_sold')->take(10);
 
         return view(
-            'store.store',
+            'store.dashboard',
             [
                 'stores' => $userStores,
                 'topProducts' => $topProducts
             ]
         );
+    }
+
+    // Display a listing of the resource.
+    public function index()
+    {
+        return view('store.index')->with('stores', auth()->user()->stores);
     }
 
     // Show the form for creating a new resource.

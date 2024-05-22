@@ -64,6 +64,10 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 // Store Routes
 Route::middleware(['auth'])->group(function () {
 
+    // Store Dashboard
+    Route::get('/store/dashboard', [StoreController::class, 'dashboard'])->name('store.dashboard');
+
+
     // Store routes
     Route::resource('store', StoreController::class);
 
@@ -106,11 +110,11 @@ Route::get('/dd', function () {
         'address_id' => '90',
         'phone' => '36217836712',
     ]);
-    
+
     // Debug and output
     dd($store);
     echo "<br>";
     dd("done");
-    
+
 
 });
