@@ -67,6 +67,8 @@ Route::middleware(['auth'])->group(function () {
     // Store Dashboard
     Route::get('/store/dashboard', [StoreController::class, 'dashboard'])->name('store.dashboard');
 
+    // Store Update Business Hours
+    Route::put('/store/{store}/business-hours', [StoreController::class, 'updateBusinessHours'])->name('store.updateBusinessHours');
 
     // Store routes
     Route::resource('store', StoreController::class);

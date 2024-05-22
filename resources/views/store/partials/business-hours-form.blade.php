@@ -5,7 +5,13 @@
     </div>
 
     @foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as $day)
-        <div class="w-90 mb-6" x-data="{ is{{ ucfirst($day) }}Checked: @json(in_array($day, $oldBusinessHours)) }">
+        @php
+            $isDayChecked = in_array(ucfirst($day), $oldBusinessHours);
+            $startTime = $isDayChecked ? $oldStartTimes[$day] ?? '09:00' : '09:00';
+            $endTime = $isDayChecked ? $oldEndTimes[$day] ?? '18:00' : '18:00';
+        @endphp
+
+        <div class="w-90 mb-6" x-data="{ is{{ ucfirst($day) }}Checked: @json($isDayChecked) }">
             <div class="flex items-center justify-between gap-x-16">
                 <div class="flex min-w-[4rem] items-center">
                     <input class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500" id="{{ $day }}" name="days[]" type="checkbox" value="{{ $day }}" x-model="is{{ ucfirst($day) }}Checked">
@@ -17,7 +23,7 @@
                         <div class="flex items-center gap-x-2">
                             <label for="start-time-{{ $day }}">Start time:</label>
                             <div class="relative">
-                                <x-neomorphic-form.input class="py-2.5" id="start-time-{{ $day }}" name="start-time-{{ $day }}" type="time" value="{{ old('start-time-' . $day, '09:00') }}" required />
+                                <x-neomorphic-form.input class="py-2.5" id="start-time-{{ $day }}" name="start-time-{{ $day }}" type="time" value="{{ old('start-time-' . $day, $startTime) }}" required />
                             </div>
                         </div>
                         @error("start-time-{$day}")
@@ -27,7 +33,7 @@
                         <div class="flex items-center gap-x-2">
                             <label for="end-time-{{ $day }}">End time:</label>
                             <div class="relative">
-                                <x-neomorphic-form.input class="py-2.5" id="end-time-{{ $day }}" name="end-time-{{ $day }}" type="time" value="{{ old('end-time-' . $day, '18:00') }}" required />
+                                <x-neomorphic-form.input class="py-2.5" id="end-time-{{ $day }}" name="end-time-{{ $day }}" type="time" value="{{ old('end-time-' . $day, $endTime) }}" required />
                             </div>
                         </div>
                     </div>

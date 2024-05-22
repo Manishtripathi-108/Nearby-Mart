@@ -6,6 +6,7 @@
         {{-- Content --}}
         <div class="flex w-full flex-col flex-wrap gap-x-6 gap-y-10 py-10 pr-6">
 
+            {{-- Form for Updating Store Information --}}
             <x-neomorphic-form method="POST" action="{{ route('store.update', $store->id) }}">
                 @csrf
                 @method('PUT')
@@ -15,7 +16,7 @@
                 <!-- Store Name -->
                 <div class="mb-4">
                     <label class="mb-2 block text-sm font-medium text-gray-700" for="store_name">Store Name</label>
-                    <x-neomorphic-form.input class="w-full" id="store_name" name="store_name" type="text" value="{{ old('store_name', $store->store_name) }}" placeholder="Store Name" required />
+                    <x-neomorphic-form.input class="w-full" id="store_name" name="store_name" type="text" value="{{ old('store_name', $store->name) }}" placeholder="Store Name" required />
                     @error('store_name')
                         <span class="text-sm text-red-500">{{ $message }}</span>
                     @enderror
@@ -61,24 +62,19 @@
                 <x-primary-button class="w-full" type="submit" buttonAttributes='w-full mt-6'>Update Store</x-primary-button>
             </x-neomorphic-form>
 
+            {{-- Form for Updating Business Hours --}}
             <x-neomorphic-form method="POST" action="{{ route('store.updateBusinessHours', $store->id) }}">
                 @csrf
                 @method('PUT')
 
-                <h2 class="mb-6 text-center text-2xl font-bold">Update Store Business Hours</h2>
-
-                <!-- Business Hours -->
                 @include('store.partials.business-hours-form', [
-'businessHours' => '$businessHours', 
-                    'oldBusinessHours' => old('days', $store->business_hours_days),
-                    'oldStartTimes' => old('start-times', $store->business_hours_start_times),
-                    'oldEndTimes' => old('end-times', $store->business_hours_end_times),
+                    'oldBusinessHours' => old('days', $oldBusinessHours),
+                    'oldStartTimes' => old('start-times', $oldStartTimes),
+                    'oldEndTimes' => old('end-times', $oldEndTimes),
                 ])
 
-                <!-- Submit Button -->
                 <x-primary-button class="w-full" type="submit" buttonAttributes='w-full mt-6'>Update Store Business Hours</x-primary-button>
             </x-neomorphic-form>
-
         </div>
     </div>
 </x-app-layout>
