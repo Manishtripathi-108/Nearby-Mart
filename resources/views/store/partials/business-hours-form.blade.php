@@ -6,7 +6,7 @@
 
     @foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as $day)
         @php
-            $isDayChecked = in_array(ucfirst($day), $oldBusinessHours);
+            $isDayChecked = in_array(ucfirst($day), $oldBusinessHours ?? []);
             $startTime = $isDayChecked ? $oldStartTimes[$day] ?? '09:00' : '09:00';
             $endTime = $isDayChecked ? $oldEndTimes[$day] ?? '18:00' : '18:00';
         @endphp
