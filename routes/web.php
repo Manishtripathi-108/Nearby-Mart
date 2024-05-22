@@ -11,24 +11,21 @@ use App\Http\Controllers\BusinessHourController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PasswordController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreProductController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
 
 // Welcome Page
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/wishlist',function(){
+Route::get('/wishlist', function () {
     return view('orders.wishList');
 })->name('wishlist');
 
@@ -56,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/email/verification-notification', [VerifyEmailController::class, 'send'])->name('verification.send');
     Route::put('/password/update', [PasswordController::class, 'update'])->name('password.update');
-    Route::post('/upload-image',[ProfileController::class, 'upload'])->name('upload.image');
+    Route::post('/upload-image', [ProfileController::class, 'upload'])->name('upload.image');
     Route::delete('/delete-account', [ProfileController::class, 'destroy'])->name('delete.user');
     Route::delete('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
@@ -66,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+Route::get('/product-details/{product}', [ProductController::class, 'details'])->name('products.show');
 
 
 // Store Routes
@@ -83,11 +82,12 @@ Route::middleware(['auth'])->group(function () {
     /*
         It is for the store product routes. where store will manage the products.
 
-        this will create the following routes: store.product.index => /store/{store}/product, 
-        store.product.create, store.product.store, store.product.show,
-        store.product.edit, store.product.update, store.product.destroy 
+        this will create the following routes: store.products.index => /store/{store}/products, 
+        store.products.create, store.products.store, store.products.show,
+        store.products.edit, store.products.update, store.products.destroy 
     */
-    Route::resource('store.product', StoreProductController::class);
+    Route::get('products', [StoreProductController::class, 'allProducts'])->name('products.all');
+    Route::resource('store.products', StoreProductController::class);
 });
 
 // Cart Routes
@@ -101,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 });
+
 // BusinessHours Routes
 Route::middleware(['auth'])->group(function () {
     Route::resource('business_hours', BusinessHourController::class)->except(['create', 'edit']);
@@ -112,7 +113,7 @@ Route::middleware(['auth'])->group(function () {
         return view('orders.yourOrders');
     })->name('your-orders');
 
-    
+
 });
 
 // Address Routes

@@ -16,8 +16,9 @@ class SearchBar extends Component
         if (strlen($this->search) >= 2) {
             $suggests = Product::select('id', 'name')
                 ->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('description', 'like', '%' . $this->search . '%')
                 ->limit(10)
-                ->get();;
+                ->get();
         }
 
         return view('livewire.search-bar', [

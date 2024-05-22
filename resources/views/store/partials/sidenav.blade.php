@@ -39,4 +39,13 @@
     <x-sidenav.section>
         Products
     </x-sidenav.section>
+
+    <x-sidenav.link :url="route('products.all')" isSelected="{{ $currentUrl === route('products.all') }}">
+        <x-slot:icon>
+            <svg class="h-6 w-6 text-gray-400" fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 122.88 112.13">
+                <path id="svg_1" xmlns="http://www.w3.org/2000/svg" d="m118.13055,9.56516a3.25,3.25 0 0 1 2.2,0.41a3.28,3.28 0 0 1 2,3l0.57,78.83a3.29,3.29 0 0 1 -1.59,3l-32.19,19.15a3.29,3.29 0 0 1 -2,0.65a3.07,3.07 0 0 1 -0.53,0l-83.48,-9.33a3.28,3.28 0 0 1 -3.11,-3.25l0,-80.22l0,0a3.28,3.28 0 0 1 2,-3.08l41.89,-18.43l0,0a3.19,3.19 0 0 1 1.74,-0.27l72.5,9.51l0,0.03zm-37.26,1.7l-24.67,14l30.38,3.88l22.5,-14.18l-28.21,-3.7zm-29,20l-1.12,33.38l-12.52,-8.53l-12.51,7.08l2.53,-34.91l-21.7,-2.77l0,73.56l77.33,8.6l0,-72.29l-32,-4.09l-0.01,-0.03zm-19.7,-9.09l23.95,-14.15l-10.42,-1.38l-30.46,13.38l16.95,2.17l-0.02,-0.02zm58.27,12.26l0,71.12l25.9,-15.44l-0.52,-71.68l-25.38,16z" />
+            </svg>
+        </x-slot:icon>
+        Your Products
+    </x-sidenav.link>
 </x-sidenav>

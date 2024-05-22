@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class StoreProductController extends Controller
 {
+
+    // display all products of all stores with pagination
+    public function allProducts()
+    {
+        $products = Product::latest()->with('category')->paginate(10);
+        return view('products.all', compact('products'));
+    }
+
     /**
      * Display a listing of the resource.
      */
