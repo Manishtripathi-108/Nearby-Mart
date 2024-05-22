@@ -1,47 +1,75 @@
-<li class="flex flex-col py-6 sm:flex-row sm:justify-between">
-    <div class="flex w-full space-x-2 sm:space-x-4">
-        <img class="flex-shrink-0 object-cover w-24 h-20 rounded outline-none sm:w-32 sm:h-32 "
-            src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&amp;ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80"
-            alt="Polaroid camera">
-        <div class="flex flex-col justify-between w-full pb-4">
-            <div class="flex justify-between w-full pb-2 space-x-2">
-                <div class="space-y-1">
-                    <h3 class="text-lg font-semibold leading-snug sm:pr-8">{{$item->product->name}}</h3>
-                    <p class="text-sm">{{$item->description}}</p>
-                </div>
-                <div class="text-right">
-                    <p class="text-lg font-semibold">${{$item->product->price}}</p>
-                    <p class="text-sm line-through">${{$item->product->price+ $item->product->discount}} </p>
-                </div>
-            </div>
-            <div class="flex text-sm divide-x">
-                <form action="{{route('cart.destroy', $item)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="flex items-center px-2 py-1 pl-0 space-x-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
-                            <path
-                                d="M96,472a23.82,23.82,0,0,0,23.579,24H392.421A23.82,23.82,0,0,0,416,472V152H96Zm32-288H384V464H128Z">
-                            </path>
-                            <rect width="32" height="200" x="168" y="216"></rect>
-                            <rect width="32" height="200" x="240" y="216"></rect>
-                            <rect width="32" height="200" x="312" y="216"></rect>
-                            <path
-                                d="M328,88V40c0-13.458-9.488-24-21.6-24H205.6C193.488,16,184,26.542,184,40V88H64v32H448V88ZM216,48h80V88H216Z">
-                            </path>
-                        </svg>
-                        <span>Remove</span>
-                    </button>
-                </form>
-                <button type="button" class="flex items-center px-2 py-1 space-x-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4 fill-current">
-                        <path
-                            d="M453.122,79.012a128,128,0,0,0-181.087.068l-15.511,15.7L241.142,79.114l-.1-.1a128,128,0,0,0-181.02,0l-6.91,6.91a128,128,0,0,0,0,181.019L235.485,449.314l20.595,21.578.491-.492.533.533L276.4,450.574,460.032,266.94a128.147,128.147,0,0,0,0-181.019ZM437.4,244.313,256.571,425.146,75.738,244.313a96,96,0,0,1,0-135.764l6.911-6.91a96,96,0,0,1,135.713-.051l38.093,38.787,38.274-38.736a96,96,0,0,1,135.765,0l6.91,6.909A96.11,96.11,0,0,1,437.4,244.313Z">
-                        </path>
+<!-- product - start -->
+<div class="flex flex-wrap gap-x-4 overflow-hidden rounded-lg border sm:gap-y-4 lg:gap-6">
+    <a class="group relative block h-48 w-32 overflow-hidden bg-gray-100 sm:h-56 sm:w-40" href="{{ route('products.show', $item->product->id) }}">
+        <img class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" src="{{ asset('images/products/' . $item->product->photo_main) }}" alt="{{ $item->product->name }}" loading="lazy" />
+    </a>
+
+    <div class="flex flex-1 flex-col justify-between py-4">
+        <div>
+            <a class="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl" href="{{ route('products.show', $item->product->id) }}">{{ $item->product->name }}</a>
+
+            <span class="block text-gray-500">
+                Category: {{ $item->product->category->name }}
+            </span>
+        </div>
+
+        <div>
+            @if ($item->product->discount)
+                @if ($item->product->discount_type === 'Fixed')
+                    <span class="mb-1 block font-bold text-gray-800 md:text-lg">₹{{ number_format($item->product->price - $item->product->discount, 2) }}</span>
+                @elseif ($item->product->discount_type === 'Percentage')
+                    <span class="mb-1 block font-bold text-gray-800 md:text-lg">₹{{ number_format($item->product->price - ($item->product->price * $item->product->discount) / 100, 2) }}</span>
+                @endif
+            @endif
+
+            <span class="flex items-center gap-1 text-sm text-gray-500">
+
+                @if ($item->product->stock === 0)
+                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
-                    <span>Add to favorites</span>
-                </button>
-            </div>
+                    <span class="text-red-500">Out of stock</span>
+                @else
+                    <svg class="h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span class="text-green-500">In stock</span>
+                @endif
+            </span>
         </div>
     </div>
-</li>
+
+    <div class="flex w-full justify-between border-t p-4 sm:w-auto sm:border-none sm:pl-0 lg:p-6 lg:pl-0">
+        <div class="flex flex-col items-start gap-2">
+            <div class="flex h-12 w-24 overflow-hidden rounded border">
+                <input class="w-full px-4 py-2 outline-none ring-inset ring-indigo-300 transition duration-100 focus:ring" type="number" value="{{ $item->quantity }}" />
+
+                <div class="flex flex-col divide-y border-l">
+                    <button class="flex w-6 flex-1 select-none items-center justify-center bg-white leading-none transition duration-100 hover:bg-gray-100 active:bg-gray-200">+</button>
+                    <button class="flex w-6 flex-1 select-none items-center justify-center bg-white leading-none transition duration-100 hover:bg-gray-100 active:bg-gray-200">-</button>
+                </div>
+            </div>
+
+            <form action="{{ route('cart.destroy', $item->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="select-none text-sm font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700" type="submit">Delete</button>
+            </form>
+        </div>
+
+        <div class="ml-4 pt-3 md:ml-8 md:pt-2 lg:ml-16">
+            <span class="block font-bold text-gray-800 md:text-lg">
+                @if ($item->product->discount)
+                    @if ($item->product->discount_type === 'Fixed')
+                        ₹{{ number_format(($item->product->price - $item->product->discount) * $item->quantity, 2) }}
+                    @elseif ($item->product->discount_type === 'Percentage')
+                        ₹{{ number_format(($item->product->price - ($item->product->price * $item->product->discount) / 100) * $item->quantity, 2) }}
+                    @endif
+                @else
+                    ₹{{ number_format($item->product->price * $item->quantity, 2) }}
+                @endif
+            </span>
+        </div>
+    </div>
+</div>
+<!-- product - end -->

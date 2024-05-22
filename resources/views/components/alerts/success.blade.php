@@ -11,7 +11,7 @@
                 <path d="M22 4 12 14.01l-3-3"></path>
             </svg>
             <div class="ml-3 flex flex-col">
-                <div class="text-sm font-medium leading-none">{{ $attributte->get('title') }}</div>
+                <div class="text-sm font-medium leading-none">{{ $attributes->get('title') }}</div>
                 <p class="mt-1 text-xs leading-none text-gray-600">{{ $slot }}</p>
             </div>
         </div>

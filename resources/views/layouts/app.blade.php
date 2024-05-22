@@ -27,6 +27,12 @@
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
+        @if (session('success'))
+            <x-alerts.success title="Success">
+                {{ session('success') }}
+            </x-alerts.success>
+        @endif
+
         <!-- Page Content -->
         <main>
             {{ $slot }}

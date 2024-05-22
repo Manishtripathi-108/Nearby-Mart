@@ -1,42 +1,21 @@
 <x-app-layout>
-    <div class="flex justify-center items-center w-full">
-        <div class="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10">
-            <h2 class="text-xl font-semibold text-blue-600 ">Your cart</h2>
-            @if (session('success'))
-            <div class="alert alert-success text-green-400">
-                {{ session('success') }}
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-lg px-4 md:px-8">
+            <div class="mb-6 sm:mb-10 lg:mb-16">
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Your Cart</h2>
             </div>
-            @endif
-            <ul class="flex flex-col divide-y">
-                @if($cartItems->count() == 0)
-                <li class="flex flex-col py-6 sm:flex-row sm:justify-between">
-                    <h1 class="font-semibold text-xl"> No item in your cart</h1>
-                </li>
-                @else
 
-                @foreach($cartItems as $item)
-                @include('cart.partials.cart_item', ['item' => $item])
+            <div class="mb-6 flex flex-col gap-4 sm:mb-8 md:gap-6">
+                <!-- items - start -->
+                @foreach ($cartItems as $item)
+                    @include('cart.partials.cart_item', ['item' => $item])
                 @endforeach
-
-                @endif
-
-            </ul>
-            <div class="space-y-1 text-right">
-                <p>Total amount:
-                    <span class="font-semibold">
-                        @include('cart.partials.cart_total', ['total' => $cartItems->sum(function($item) {
-                        return $item->product->price * $item->quantity;
-                        })])
-                    </span>
-                </p>
-                <p class="text-sm">Not including taxes and shipping costs</p>
+                <!-- items - end -->
             </div>
-            <div class="flex justify-end space-x-4">
 
-                <a href="{{ route('checkout.index') }}" class="px-6 py-2 border rounded-md">
-                    <span class="sr-only sm:not-sr-only">Continue to</span>Checkout
-                </a>
-            </div>
+            <!-- totals - start -->
+            @include('cart.partials.cart_total')
+            <!-- totals - end -->
         </div>
     </div>
 
