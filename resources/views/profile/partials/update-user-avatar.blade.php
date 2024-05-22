@@ -14,16 +14,6 @@
     </div>
     @endif
 
-    @if ($errors->any())
-    <div class="bg-red-500 text-white p-4 rounded mb-4">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
     <div>
         <form action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf

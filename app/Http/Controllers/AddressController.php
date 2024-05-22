@@ -1,23 +1,22 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Location;
 
 class AddressController extends Controller
 {
-
     /**
      * Display a listing of the addresses.
      */
     public function index()
     {
         $addresses = Address::where('user_id', Auth::id())->get();
-
         return view('address.your-address', compact('addresses'));
     }
+
     /**
      * Show the form for creating a new address.
      */
@@ -31,32 +30,36 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // Validate the request
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',
+            'pincode' => 'required|string|max:10',
             'address_line_one' => 'required|string|max:255',
             'address_line_two' => 'nullable|string|max:255',
             'city' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
-            'is_default' => 'nullable|boolean',
+            'country' => 'required|string|max:255',
+            'is_default' => 'sometimes|boolean'
         ]);
 
-        $user = Auth::user();
-
-        // If the address is marked as default, unset the current default address
-        if ($request->is_default) {
-            Address::where('user_id', $user->id)->update(['is_default' => false]);
+        // Ensure the area exists in the locations table
+        $location = Location::where('area', $request->area)->first();
+        if (!$location) {
+            return redirect()->back()->withErrors(['area' => 'The specified area is not valid.']);
         }
 
-        $address = Address::create([
-            'user_id' => $user->id,
-            'location_id' => $request->location_id,
+        // Store the address
+        Address::create([
+            'user_id' => Auth::id(),
+            'location_id' => $location->id,
             'address_line_one' => $request->address_line_one,
             'address_line_two' => $request->address_line_two,
             'city' => $request->city,
             'phone' => $request->phone,
-            'is_default' => $request->is_default ?? false,
         ]);
-
-        return redirect()->route('address.your-address')->with('success', 'Address added successfully.');
+        
+        // Redirect back with success message
+        return redirect()->route('addresses.index')->with('success', 'Address added successfully.');
     }
 
     /**
@@ -73,63 +76,71 @@ class AddressController extends Controller
         // Set the selected address as default
         $address->update(['is_default' => true]);
 
-        return redirect()->route('address.your-address')->with('success', 'Default address set successfully.');
+        return redirect()->route('addresses.index')->with('success', 'Default address set successfully.');
     }
 
     /**
      * Remove the specified address from storage.
-     */
-    public function destroy($id)
-    {
-        $user = Auth::user();
-        $address = Address::where('user_id', $user->id)->findOrFail($id);
+ */
+public function destroy($id)
+{
+    $user = Auth::user();
+    $address = Address::where('user_id', $user->id)->findOrFail($id);
 
-        $address->delete();
+    $address->delete();
 
-        return redirect()->route('address.your-address')->with('success', 'Address deleted successfully.');
+    return redirect()->route('addresses.index')->with('success', 'Address deleted successfully.');
+}
+
+/**
+ * Show the form for editing the specified address.
+ */
+public function edit($id)
+{
+    $user = Auth::user();
+    $address = Address::where('user_id', $user->id)->findOrFail($id);
+
+    return view('address.edit', compact('address'));
+}
+
+/**
+ * Update the specified address in storage.
+ */
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'full_name' => 'required|string|max:255',
+        'phone' => 'required|string|max:15',
+        'pincode' => 'required|string|max:10',
+        'address_line_one' => 'required|string|max:255',
+        'address_line_two' => 'nullable|string|max:255',
+        'city' => 'required|string|max:255',
+        'country' => 'required|string|max:255',
+        'is_default' => 'nullable|boolean',
+    ]);
+
+    $user = Auth::user();
+    $address = Address::where('user_id', $user->id)->findOrFail($id);
+
+    // If the address is marked as default, unset the current default address
+    if ($request->is_default) {
+        Address::where('user_id', $user->id)->update(['is_default' => false]);
     }
 
-    /**
-     * Show the form for editing the specified address.
-     */
-    public function edit($id)
-    {
-        $user = Auth::user();
-        $address = Address::where('user_id', $user->id)->findOrFail($id);
-
-        return view('addresses.edit', compact('address'));
+    $location = Location::where('area', $request->area)->first();
+    if (!$location) {
+        return redirect()->back()->withErrors(['area' => 'The specified area is not valid.']);
     }
 
-    /**
-     * Update the specified address in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'address_line_one' => 'required|string|max:255',
-            'address_line_two' => 'nullable|string|max:255',
-            'city' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
-            'is_default' => 'nullable|boolean',
-        ]);
+    $address->update([
+        'location_id' => $location->id,
+        'address_line_one' => $request->address_line_one,
+        'address_line_two' => $request->address_line_two,
+        'city' => $request->city,
+        'phone' => $request->phone,
+        'is_default' => $request->is_default ?? false,
+    ]);
 
-        $user = Auth::user();
-        $address = Address::where('user_id', $user->id)->findOrFail($id);
-
-        // If the address is marked as default, unset the current default address
-        if ($request->is_default) {
-            Address::where('user_id', $user->id)->update(['is_default' => false]);
-        }
-
-        $address->update([
-            'location_id' => $request->location_id,
-            'address_line_one' => $request->address_line_one,
-            'address_line_two' => $request->address_line_two,
-            'city' => $request->city,
-            'phone' => $request->phone,
-            'is_default' => $request->is_default ?? false,
-        ]);
-
-        return redirect()->route('address.your-address')->with('success', 'Address updated successfully.');
-    }
+    return redirect()->route('addresses.index')->with('success', 'Address updated successfully.');
+}
 }

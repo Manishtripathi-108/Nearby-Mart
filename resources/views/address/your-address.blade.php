@@ -37,7 +37,7 @@
                     <p class="text-lg">{{ $address->address_line_two }}</p>
                     <p class="text-lg">{{ $address->city }}</p>
                     <p class="text-lg">{{ $address->state }}</p>
-                    <p class="text-lg">{{ $address->country }}</p>
+                    <p class="text-lg">{{ $address->district }}</p>
                     <p class="text-lg">Phone: {{ $address->phone }}</p>
                     <a class="text-lg text-blue-600 underline" href="#">Add Delivery Instruction</a>
                 </div>
@@ -81,7 +81,7 @@
                         <button type="submit" class="text-lg text-blue-600">Remove</button>
                     </form>
 
-                    
+
                     <a href="{{ route('addresses.setDefault', $address->id) }}">
                         <p class="text-lg text-blue-600">Set It Default</p>
                     </a>
