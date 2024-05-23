@@ -96,8 +96,8 @@ Route::middleware(['auth'])->group(function () {
 
 //add products routes
 Route::middleware(['auth'])->group(function()
-    {   Route::get('/products',[StoreProductController::class,'index'])->name('store.products.index');
-        Route::get('/products/create', [StoreProductController::class, 'create'])->name('store.products.create');
+    {   Route::get('/products',[StoreProductController::class,'index'])->name('products.index');
+        Route::get('/products/create', [StoreProductController::class, 'create'])->name('products.create');
         Route::post('/products', [StoreProductController::class, 'store'])->name('products.store');
         Route::get('/products/all', [StoreProductController::class, 'allProducts'])->name('products.all');
         Route::get('/products/edit',[StoreProductController::class,'edit'])->name('products.edit');

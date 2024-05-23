@@ -5,7 +5,7 @@
 
         {{-- Content --}}
         <div class="flex w-full flex-col flex-wrap gap-x-6 gap-y-10 py-10 pr-6">
-            <h1 class="text-2xl font-bold mb-4">Add Product</h1>
+            <h1 class="text-3xl font-bold mb-4">Add Product</h1>
             <x-neomorphic-form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
