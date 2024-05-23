@@ -37,7 +37,11 @@
             <circle cx="113" cy="113" fill="none" r="109" stroke="#6E6E96" stroke-width="8" />
         </svg>
         <div class="mt-4 tracking-widest">
-            <span class="block text-6xl text-gray-500">4 0 4</span>
+            @isset($title)
+                <h1 class="text-3xl font-bold text-gray-800">{{ $title }}</h1>
+            @else
+                <span class="block text-6xl text-gray-500">4 0 4</span>
+            @endisset
             <span class="text-xl text-gray-500">
                 @if ($slot->isEmpty())
                     Sorry, We couldn't find what you are looking for!
@@ -47,7 +51,7 @@
             </span>
         </div>
         <div class="mt-6">
-            <a class="inline-block rounded-md bg-gray-200 p-3 font-mono text-xl text-gray-500 hover:shadow-md" href="{{ url()->previous() }}">Go back</a>
+            <a class="inline-block rounded-md bg-gray-200 p-3 font-mono text-xl text-gray-500 hover:shadow-md" href="{{ $backUrl ?? url()->previous() }}">{{ $buttonName ?? 'Go back' }}</a>
         </div>
     </div>
 </div>
