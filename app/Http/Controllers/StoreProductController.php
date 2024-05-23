@@ -71,21 +71,21 @@ class StoreProductController extends Controller
 
         if ($request->hasFile('photo_main')) {
             $photoMain = time() . 'product.' . $request->photo_main->extension();
-            $request->profile_picture->storeAs('public/products', $photoMain);
+            $request->photo_main->storeAs('public/products', $photoMain);
 
             $product->photo_main = $photoMain;
         }
 
         if ($request->hasFile('photo_1')) {
             $photo_1 = time() . 'product.' . $request->photo_1->extension();
-            $request->profile_picture->storeAs('public/products', $photo_1);
+            $request->photo_1->storeAs('public/products', $photo_1);
 
             $product->photo_1 = $photo_1;
         }
 
         if ($request->hasFile('photo_2')) {
             $photo_2 = time() . 'product.' . $request->photo_2->extension();
-            $request->profile_picture->storeAs('public/products', $photo_2);
+            $request->photo_2->storeAs('public/products', $photo_2);
 
             $product->photo_2 = $photo_2;
         }
