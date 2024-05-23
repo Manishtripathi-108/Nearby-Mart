@@ -66,7 +66,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/search', [ProductController::class, 'search'])->name('products.search');
-Route::get('/product-details/{product}', [ProductController::class, 'details'])->name('products.show');
+Route::get('/product-details/{product}', [ProductController::class, 'details'])->name('products.details');
 
 
 // Store Routes
@@ -88,21 +88,22 @@ Route::middleware(['auth'])->group(function () {
         store.products.create, store.products.store, store.products.show,
         store.products.edit, store.products.update, store.products.destroy 
     */
-   
 
-    Route::resource('store.products', StoreProductController::class);
-    
+    Route::get('/products/all', [StoreProductController::class, 'allProducts'])->name('products.all');
+
+    Route::resource('store.products', StoreProductController::class)->shallow();
+
 
 });
 
 //add products routes
-Route::middleware(['auth'])->group(function()
-    {   Route::get('/products',[StoreProductController::class,'index'])->name('products.index');
+Route::middleware(['auth'])->group(
+    function () {
+        Route::get('/products', [StoreProductController::class, 'index'])->name('products.index');
         Route::get('/products/create', [StoreProductController::class, 'create'])->name('products.create');
         Route::post('/products', [StoreProductController::class, 'store'])->name('products.store');
-        Route::get('/products/all', [StoreProductController::class, 'allProducts'])->name('products.all');
-        Route::get('/products/edit',[StoreProductController::class,'edit'])->name('products.edit');
-        Route::post('/product-update',[StoreProductController::class,'update'])->name('products.update');
+        Route::get('/products/edit', [StoreProductController::class, 'edit'])->name('products.edit');
+        Route::post('/product-update', [StoreProductController::class, 'update'])->name('products.update');
     }
 );
 

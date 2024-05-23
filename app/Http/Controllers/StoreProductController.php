@@ -10,11 +10,11 @@ use App\Models\Store;
 
 class StoreProductController extends Controller
 {
- 
+
     // display all products of all stores with pagination
     public function allProducts()
     {
-        $products = Product::latest()->with('category')->paginate(10);
+        $products = Product::latest()->with('category')->paginate(12);
         return view('products.all', compact('products'));
     }
 
@@ -23,7 +23,7 @@ class StoreProductController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -31,10 +31,10 @@ class StoreProductController extends Controller
      */
     public function create(Store $store)
     {
-        $categories = Category::all(); // Fetch all categories to populate the dropdown
-        $soldby=['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
-        return view('products.create', compact('store','categories','soldby'));
+        $categories = Category::all();
+        $soldBy = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
 
+        return view('products.create', compact('store', 'categories', 'soldBy'));
     }
 
     /**
@@ -92,7 +92,7 @@ class StoreProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('store.products.index')->with('success', 'Product added successfully.');
+        return redirect()->route('products.index')->with('success', 'Product added successfully.');
     }
 
     /**
@@ -100,7 +100,7 @@ class StoreProductController extends Controller
      */
     public function show(Store $store, Product $product)
     {
-        return view('store.products.show', compact('store', 'product'));
+        return view('products.show', compact('store', 'product'));
     }
 
     /**
@@ -109,8 +109,8 @@ class StoreProductController extends Controller
     public function edit(Store $store, Product $product)
     {
         $categories = Category::all();
-        $soldby=['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
-        return view('products.edit', compact('store', 'product','categories','soldby'));
+        $soldby = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
+        return view('products.edit', compact('store', 'product', 'categories', 'soldby'));
     }
 
     /**
@@ -135,7 +135,7 @@ class StoreProductController extends Controller
 
         $product->update($validatedData);
 
-        return redirect()->route('store.products.index', $store)->with('success', 'Product updated successfully.');
+        return redirect()->route('products.index', $store)->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -144,6 +144,6 @@ class StoreProductController extends Controller
     public function destroy(Store $store, Product $product)
     {
         $product->delete();
-        return redirect()->route('store.products.index', $store)->with('success', 'Product deleted successfully.');
+        return redirect()->route('products.index', $store)->with('success', 'Product deleted successfully.');
     }
 }

@@ -5,7 +5,7 @@
     @endphp
 
     <div class="mb-10 flex transform items-center rounded-t-xl rounded-bl-[55px] bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-8">
-        <img class="h-20 w-20 rounded-full ring-4 ring-gray-200 ring-opacity-20" src="{{ asset('images/profile/avatar/' . auth()->user()->profile_picture) }}" alt="">
+        <img class="h-20 w-20 rounded-full ring-4 ring-gray-200 ring-opacity-20" src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="">
         <div class="ml-5">
             <h1 class="text-lg tracking-wide text-white">
                 {{ auth()->user()->name }}
@@ -49,12 +49,17 @@
         Your Products
     </x-sidenav.link>
 
-    <x-sidenav.addnew :url="route('products.create')" isSelected="{{ $currentUrl === route('products.create') }}">
-     products
-    </x-sidenav.addnew>
-
     <x-sidenav.link :url="route('products.edit')" isSelected="{{ $currentUrl === route('products.edit') }}">
-     Edit products
+        <x-slot:icon>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+        </x-slot:icon>
+        Edit products
     </x-sidenav.link>
 
+    <x-sidenav.addnew :url="route('products.create')" isSelected="{{ $currentUrl === route('products.create') }}">
+        products
+    </x-sidenav.addnew>
 </x-sidenav>

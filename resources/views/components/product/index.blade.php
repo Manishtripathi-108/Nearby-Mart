@@ -23,7 +23,9 @@
 
         {{-- Pagination --}}
         @isset($paginationEnabled)
-            {{ $products->links() }}
+            <div class="mt-12">
+                {{ $products->links() }}
+            </div>
         @endisset
     </div>
 </div>

@@ -15,8 +15,9 @@ class ProductController extends Controller
         $products = Product::where('name', 'like', "%{$query}%")
             ->orWhere('description', 'like', "%{$query}%")
             ->where('available', 1)
+            ->orderBy('rating', 'desc')
             ->with('category')
-            ->paginate(10);
+            ->paginate(12);
 
         return view('products-search', compact('products', 'query'));
     }
