@@ -48,4 +48,13 @@
         </x-slot:icon>
         Your Products
     </x-sidenav.link>
+
+    <x-sidenav.addnew :url="route('products.create')" isSelected="{{ $currentUrl === route('products.create') }}">
+     products
+    </x-sidenav.addnew>
+
+    <x-sidenav.link :url="route('products.edit')" isSelected="{{ $currentUrl === route('products.edit') }}">
+     Edit products
+    </x-sidenav.link>
+
 </x-sidenav>

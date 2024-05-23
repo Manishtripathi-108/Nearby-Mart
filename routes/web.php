@@ -20,6 +20,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\AddProductsController;
 
 // Welcome Page
 Route::get('/', function () {
@@ -87,9 +88,24 @@ Route::middleware(['auth'])->group(function () {
         store.products.create, store.products.store, store.products.show,
         store.products.edit, store.products.update, store.products.destroy 
     */
-    Route::get('products', [StoreProductController::class, 'allProducts'])->name('products.all');
+   
+
     Route::resource('store.products', StoreProductController::class);
+    
+
 });
+
+//add products routes
+Route::middleware(['auth'])->group(function()
+    {   Route::get('/products',[StoreProductController::class,'index'])->name('products.index');
+        Route::get('/products/create', [StoreProductController::class, 'create'])->name('products.create');
+        Route::post('/products', [StoreProductController::class, 'store'])->name('products.store');
+        Route::get('/products/all', [StoreProductController::class, 'allProducts'])->name('products.all');
+        Route::get('/products/edit',[StoreProductController::class,'edit'])->name('products.edit');
+        Route::post('/product-update',[StoreProductController::class,'update'])->name('products.update');
+    }
+);
+
 
 // Cart Routes
 Route::middleware(['auth'])->group(function () {
