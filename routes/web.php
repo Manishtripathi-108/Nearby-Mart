@@ -19,11 +19,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 // Welcome Page
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(RedirectIfAuthenticated::class)->name('welcome');
 
 Route::get('/wishlist', function () {
     return view('orders.wishList');

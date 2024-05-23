@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
@@ -15,6 +16,11 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if (Auth::check()) {
+            // User is logged in, redirect to a different route
+            return redirect()->route('home');
+        }
+
         return $next($request);
     }
 }
