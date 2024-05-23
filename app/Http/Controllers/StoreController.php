@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\CheckStoreOwnership;
 use App\Http\Middleware\CheckStoreOwner;
 use App\Models\Store;
-use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class StoreController extends Controller implements HasMiddleware
 {
-
     // Middleware for the StoreController
     public static function middleware(): array
     {
@@ -36,13 +35,17 @@ class StoreController extends Controller implements HasMiddleware
         // To get the top 10 selling products from all stores
         $topProducts = $allProducts->sortByDesc('units_sold')->take(10);
 
-        return view(
-            'store.dashboard',
-            [
-                'stores' => $userStores,
-                'topProducts' => $topProducts
-            ]
-        );
+        // Fetch payments for orders associated with the store
+        $store = auth()->user()->stores()->first();
+        $payments = Payment::whereHas('order', function ($query) use ($store) {
+            $query->where('store_id', $store->id);
+        })->get();
+
+        return view('store.dashboard', [
+            'stores' => $userStores,
+            'topProducts' => $topProducts,
+            'payments' => $payments,
+        ]);
     }
 
     // Display a listing of the resource.
@@ -50,14 +53,11 @@ class StoreController extends Controller implements HasMiddleware
     {
         $userStores = auth()->user()->stores()->with('storeAddress')->get();
 
-        return view(
-            'store.index',
-            [
-                'stores' => $userStores
-            ]
-        );
+        return view('store.index', [
+            'stores' => $userStores,
+        ]);
     }
-
+    
     // Show the form for creating a new resource.
     public function create()
     {
@@ -127,7 +127,7 @@ class StoreController extends Controller implements HasMiddleware
     // Display the specified resource.
     public function show(Store $store)
     {
-        return view('store.show')->with('store', $store);
+        return view('store.show', ['store' => $store]);
     }
 
     // Show the form for editing the specified resource.
@@ -138,7 +138,7 @@ class StoreController extends Controller implements HasMiddleware
                 $item->day => [
                     'open_time' => $item->open_time,
                     'close_time' => $item->close_time,
-                ]
+                ],
             ];
         })->toArray();
 
@@ -176,7 +176,7 @@ class StoreController extends Controller implements HasMiddleware
                     }
                 },
             ],
-            'phone' => 'required|regex:/^[0-9]{10,12}$/|max:12'
+            'phone' => 'required|regex:/^[0-9]{10,12}$/|max:12',
         ]);
 
         if ($validator->fails()) {

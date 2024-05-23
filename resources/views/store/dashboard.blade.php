@@ -103,6 +103,8 @@
                 {{-- Your Store table --}}
                 @include('store.partials.store-list', ['stores' => $stores])
 
+                {{-- Payments table --}}
+                @include('store.partials.payments-list', ['payments' => $payments]) 
             </div>
         </div>
     </div>
