@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
     
     public function index(){
-        $products = Product::all();
-        return view('home', compact('products'));
+       
+        $trending = Product::where('rating',4)->take('6')->get();
+        return view('home')->with('products',$trending);
     }
 }
