@@ -6,26 +6,12 @@
     @include('components.products-category')
 
     <!-- Trending Products -->
-    <h2 class="text-3xl font-bold text-gray-800 mt-8 ml-10 mb-4">Trending Products</h2>
-    <div class="flex flex-row flex-wrap justify-center items-center">
-        @foreach($products as $product)
-        @include('product.product-card', ['product' => $product])
-        @endforeach
-    </div>
+    <x-product title="Trending Products" :products="$products"></x-product>
 
     <!-- Featured Products -->
-    <h2 class="text-3xl font-bold text-gray-800 mt-8 ml-10 mb-4">Featured Products</h2>
-    <div class="flex flex-row flex-wrap justify-center items-center">
-        @foreach($products as $product)
-        @include('product.product-card', ['product' => $product])
-        @endforeach
-    </div>
-    
+    <x-product title="Featured Products" :products="$products"></x-product>
+
     <!-- Best Selling Products -->
-    <h2 class="text-3xl font-bold text-gray-800 mt-8 ml-10 mb-4">Best Selling Products</h2>
-    <div class="flex flex-row flex-wrap justify-center items-center">
-        @foreach($products as $product)
-        @include('product.product-card', ['product' => $product])
-        @endforeach
-    </div>
+    <x-product title="Best Selling Products" :products="$products"></x-product>
+
 </x-app-layout>

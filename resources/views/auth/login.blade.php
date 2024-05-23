@@ -2,11 +2,11 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <x-neomorphic-form method="POST" action="{{ route('login') }}">
         @csrf
         <!-- component -->
         <div>
-            <div class="flex h-screen justify-center">
+            <div class="flex justify-center">
                 <div class="mx-auto flex w-full max-w-md items-center px-6 lg:w-full">
                     <div class="flex-1">
                         <div class="text-center">
@@ -17,16 +17,16 @@
                         <div class="mt-8">
                             <!-- Email Address -->
                             <div>
-                                <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email')" required autofocus autocomplete="username" />
-                                <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                                <x-neomorphic-form.label for="email" :value="__('Email')" />
+                                <x-neomorphic-form.input class="mt-1 block w-full" id="email" name="email" type="email" :value="old('email')" required autofocus autocomplete="username" />
+                                <x-neomorphic-form.input-error class="mt-2" :messages="$errors->get('email')" />
                             </div>
 
                             <!-- Password -->
                             <div class="mt-4">
-                                <x-input-label for="password" :value="__('Password')" />
-                                <x-text-input class="mt-1 block w-full" id="password" name="password" type="password" required autocomplete="current-password" />
-                                <x-input-error class="mt-2" :messages="$errors->get('password')" />
+                                <x-neomorphic-form.label for="password" :value="__('Password')" />
+                                <x-neomorphic-form.input class="mt-1 block w-full" id="password" name="password" type="password" required autocomplete="current-password" />
+                                <x-neomorphic-form.input-error class="mt-2" :messages="$errors->get('password')" />
                             </div>
 
                             <!-- Remember Me -->
@@ -63,5 +63,5 @@
                 </a>
             </div>
         </div>
-    </form>
+    </x-neomorphic-form>
 </x-guest-layout>

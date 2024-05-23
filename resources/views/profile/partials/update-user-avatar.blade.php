@@ -1,36 +1,45 @@
 <section>
-<header>
+    <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Update Avatar ') }}
+            {{ __('Update Avatar') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your Avatar.") }}
+            {{ __('Update your Avatar.') }}
         </p>
     </header>
-@if(session('changed'))
-    <div class="bg-green-500 text-white p-4 rounded mb-4">
-        {{ session('changed') }}
-    </div>
+
+    @if (session('changed'))
+        <div class="mb-4 rounded bg-green-500 p-4 text-white">
+            {{ session('changed') }}
+        </div>
     @endif
 
     <div>
-        <form action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        <form class="space-y-4" action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Profile Image -->
             <div class="flex items-center">
                 <div class="mr-4">
-                    <img id="profile_image"
-                        src="{{ $user->profile_picture ? asset('storage/Avatar/' . $user->profile_picture) : 'https://via.placeholder.com/150' }}"
-                        alt="Profile Image" class="h-24 w-24 rounded-full object-cover">
+                    <img class="h-24 w-24 rounded-full object-cover" id="profile_image" src="{{ $user->profile_picture ? asset('storage/Avatar/' . $user->profile_picture) : 'https://via.placeholder.com/150' }}" alt="Profile Image">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="block text-gray-700">Profile Image</label>
-                    <input type="file" id="profile_picture" name="profile_picture" accept="image/*"
-                        class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input class="mt-1 block w-full rounded-md border border-gray-300 text-sm text-gray-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" id="profile_picture" name="profile_picture" type="file" accept="image/*">
                 </div>
             </div>
             <x-primary-button>Upload</x-primary-button>
         </form>
     </div>
+
+    @push('scripts')
+        <script>
+            document.getElementById('profile_picture').addEventListener('change', function(event) {
+                const [file] = event.target.files;
+                if (file) {
+                    document.getElementById('profile_image').src = URL.createObjectURL(file);
+                }
+            });
+        </script>
+    @endpush
 </section>
