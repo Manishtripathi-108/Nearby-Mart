@@ -21,7 +21,7 @@
             <!-- Profile Image -->
             <div class="flex items-center">
                 <div class="mr-4">
-                    <img class="h-24 w-24 rounded-full object-cover" id="profile_image" src="{{ $user->profile_picture ? asset('storage/Avatar/' . $user->profile_picture) : 'https://via.placeholder.com/150' }}" alt="Profile Image">
+                    <img class="h-24 w-24 rounded-full object-cover" id="profile_image" src="{{ $user->profile_picture ? asset('avatars/' . $user->profile_picture) : 'https://via.placeholder.com/150' }}" alt="Profile Image">
                 </div>
                 <div class="flex flex-col gap-2">
                     <label class="block text-gray-700">Profile Image</label>

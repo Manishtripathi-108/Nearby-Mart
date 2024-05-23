@@ -53,17 +53,20 @@ class ProfileController extends Controller
         if ($request->hasFile('profile_picture')) {
             // Delete old image if exists
             if ($user->profile_picture) {
-                Storage::delete('public/Avatar/' . $user->profile_picture);
+                Storage::delete('public/avatars/' . $user->profile_picture);
             }
 
-            // Store new image
-            $imageName = time() . 'avatar.' . $request->profile_picture->extension();
-            $request->profile_picture->storeAs('public/Avatar', $imageName);
+            // Store new avatar
+            $avatar = $request->file('profile_picture');
+            $avatarName = time() . '_avatar_' . $avatar->hashName();
+
+            $avatar->storeAs('public/avatars', $avatarName);
 
             // Update user profile image
-            $user->profile_picture = $imageName;
+            $user->profile_picture = $avatarName;
             $user->save();
         }
+
 
         return redirect()->route('edit.profile')->with('changed', 'Profile image updated successfully.');
     }

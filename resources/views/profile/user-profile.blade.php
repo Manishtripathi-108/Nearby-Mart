@@ -3,17 +3,16 @@
 
         <div class="h-auto w-full flex-1 flex-col">
             <!--user profile-->
-            <div class="m-10 h-auto flex-1 flex-row space-y-4 rounded-lg border-2 p-3 justify-center items-center">
-                <div class="flex items-center justify-center     ">
+            <div class="m-10 h-auto flex-1 flex-row items-center justify-center space-y-4 rounded-lg border-2 p-3">
+                <div class="flex items-center justify-center">
                     <div class="m-2 h-auto w-48 rounded-full p-2">
-                        <img class="h-cover w-full rounded-full bg-blend-screen"
-                            src="{{asset('/storage/Avatar/'.auth()->user()->profile_picture)}}" alt="user">
+                        <img class="h-cover w-full rounded-full bg-blend-screen" src="{{ asset('avatars/' . auth()->user()->profile_picture) }}" alt="user">
                     </div>
                 </div>
 
-                <div class="flex flex-col item-center justify-start">
+                <div class="item-center flex flex-col justify-start">
                     <div class="flex items-center justify-center">
-                        <h1 class="text-bold text-2xl">{{auth()->user()->name}}</h1>
+                        <h1 class="text-bold text-2xl">{{ auth()->user()->name }}</h1>
                     </div>
                     <div class="flex flex-col items-center justify-center">
                         <p class="text-sm">{{ auth()->user()->email }}</p>
@@ -22,12 +21,10 @@
                 </div>
             </div>
 
-
             <!-- payments , other Accounts contianer -->
             <div class="flex flex-col md:flex-row">
                 <!--payments-->
-                <div
-                    class="m-10 flex h-auto w-full flex-col items-center justify-center space-y-4 rounded-lg border-2 bg-gray-200 p-3">
+                <div class="m-10 flex h-auto w-full flex-col items-center justify-center space-y-4 rounded-lg border-2 bg-gray-200 p-3">
                     <h2 class="text-2xl font-bold text-gray-800">PAYMENTS</h2>
                     <a href="#">
                         <p class="font-semibold text-blue-400">Gift Cards</p>
@@ -41,8 +38,7 @@
                 </div>
 
                 <!--other Accounts-->
-                <div
-                    class="m-10 flex h-auto w-full flex-col items-center justify-start space-y-4 rounded-lg border-2 bg-gray-200 p-3">
+                <div class="m-10 flex h-auto w-full flex-col items-center justify-start space-y-4 rounded-lg border-2 bg-gray-200 p-3">
                     <h2 class="text-2xl font-bold text-gray-800">OTHER AACOUNTS</h2>
                     <a href="/create-seller">
                         <p class="font-semibold text-blue-400">Seller Accout</p>
@@ -52,8 +48,7 @@
 
             <!--Your Stuff-->
             <div class="flex flex-col md:flex-row">
-                <div
-                    class="m-10 flex h-auto w-full flex-col items-center justify-center space-y-4 rounded-lg border-2 bg-gray-200 p-3">
+                <div class="m-10 flex h-auto w-full flex-col items-center justify-center space-y-4 rounded-lg border-2 bg-gray-200 p-3">
                     <h2 class="text-2xl font-bold text-gray-800">YOUR STUFF</h2>
                     <a href="#">
                         <p class="font-semibold text-blue-400">Your Coupons</p>
@@ -74,11 +69,9 @@
             <!--Your profile-->
             <div class="mt-2">
                 <a href="{{ route('edit.profile') }}">
-                    <div
-                        class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
+                    <div class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
                         <div class="m-2 h-auto w-24 p-2">
-                            <img class="h-cover w-full bg-blend-screen"
-                                src="{{ asset('images/profile/profile-edit.jpeg') }}" alt="user">
+                            <img class="h-cover w-full bg-blend-screen" src="{{ asset('images/profile/profile-edit.jpeg') }}" alt="user">
                         </div>
                         <div class="flex-col items-center justify-center">
                             <h2 class="text-2xl font-bold">Edit Profile</h2>
@@ -92,11 +85,9 @@
 
             <div class="mt-2">
                 <a href="{{ route('your-orders') }}">
-                    <div
-                        class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
+                    <div class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
                         <div class="m-2 h-auto w-24 p-2">
-                            <img class="h-cover w-full bg-blend-screen"
-                                src="{{ asset('images/profile/delivery-box.jpeg') }}" alt="user">
+                            <img class="h-cover w-full bg-blend-screen" src="{{ asset('images/profile/delivery-box.jpeg') }}" alt="user">
                         </div>
                         <div class="flex-col items-center justify-center">
                             <h2 class="text-2xl font-bold">Your Orders</h2>
@@ -106,15 +97,12 @@
                 </a>
             </div>
 
-
             <!--Your wishlist-->
             <div class="mt-2">
-                <a href="{{route('wishlist')}}">
-                    <div
-                        class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
+                <a href="{{ route('wishlist') }}">
+                    <div class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
                         <div class="m-2 h-auto w-24 p-2">
-                            <img class="h-cover w-full bg-blend-screen"
-                                src="{{ asset('images/profile/wish-list.jpeg') }}" alt="user">
+                            <img class="h-cover w-full bg-blend-screen" src="{{ asset('images/profile/wish-list.jpeg') }}" alt="user">
                         </div>
                         <div class="flex-col items-center justify-center">
                             <h2 class="text-2xl font-bold">Your Wishlist</h2>
@@ -127,11 +115,9 @@
             <!--Your location-->
             <div class="mt-2">
                 <a href="{{ route('addresses.index') }}">
-                    <div
-                        class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 p-4 transition hover:border-blue-400">
+                    <div class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 p-4 transition hover:border-blue-400">
                         <div class="m-2 h-auto w-20 p-2">
-                            <img class="h-cover w-full bg-blend-screen"
-                                src="{{ asset('images/profile/location.jpeg') }}" alt="user">
+                            <img class="h-cover w-full bg-blend-screen" src="{{ asset('images/profile/location.jpeg') }}" alt="user">
                         </div>
                         <div class="flex-col items-center justify-center">
                             <h2 class="text-2xl font-bold">Your Addresses</h2>
@@ -143,24 +129,22 @@
 
             <!--user seller accout if have-->
             @if (Auth()->check())
-            <!-- seller account-->
-            @if (auth()->user()->user_type == 'Store Owner')
-            <div class="mt-2">
-                <a href="{{route('store.store')}}">
-                    <div
-                        class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
-                        <div class="m-2 h-auto w-24 p-2">
-                            <img class="h-cover w-full bg-blend-screen" src="{{ asset('images/profile/store.jpeg') }}"
-                                alt="user">
-                        </div>
-                        <div class="flex-col items-center justify-center">
-                            <h2 class="text-2xl font-bold">Your Store</h2>
-                            <p class="text-sm">Add more products in your digital store</p>
-                        </div>
+                <!-- seller account-->
+                @if (auth()->user()->user_type == 'Store Owner')
+                    <div class="mt-2">
+                        <a href="{{ route('store.store') }}">
+                            <div class="h-30 eas-in-out delay-2 hover:border-3 flex w-full flex-row items-center justify-center rounded-lg border-2 transition hover:border-blue-400">
+                                <div class="m-2 h-auto w-24 p-2">
+                                    <img class="h-cover w-full bg-blend-screen" src="{{ asset('images/profile/store.jpeg') }}" alt="user">
+                                </div>
+                                <div class="flex-col items-center justify-center">
+                                    <h2 class="text-2xl font-bold">Your Store</h2>
+                                    <p class="text-sm">Add more products in your digital store</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            @endif
+                @endif
 
             @endif
         </div>
@@ -168,5 +152,4 @@
 
     </div>
 
-    
 </x-app-layout>
