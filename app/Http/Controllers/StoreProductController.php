@@ -10,7 +10,7 @@ use App\Models\Store;
 
 class StoreProductController extends Controller
 {
-
+ 
     // display all products of all stores with pagination
     public function allProducts()
     {
@@ -32,7 +32,8 @@ class StoreProductController extends Controller
     public function create(Store $store)
     {
         $categories = Category::all(); // Fetch all categories to populate the dropdown
-        return view('products.create', compact('store','categories'));
+        $soldby=['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
+        return view('products.create', compact('store','categories','soldby'));
 
     }
 
@@ -52,7 +53,6 @@ class StoreProductController extends Controller
             'discount_type' => 'required|string|in:percentage,fixed',
             'description' => 'nullable|string',
             'stock' => 'required|integer',
-            'units_sold' => 'required|integer',
             'measure' => 'required|string|max:255',
             'sold_by' => 'required|string|max:255',
         ]);
@@ -66,7 +66,6 @@ class StoreProductController extends Controller
         $product->discount_type = $request->discount_type;
         $product->description = $request->description;
         $product->stock = $request->stock;
-        $product->units_sold = $request->units_sold;
         $product->measure = $request->measure;
         $product->sold_by = $request->sold_by;
 
@@ -110,7 +109,8 @@ class StoreProductController extends Controller
     public function edit(Store $store, Product $product)
     {
         $categories = Category::all();
-        return view('products.edit', compact('store', 'product','categories'));
+        $soldby=['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
+        return view('products.edit', compact('store', 'product','categories','soldby'));
     }
 
     /**
@@ -129,7 +129,6 @@ class StoreProductController extends Controller
             'discount_type' => 'nullable|string',
             'description' => 'nullable|string',
             'stock' => 'required|integer',
-            'units_sold' => 'nullable|integer',
             'measure' => 'nullable|string',
             'sold_by' => 'nullable|string',
         ]);
