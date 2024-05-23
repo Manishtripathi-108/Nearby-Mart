@@ -9,13 +9,10 @@
         </p>
     </header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('delete.user') }}" class="p-6">
+        <x-neomorphic-form class="p-6" method="post" action="{{ route('delete.user') }}">
             @csrf
             @method('delete')
 
@@ -28,17 +25,11 @@
             </p>
 
             <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+                <x-neomorphic-form.label class="sr-only" for="password" value="{{ __('Password') }}" />
 
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
+                <x-neomorphic-form.input class="mt-1 block w-3/4" id="password" name="password" type="password" placeholder="{{ __('Password') }}" />
 
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                <x-neomorphic-form.input-error class="mt-2" :messages="$errors->userDeletion->get('password')" />
             </div>
 
             <div class="mt-6 flex justify-end">
@@ -50,6 +41,6 @@
                     {{ __('Delete Account') }}
                 </x-danger-button>
             </div>
-        </form>
+        </x-neomorphic-form>
     </x-modal>
 </section>
