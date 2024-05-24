@@ -33,7 +33,7 @@
 
             @endphp
 
-            <x-table.td type='1' stars='{{ $product->rating }}' imageUrl='{{ $product->photo_main }}'>{{ $product->name }}</x-table.td>
+            <x-table.td type='1' stars='{{ $product->rating }}' imageUrl="{{ asset('products/' . $product->photo_main) }}">{{ $product->name }}</x-table.td>
             <x-table.td>₹{{ $product->price }}</x-table.td>
             <x-table.td>₹{{ $product->profit }}</x-table.td>
             <x-table.td>{{ $product->units_sold }}</x-table.td>

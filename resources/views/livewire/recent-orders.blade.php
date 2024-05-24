@@ -13,7 +13,7 @@
         @if ($storeOrderItems->orderItems->count() > 0)
             @foreach ($storeOrderItems->orderItems as $storeOrderItem)
                 <x-table.tr>
-                    <x-table.td type="1" content="{{ $storeOrderItem->order_id }}" imageUrl="{{ $storeOrderItem->product->photo_main }}">{{ $storeOrderItem->product->name }}</x-table.td>
+                    <x-table.td type="1" content="{{ $storeOrderItem->order_id }}" imageUrl="{{ asset('products/' . $storeOrderItem->product->photo_main) }}">{{ $storeOrderItem->product->name }}</x-table.td>
                     <x-table.td>₹{{ number_format($storeOrderItem->unit_price, 2) }}</x-table.td>
                     <x-table.td>{{ $storeOrderItem->quantity }}</x-table.td>
                     <x-table.td>₹{{ number_format($storeOrderItem->total_amount, 2) }}</x-table.td>

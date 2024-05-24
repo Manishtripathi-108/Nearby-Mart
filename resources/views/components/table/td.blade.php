@@ -37,7 +37,7 @@
 
         case 'Confirmed':
             $statusColor = 'blue';
-            $statusIcon = 'package-processing-icon.svg';
+            $statusIcon = 'package-confirmed-icon.svg';
             break;
 
         case 'Delivered':
@@ -82,7 +82,7 @@
         <td class="px-4 py-3">
             <div class="flex items-center gap-4">
                 @isset($imageUrl)
-                    <img class="h-10 w-10 rounded-full" src="{{ asset($imageUrl) }}" alt="" loading="lazy">
+                    <img class="h-10 w-10 rounded-full" src="{{ $imageUrl }}" alt="" loading="lazy">
                 @endisset
                 <div class="font-medium">
                     <div>{{ $slot }}</div>

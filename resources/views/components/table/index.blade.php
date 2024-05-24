@@ -10,7 +10,7 @@
 
 <div {{ $attributes->merge(['class' => 'h-fit overflow-hidden rounded-xl bg-gray-50 p-2 shadow-md']) }}>
     <div class="w-full overflow-x-auto rounded-md">
-        @isset($tittle)
+        @isset($title)
             <div class="flex w-full items-center justify-between px-4 py-3">
                 <div class="font-bold text-gray-700">
                     {{ ucwords($title) }}

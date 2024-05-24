@@ -15,9 +15,17 @@ class StoreProductController extends Controller
     // display all products of all stores with pagination
     public function allProducts()
     {
-        $products = Product::latest()->with('category')->paginate(12);
+        $stores = auth()->user()->stores()->pluck('id');
+
+        $products = Product::whereIn('store_id', $stores)
+            ->with('category')
+            ->orderByDesc('units_sold')
+            ->orderByDesc('created_at')
+            ->paginate(12);
+
         return view('products.all', compact('products'));
     }
+
 
     // Show the form for creating a new resource.
     public function addNew()
