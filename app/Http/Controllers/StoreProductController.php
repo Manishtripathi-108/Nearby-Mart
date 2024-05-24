@@ -21,9 +21,7 @@ class StoreProductController extends Controller
     // Show the form for creating a new resource.
     public function addNew()
     {
-
         $stores = Auth::user()->stores;
-
         $categories = Category::all();
         $soldBy = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
 
@@ -121,25 +119,28 @@ class StoreProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Store $store, Product $product)
+    public function show(Product $product)
     {
-        return view('products.show', compact('store', 'product'));
+        $reviews = $product->feedbackRatings()->with('user')->get();
+        return view('products.show', compact('product', 'reviews'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Store $store, Product $product)
+    public function edit(Product $product)
     {
+        $stores = Auth::user()->stores;
         $categories = Category::all();
-        $soldby = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
-        return view('products.edit', compact('store', 'product', 'categories', 'soldby'));
+        $soldBy = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
+
+        return view('products.edit', compact('store', 'product', 'categories', 'soldBy'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Store $store, Product $product)
+    public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
             'category_id' => 'required',
@@ -158,15 +159,15 @@ class StoreProductController extends Controller
 
         $product->update($validatedData);
 
-        return redirect()->route('products.index', $store)->with('success', 'Product updated successfully.');
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Store $store, Product $product)
+    public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index', $store)->with('success', 'Product deleted successfully.');
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 }

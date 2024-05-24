@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/products/all', [StoreProductController::class, 'allProducts'])->name('products.all');
     Route::get('/products/addNew', [StoreProductController::class, 'addNew'])->name('products.addNew');
+    Route::post('/products', [StoreProductController::class, 'store'])->name('products.store');
 
     Route::resource('store.products', StoreProductController::class)->shallow();
 
@@ -101,7 +102,6 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(
     function () {
         Route::get('/products', [StoreProductController::class, 'index'])->name('products.index');
-        Route::post('/products', [StoreProductController::class, 'store'])->name('products.store');
         Route::get('/products/edit', [StoreProductController::class, 'edit'])->name('products.edit');
         Route::post('/product-update', [StoreProductController::class, 'update'])->name('products.update');
     }
