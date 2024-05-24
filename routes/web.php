@@ -88,6 +88,12 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('store.products', StoreProductController::class)->shallow();
 });
 
+// store product routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/store/{store}/products', [ProductController::class, 'index'])->name('store.products');
+   
+});
+
 // Cart Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

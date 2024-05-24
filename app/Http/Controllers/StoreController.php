@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Category;
 
 class StoreController extends Controller implements HasMiddleware
 {
@@ -127,7 +128,9 @@ class StoreController extends Controller implements HasMiddleware
     // Display the specified resource.
     public function show(Store $store)
     {
-        return view('store.show')->with('store', $store);
+        $products = $store->products()->get();
+        $categories = Category::all();
+        return view('store.show')->with('store', $store)->with('products', $products)->with('categories', $categories);
     }
 
     // Show the form for editing the specified resource.
