@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Store;
 
 class ProductController extends Controller
 {
@@ -20,6 +22,23 @@ class ProductController extends Controller
             ->paginate(12);
 
         return view('products-search', compact('products', 'query'));
+    }
+
+
+    public function index(Request $request, Store $store)
+    {
+        $categoryId = $request->input('category');
+        $categories = Category::all();
+
+        if ($categoryId) {
+            $products = Product::where('store_id', $store->id)
+                                ->where('category_id', $categoryId)
+                                ->get();
+        } else {
+            $products = Product::where('store_id', $store->id)->get();
+        }
+
+        return view('store.show', compact('store', 'products', 'categories'));
     }
 
     // display details of a product
