@@ -49,7 +49,7 @@
         Your Products
     </x-sidenav.link>
 
-    <x-sidenav.link :url="route('products.edit')" isSelected="{{ $currentUrl === route('products.edit') }}">
+    {{-- <x-sidenav.link :url="route('products.edit')" isSelected="{{ $currentUrl === route('products.edit') }}">
         <x-slot:icon>
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -57,7 +57,7 @@
             </svg>
         </x-slot:icon>
         Edit products
-    </x-sidenav.link>
+    </x-sidenav.link> --}}
 
     <x-sidenav.addnew :url="route('products.addNew')" isSelected="{{ $currentUrl === route('products.addNew') }}">
         products

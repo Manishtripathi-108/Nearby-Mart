@@ -102,8 +102,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(
     function () {
         Route::get('/products', [StoreProductController::class, 'index'])->name('products.index');
-        Route::get('/products/edit', [StoreProductController::class, 'edit'])->name('products.edit');
-        Route::post('/product-update', [StoreProductController::class, 'update'])->name('products.update');
+        // Route::get('/products/edit', [StoreProductController::class, 'edit'])->name('products.edit');
+        // Route::post('/product-update', [StoreProductController::class, 'update'])->name('products.update');
     }
 );
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Auth;
 use App\Models\Store;
+use Illuminate\Support\Facades\Storage;
 
 class StoreProductController extends Controller
 {
@@ -87,27 +88,21 @@ class StoreProductController extends Controller
         if ($request->hasFile('photo_main')) {
             $photo_main = $request->file('photo_main');
             $photo_main_name = time() . '_photo_main_' . $photo_main->hashName();
-
             $photo_main->storeAs('public/products', $photo_main_name);
-
             $product->photo_main = $photo_main_name;
         }
 
         if ($request->hasFile('photo_1')) {
             $photo_1 = $request->file('photo_1');
             $photo_1_name = time() . '_photo_1_' . $photo_1->hashName();
-
             $photo_1->storeAs('public/products', $photo_1_name);
-
             $product->photo_1 = $photo_1_name;
         }
 
         if ($request->hasFile('photo_2')) {
             $photo_2 = $request->file('photo_2');
             $photo_2_name = time() . '_photo_2_' . $photo_2->hashName();
-
             $photo_2->storeAs('public/products', $photo_2_name);
-
             $product->photo_2 = $photo_2_name;
         }
 
@@ -134,7 +129,7 @@ class StoreProductController extends Controller
         $categories = Category::all();
         $soldBy = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
 
-        return view('products.edit', compact('store', 'product', 'categories', 'soldBy'));
+        return view('products.edit', compact('stores', 'product', 'categories', 'soldBy'));
     }
 
     /**
@@ -143,24 +138,61 @@ class StoreProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
-            'category_id' => 'required',
-            'name' => 'required',
-            'photo_main' => 'image',
-            'photo_1' => 'image',
-            'photo_2' => 'image',
+            'store_id' => 'required|exists:stores,id',
+            'category_id' => 'required|exists:categories,id',
+            'photo_main' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_2' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
             'price' => 'required|numeric',
-            'discount' => 'nullable|numeric',
-            'discount_type' => 'nullable|string',
+            'discount' => 'required|numeric',
+            'discount_type' => 'required|string|in:Percentage,Fixed',
             'description' => 'nullable|string',
             'stock' => 'required|integer',
-            'measure' => 'nullable|string',
-            'sold_by' => 'nullable|string',
+            'measure' => 'required|numeric',
+            'sold_by' => 'required|string|max:255',
         ]);
+
+        if ($request->hasFile('photo_main')) {
+            // Delete old image if exists
+            if ($product->photo_main) {
+                Storage::delete('public/products/' . $product->photo_main);
+            }
+
+            $photo_main = $request->file('photo_main');
+            $photo_main_name = time() . '_photo_main_' . $photo_main->hashName();
+            $photo_main->storeAs('public/products', $photo_main_name);
+            $validatedData['photo_main'] = $photo_main_name;
+        }
+
+        if ($request->hasFile('photo_1')) {
+            if ($product->photo_1) {
+                Storage::delete('public/products/' . $product->photo_1);
+            }
+
+            $photo_1 = $request->file('photo_1');
+            $photo_1_name = time() . '_photo_1_' . $photo_1->hashName();
+            $photo_1->storeAs('public/products', $photo_1_name);
+            $validatedData['photo_1'] = $photo_1_name;
+        }
+
+        if ($request->hasFile('photo_2')) {
+            if ($product->photo_2) {
+                Storage::delete('public/products/' . $product->photo_2);
+            }
+
+            $photo_2 = $request->file('photo_2');
+            $photo_2_name = time() . '_photo_2_' . $photo_2->hashName();
+            $photo_2->storeAs('public/products', $photo_2_name);
+            $validatedData['photo_2'] = $photo_2_name;
+        }
 
         $product->update($validatedData);
 
+        // Redirect with success message
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

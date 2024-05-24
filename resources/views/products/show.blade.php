@@ -128,15 +128,13 @@
 
                                 <!-- edit and delete buttons - start -->
                                 <div class="flex gap-4">
-                                    <a class="inline-block rounded-lg bg-blue-600 px-6 py-3 text-center text-white transition duration-100 hover:bg-blue-700 focus-visible:ring focus-visible:ring-blue-500 active:bg-blue-800" href="{{ route('products.edit', $product->id) }}">
+                                    <a class="cursor-pointer rounded-lg border-b-[4px] border-blue-600 bg-blue-500 px-6 py-2 text-white transition-all hover:-translate-y-[1px] hover:border-b-[6px] hover:brightness-110 active:translate-y-[2px] active:border-b-[2px] active:brightness-90" href="{{ route('products.edit', $product->id) }}">
                                         Edit Product
                                     </a>
                                     <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="inline-block rounded-lg bg-red-600 px-6 py-3 text-center text-white transition duration-100 hover:bg-red-700 focus-visible:ring focus-visible:ring-red-500 active:bg-red-800" type="submit">
-                                            Delete Product
-                                        </button>
+                                        <x-danger-button type="submit">Delete Product</x-danger-button>
                                     </form>
                                 </div>
                                 <!-- edit and delete buttons - end -->
