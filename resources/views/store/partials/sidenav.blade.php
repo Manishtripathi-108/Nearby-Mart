@@ -59,7 +59,7 @@
         Edit products
     </x-sidenav.link>
 
-    <x-sidenav.addnew :url="route('products.create')" isSelected="{{ $currentUrl === route('products.create') }}">
+    <x-sidenav.addnew :url="route('products.addNew')" isSelected="{{ $currentUrl === route('products.addNew') }}">
         products
     </x-sidenav.addnew>
 </x-sidenav>

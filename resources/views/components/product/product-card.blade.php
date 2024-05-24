@@ -1,7 +1,11 @@
+@php
+    $currentUrl = url()->current();
+@endphp
+
 <div>
 
     {{-- if route is products.all, then the product should be a link to the product page. --}}
-    @if (route('products.all'))
+    @if ($currentUrl === route('products.all'))
         <a class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100" href="{{ route('products.show', $product->id) }}">
         @else
             <a class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100" href="{{ route('products.details', $product->id) }}">
@@ -19,7 +23,7 @@
         <div class="flex flex-col">
 
             {{--  If the route is products.all, then the product name should be a link to the product page. --}}
-            @if (route('products.all'))
+            @if ($currentUrl === route('products.all'))
                 <a class="text-sm text-gray-500 lg:text-base" href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
             @else
                 <a class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg" href="{{ route('products.details', $product->id) }}">{{ $product->name }}</a>

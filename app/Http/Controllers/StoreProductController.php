@@ -18,6 +18,21 @@ class StoreProductController extends Controller
         return view('products.all', compact('products'));
     }
 
+    // Show the form for creating a new resource.
+    public function addNew()
+    {
+
+        $stores = Auth::user()->stores;
+
+        $categories = Category::all();
+        $soldBy = ['kg', 'g', 'lb', 'pcs', 'units', 'each', 'ml', 'l', 'fl oz'];
+
+        return view(
+            'products.create',
+            compact('stores', 'categories', 'soldBy')
+        );
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -43,6 +58,7 @@ class StoreProductController extends Controller
     public function store(Request $request, Store $store)
     {
         $request->validate([
+            'store_id' => 'required|exists:stores,id',
             'category_id' => 'required|exists:categories,id',
             'photo_main' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'photo_1' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -50,15 +66,16 @@ class StoreProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'discount' => 'required|numeric',
-            'discount_type' => 'required|string|in:percentage,fixed',
+            'discount_type' => 'required|string|in:Percentage,Fixed',
             'description' => 'nullable|string',
             'stock' => 'required|integer',
-            'measure' => 'required|string|max:255',
+            'measure' => 'required|numeric',
             'sold_by' => 'required|string|max:255',
         ]);
 
+
         $product = new Product();
-        $product->store_id = $store->id;
+        $product->store_id = $request->store_id;
         $product->category_id = $request->category_id;
         $product->name = $request->name;
         $product->price = $request->price;
@@ -70,24 +87,30 @@ class StoreProductController extends Controller
         $product->sold_by = $request->sold_by;
 
         if ($request->hasFile('photo_main')) {
-            $photoMain = time() . 'product.' . $request->photo_main->extension();
-            $request->profile_picture->storeAs('public/products', $photoMain);
+            $photo_main = $request->file('photo_main');
+            $photo_main_name = time() . '_photo_main_' . $photo_main->hashName();
 
-            $product->photo_main = $photoMain;
+            $photo_main->storeAs('public/products', $photo_main_name);
+
+            $product->photo_main = $photo_main_name;
         }
 
         if ($request->hasFile('photo_1')) {
-            $photo_1 = time() . 'product.' . $request->photo_1->extension();
-            $request->profile_picture->storeAs('public/products', $photo_1);
+            $photo_1 = $request->file('photo_1');
+            $photo_1_name = time() . '_photo_1_' . $photo_1->hashName();
 
-            $product->photo_1 = $photo_1;
+            $photo_1->storeAs('public/products', $photo_1_name);
+
+            $product->photo_1 = $photo_1_name;
         }
 
         if ($request->hasFile('photo_2')) {
-            $photo_2 = time() . 'product.' . $request->photo_2->extension();
-            $request->profile_picture->storeAs('public/products', $photo_2);
+            $photo_2 = $request->file('photo_2');
+            $photo_2_name = time() . '_photo_2_' . $photo_2->hashName();
 
-            $product->photo_2 = $photo_2;
+            $photo_2->storeAs('public/products', $photo_2_name);
+
+            $product->photo_2 = $photo_2_name;
         }
 
         $product->save();
