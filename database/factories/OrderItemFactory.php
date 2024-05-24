@@ -35,7 +35,7 @@ class OrderItemFactory extends Factory
         return [
             'order_id' => $useExistingOrder ? Order::inRandomOrder()->value('id') : Order::factory(),
             'product_id' => $useExistingProduct ? Product::inRandomOrder()->value('id') : Product::factory(),
-            'product_image' => 'images/products/product.png',
+            'product_image' => 'product.png',
             'product_name' => $this->faker->word,
             'unit_price' => $price,
             'quantity' => $quantity,

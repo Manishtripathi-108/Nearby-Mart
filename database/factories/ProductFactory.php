@@ -29,9 +29,9 @@ class ProductFactory extends Factory
         return [
             'store_id' => $useExistingStore ? Store::inRandomOrder()->value('id') : Store::factory(),
             'category_id' => $useExistingCategory ? Category::inRandomOrder()->value('id') : Category::factory(),
-            'photo_main' => 'images/products/product.png',
-            'photo_1' => 'images/products/product.png',
-            'photo_2' => 'images/products/product.png',
+            'photo_main' => 'product.png',
+            'photo_1' => 'product.png',
+            'photo_2' => 'product.png',
             'name' => $this->faker->sentence(3),
             'rating' => $this->faker->randomFloat(1, 1, 5),
             'profit' => $this->faker->randomFloat(2, 1, 100),

@@ -9,12 +9,6 @@
         </p>
     </header>
 
-    @if (session('changed'))
-        <div class="mb-4 rounded bg-green-500 p-4 text-white">
-            {{ session('changed') }}
-        </div>
-    @endif
-
     <div>
         <form class="space-y-4" action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data">
             @csrf

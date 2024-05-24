@@ -81,32 +81,12 @@ Route::middleware(['auth'])->group(function () {
     // Store routes
     Route::resource('store', StoreController::class);
 
-    /*
-        It is for the store product routes. where store will manage the products.
-
-        this will create the following routes: store.products.index => /store/{store}/products, 
-        store.products.create, store.products.store, store.products.show,
-        store.products.edit, store.products.update, store.products.destroy 
-    */
-
+    // Store Product Routes
     Route::get('/products/all', [StoreProductController::class, 'allProducts'])->name('products.all');
     Route::get('/products/addNew', [StoreProductController::class, 'addNew'])->name('products.addNew');
     Route::post('/products', [StoreProductController::class, 'store'])->name('products.store');
-
     Route::resource('store.products', StoreProductController::class)->shallow();
-
-
 });
-
-//add products routes
-Route::middleware(['auth'])->group(
-    function () {
-        Route::get('/products', [StoreProductController::class, 'index'])->name('products.index');
-        // Route::get('/products/edit', [StoreProductController::class, 'edit'])->name('products.edit');
-        // Route::post('/product-update', [StoreProductController::class, 'update'])->name('products.update');
-    }
-);
-
 
 // Cart Routes
 Route::middleware(['auth'])->group(function () {

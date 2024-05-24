@@ -32,17 +32,13 @@ class StoreProductController extends Controller
         );
     }
 
-    /**
-     * Display a listing of the resource.
-     */
+    // Store a newly created resource in storage.
     public function index()
     {
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Show the form for creating a new resource.
     public function create(Store $store)
     {
         $categories = Category::all();
@@ -108,21 +104,17 @@ class StoreProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.index')->with('success', 'Product added successfully.');
+        return redirect()->route('products.all')->with('success', 'Product added successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Display the specified resource.
     public function show(Product $product)
     {
         $reviews = $product->feedbackRatings()->with('user')->get();
         return view('products.show', compact('product', 'reviews'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Show the form for editing the specified resource.
     public function edit(Product $product)
     {
         $stores = Auth::user()->stores;
@@ -132,9 +124,7 @@ class StoreProductController extends Controller
         return view('products.edit', compact('stores', 'product', 'categories', 'soldBy'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Update the specified resource in storage.
     public function update(Request $request, Product $product)
     {
         $validatedData = $request->validate([
@@ -190,16 +180,14 @@ class StoreProductController extends Controller
         $product->update($validatedData);
 
         // Redirect with success message
-        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+        return redirect()->route('products.all')->with('success', 'Product updated successfully.');
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Remove the specified resource from storage.
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
+        return redirect()->route('products.all')->with('success', 'Product deleted successfully.');
     }
 }

@@ -1,4 +1,4 @@
-<div class="hover:shodow-lg fixed bottom-5 right-5 flex w-fit flex-col rounded-2xl border-green-300 bg-green-100 p-3 shadow-md transition-opacity duration-1000 ease-in-out" 
+<div class="fixed z-50 right-5 top-5 flex w-fit flex-col rounded-2xl border-green-300 bg-green-100 p-3 shadow-md transition-opacity duration-1000 ease-in-out hover:shadow-lg"
         x-data="{ isVisible: false }" 
         x-init="setTimeout(() => {
         isVisible = true;

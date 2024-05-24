@@ -1,12 +1,12 @@
 <!-- product - start -->
 <div class="flex flex-wrap gap-x-4 overflow-hidden rounded-lg border sm:gap-y-4 lg:gap-6">
-    <a class="group relative block h-48 w-32 overflow-hidden bg-gray-100 sm:h-56 sm:w-40" href="{{ route('product.details', $item->product->id) }}">
-        <img class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" src="{{ asset('images/products/' . $item->product->photo_main) }}" alt="{{ $item->product->name }}" loading="lazy" />
+    <a class="group relative block h-48 w-32 overflow-hidden bg-gray-100 sm:h-56 sm:w-40" href="{{ route('products.details', $item->product->id) }}">
+        <img class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" src="{{ asset('products/' . $item->product->photo_main) }}" alt="{{ $item->product->name }}" loading="lazy" />
     </a>
 
     <div class="flex flex-1 flex-col justify-between py-4">
         <div>
-            <a class="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl" href="{{ route('product.details', $item->product->id) }}">{{ $item->product->name }}</a>
+            <a class="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl" href="{{ route('products.details', $item->product->id) }}">{{ $item->product->name }}</a>
 
             <span class="block text-gray-500">
                 Category: {{ $item->product->category->name }}

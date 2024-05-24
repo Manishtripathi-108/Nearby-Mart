@@ -19,24 +19,24 @@
                             <div class="grid gap-4 lg:grid-cols-5">
                                 <div class="order-last flex gap-4 lg:order-none lg:flex-col">
                                     <div class="overflow-hidden rounded-lg bg-gray-100">
-                                        <img class="h-full w-full object-cover object-center" src="{{ asset('images/products/' . $product->photo_main) }}" alt="{{ $product->name }}" loading="lazy" />
+                                        <img class="h-full w-full object-cover object-center" src="{{ asset('products/' . $product->photo_main) }}" alt="{{ $product->name }}" loading="lazy" />
                                     </div>
 
                                     @if ($product->photo_1)
                                         <div class="overflow-hidden rounded-lg bg-gray-100">
-                                            <img class="h-full w-full object-cover object-center" src="{{ asset('images/products/' . $product->photo_1) }}" alt="{{ $product->name }}" loading="lazy" />
+                                            <img class="h-full w-full object-cover object-center" src="{{ asset('products/' . $product->photo_1) }}" alt="{{ $product->name }}" loading="lazy" />
                                         </div>
                                     @endif
 
                                     @if ($product->photo_2)
                                         <div class="overflow-hidden rounded-lg bg-gray-100">
-                                            <img class="h-full w-full object-cover object-center" src="{{ asset('images/products/' . $product->photo_2) }}" alt="{{ $product->name }}" loading="lazy" />
+                                            <img class="h-full w-full object-cover object-center" src="{{ asset('products/' . $product->photo_2) }}" alt="{{ $product->name }}" loading="lazy" />
                                         </div>
                                     @endif
                                 </div>
 
                                 <div class="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
-                                    <img class="h-full w-full object-cover object-center" src="{{ asset('images/products/' . $product->photo_main) }}" alt="{{ $product->name }}" loading="lazy" />
+                                    <img class="h-full w-full object-cover object-center" src="{{ asset('products/' . $product->photo_main) }}" alt="{{ $product->name }}" loading="lazy" />
 
                                     @if ($product->discount)
                                         @if ($product->discount_type == 'Fixed')

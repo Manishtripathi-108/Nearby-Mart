@@ -10,7 +10,7 @@
         @else
             <a class="group relative block h-96 overflow-hidden rounded-t-lg bg-gray-100" href="{{ route('products.details', $product->id) }}">
     @endif
-    <img class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" src="{{ asset('images/products/' . $product->photo_main) }}" loading="lazy" />
+    <img class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" src="{{ asset('products/' . $product->photo_main) }}" loading="lazy" />
 
     @if ($discountLabel)
         <span class="absolute left-0 top-3 rounded-r-lg bg-red-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">
