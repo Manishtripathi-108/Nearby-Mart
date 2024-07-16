@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
+     <style>
+         .image-style{
+             border:1px solid black;
+             border-radius:80px;
+             }
+     </style>
 </head>
 <body>
     <h1>Nearby Mart</h1>
@@ -91,7 +96,7 @@
     <h2>Project Implementation</h2>
     <h3>Screenshots and Descriptions</h3>
     <p><strong>Welcome Page</strong></p>
-    <img src="/project Image/landing page.png" alt="Welcome Page">
+    <img src="/project Image/landing page.png" alt="Welcome Page" class="image-style">
     <p><strong>Login Page</strong>: Users enter their credentials to access their accounts.</p>
     <img src="/project Image/signIn.png" alt="Login Page">
     <p><strong>Register Page</strong>: New users can create an account.</p>
