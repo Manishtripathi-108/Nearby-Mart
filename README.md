@@ -90,32 +90,26 @@
     </ul>
     <h2>Project Implementation</h2>
     <h3>Screenshots and Descriptions</h3>
-    <p><strong>Welcome Page</strong></p>
-    <img src="/project Image/landing page.png" alt="Welcome Page" style="
-             border : 1px solid black;
-             border-radius : 80px;
-             "/>
+   <p><strong>Welcome Page</strong></p>
+    <img src="/project Image/landing page.png" alt="Welcome Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Login Page</strong>: Users enter their credentials to access their accounts.</p>
-    <img src="/project Image/signIn.png" alt="Login Page" style="
-             border:1px solid black;
-             border-radius:80px ;
-             ">
+    <img src="/project Image/signIn.png" alt="Login Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Register Page</strong>: New users can create an account.</p>
-    <img src="/project Image/signUp.png" alt="Register Page">
+    <img src="/project Image/signUp.png" alt="Register Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Homepage</strong>: Central hub for users to search for products and view featured items.</p>
-    <img src="/project Image/homePage.png" alt="Homepage">
+    <img src="/project Image/homePage.png" alt="Homepage" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Product Listing Page</strong>: Displays search results with filter options.</p>
-    <img src="/project Image/productList.png" alt="Product Listing Page">
+    <img src="/project Image/productList.png" alt="Product Listing Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Product Details Page</strong>: Provides comprehensive information about a specific product.</p>
-    <img src="/project Image/productPage.png" alt="Product Details Page">
+    <img src="/project Image/productPage.png" alt="Product Details Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Checkout Page</strong>: Allows users to finalize their purchase.</p>
-    <img src="/project Image/cartPage.png" alt="Checkout Page">
+    <img src="/project Image/cartPage.png" alt="Checkout Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>User Profile Page</strong>: Enables users to view and update their personal information.</p>
-    <img src="/project Image/profilePage.png" alt="User Profile Page">
+    <img src="/project Image/profilePage.png" alt="User Profile Page" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Order History Section</strong>: Users can view their past orders.</p>
-    <img src="/project Image/orderHistory.jpg" alt="Order History Section">
+    <img src="/project Image/orderHistory.jpg" alt="Order History Section" style="border: 1px solid black; border-radius: 80px;">
     <p><strong>Store Owner Dashboard</strong>: Tools for managing stores, products, and orders.</p>
-    <img src="/project Image/Dashboard.png" alt="Store Owner Dashboard">
+    <img src="/project Image/Dashboard.png" alt="Store Owner Dashboard" style="border: 1px solid black; border-radius: 80px;">
     <h2>Results and Discussion</h2>
     <h3>Results</h3>
     <ul>
