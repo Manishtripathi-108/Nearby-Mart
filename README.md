@@ -94,7 +94,7 @@
     <img src="/project Image/landing page.png" alt="Welcome Page" style="
              border:1px solid black;
              border-radius:80px ;
-             ">
+             "/>
     <p><strong>Login Page</strong>: Users enter their credentials to access their accounts.</p>
     <img src="/project Image/signIn.png" alt="Login Page" style="
              border:1px solid black;
