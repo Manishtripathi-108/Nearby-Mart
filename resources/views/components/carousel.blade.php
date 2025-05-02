@@ -64,7 +64,7 @@
                 <div class="md:w-1/2">
                     <p class="text-sm font-bold uppercase">Exclusive Offer</p>
                     <p class="text-3xl font-bold">Discover Local Stores</p>
-                    <p class="mb-10 text-2xl leading-none">Connect with your community and shop locally with Nearby Mart.</p>
+                    <p class="mb-10 text-2xl leading-none">Connect with your community and shop locally with Town Kart.</p>
                     <a class="rounded bg-blue-800 px-8 py-4 text-xs font-bold uppercase text-white hover:bg-gray-200 hover:text-gray-800" href="#">Shop Now</a>
                 </div>
             </div>

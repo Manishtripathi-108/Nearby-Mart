@@ -1,1 +1,1 @@
-<img src="{{ asset('images/Nearby Logo.png') }}" alt="Nearby Mart" {{ $attributes }} />
+<img src="{{ asset('images/Town Kart.png') }}" alt="Town Kart" {{ $attributes }} />

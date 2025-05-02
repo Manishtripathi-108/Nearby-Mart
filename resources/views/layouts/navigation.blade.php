@@ -7,7 +7,7 @@
                 <div class="flex items-center">
                     <x-application-logo class="block h-9 w-auto" />
                     <span class="ml-2 text-2xl font-bold text-blue-600">
-                        Nearby Mart
+                        Town Kart
                     </span>
                 </div>
             </div>

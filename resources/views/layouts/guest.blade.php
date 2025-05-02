@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Nearby Mart') }}</title>
+    <title>{{ config('app.name', 'Town Kart') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.bunny.net" rel="preconnect">

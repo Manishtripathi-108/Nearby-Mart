@@ -10,7 +10,7 @@
                 <div class="mx-auto flex w-full max-w-md items-center px-6 lg:w-full">
                     <div class="flex-1">
                         <div class="text-center">
-                            <h2 class="text-center text-4xl font-bold text-gray-700">Nearby Mart</h2>
+                            <h2 class="text-center text-4xl font-bold text-gray-700">Town Kart</h2>
                             <p class="mt-3 text-gray-500">Sign in to access your account</p>
                         </div>
 

@@ -26,11 +26,11 @@
                     <h1 class="text-3xl font-extrabold sm:text-5xl">
                         Welcome to
 
-                        <strong class="block font-extrabold text-blue-700"> Nearby Mart. </strong>
+                        <strong class="block font-extrabold text-blue-700"> Town Kart. </strong>
                     </h1>
 
                     <p class="mt-4 max-w-lg text-center sm:text-xl/relaxed">
-                        Your one-stop destination for digital commerce where you can sell and shop with ease.Turn your products into profits by setting up your digital store on Nearby Mart. Reach a wider audience and showcase your offerings effortlessly.From everyday essentials to unique finds, explore a vast array of products from sellers near and far. Find what you need, when you need it.
+                        Your one-stop destination for digital commerce where you can sell and shop with ease.Turn your products into profits by setting up your digital store on Town Kart. Reach a wider audience and showcase your offerings effortlessly.From everyday essentials to unique finds, explore a vast array of products from sellers near and far. Find what you need, when you need it.
                     </p>
 
                     <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-center">

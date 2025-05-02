@@ -294,11 +294,11 @@
                             <rect x="14" y="1" width="7" height="6"></rect>
                             <rect x="14" y="11" width="7" height="12"></rect>
                         </svg>
-                        <span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-100">Nearby Mart</span>
+                        <span class="ml-2 text-xl font-bold uppercase tracking-wide text-gray-100">Town Kart</span>
                     </a>
                     <div class="mt-4 lg:max-w-sm">
                         <p class="text-sm text-blue-50">
-                            Welcome to Nearby Mart, your one-stop destination for all your shopping needs. Explore a
+                            Welcome to Town Kart, your one-stop destination for all your shopping needs. Explore a
                             wide range of products at affordable prices.
                         </p>
                         <p class="text-deep-purple-50 mt-4 text-sm">
@@ -334,7 +334,7 @@
             </div>
             <div class="border-deep-purple-accent-200 flex flex-col justify-between border-t pb-10 pt-5 sm:flex-row">
                 <p class="text-sm text-gray-100">
-                    © Copyright 2024 Nearby Mart All rights reserved.
+                    © Copyright 2024 Town Kart All rights reserved.
                 </p>
                 <div class="mt-4 flex items-center space-x-4 sm:mt-0">
                     <a class="text-deep-purple-100 hover:text-teal-accent-400 transition-colors duration-300" href="">
