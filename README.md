@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>README - Nearby Mart</title>
+    <title>README - Town Kart</title>
 </head>
 <body>
-    <h1>Nearby Mart</h1>
+    <h1>Town Kart</h1>
     <h2>Project Overview</h2>
     <p>
-    "Nearby Mart" is a web-based application developed to bridge the gap between local store owners and users, providing a platform for convenient online shopping. Unlike major e-commerce giants, Nearby Mart focuses on promoting local businesses and providing users with the benefits of shopping locally. The project leverages the Laravel framework for its development, ensuring a robust and scalable solution.</p>
+    "Town Kart" is a web-based application developed to bridge the gap between local store owners and users, providing a platform for convenient online shopping. Unlike major e-commerce giants, Town Kart focuses on promoting local businesses and providing users with the benefits of shopping locally. The project leverages the Laravel framework for its development, ensuring a robust and scalable solution.</p>
     <h2>Objectives</h2>
     <ul>
         <li>To provide a user-friendly platform for local store owners to showcase their products online.</li>
@@ -43,7 +43,7 @@
         <li><strong>Deployment</strong>: Apache server, Herd</li>
     </ul>
     <h2>Project Scope</h2>
-    <p>The Nearby Mart project includes the development of a fully functional web application that connects local store owners with users. The project covers the implementation of key features, user interface design, database management, and deployment. Future enhancements could include the development of a mobile application, integration of more payment gateways, and advanced analytics for store owners.</p>
+    <p>The Town Kart project includes the development of a fully functional web application that connects local store owners with users. The project covers the implementation of key features, user interface design, database management, and deployment. Future enhancements could include the development of a mobile application, integration of more payment gateways, and advanced analytics for store owners.</p>
     <h2>Modules of the Project</h2>
     <ul>
         <li><strong>User Authentication Module</strong>: Handles user registration, login functionalities, and user profiles.</li>
@@ -76,7 +76,7 @@
     </ul>
     <h2>System Design</h2>
     <h3>Architecture Overview</h3>
-    <p>The architecture of the Nearby Mart application follows the Model-View-Controller (MVC) pattern, which separates the application into three interconnected components:</p>
+    <p>The architecture of the Town Kart application follows the Model-View-Controller (MVC) pattern, which separates the application into three interconnected components:</p>
     <ul>
         <li><strong>Model</strong>: Manages the data and business logic.</li>
         <li><strong>View</strong>: Handles the presentation layer and user interface.</li>
@@ -121,7 +121,7 @@
         <li><strong>Robust Database Connectivity</strong>: Efficient data management for user actions and backend processes.</li>
     </ul>
     <h3>Discussion</h3>
-    <p>The achieved results highlight our proficiency in mastering essential web development modules and successfully implementing user-friendly features and robust database connectivity. These outcomes provide a strong foundation for ongoing development and refinement. They position the "Nearby Mart" project for enhanced user-centric web applications. Continuous improvements and feedback-driven enhancements will contribute to the sustained success and growth of the platform.</p>
+    <p>The achieved results highlight our proficiency in mastering essential web development modules and successfully implementing user-friendly features and robust database connectivity. These outcomes provide a strong foundation for ongoing development and refinement. They position the "Town Kart" project for enhanced user-centric web applications. Continuous improvements and feedback-driven enhancements will contribute to the sustained success and growth of the platform.</p>
     <h2>Future Scope</h2>
     <ul>
         <li><strong>Mobile Application Development</strong>: Dedicated mobile applications for iOS and Android.</li>
@@ -131,6 +131,8 @@
         <li><strong>Data Analytics for Business Insights</strong>: Implement robust data analytics tools.</li>
     </ul>
     <h2>Conclusion</h2>
-    <p>The "Nearby Mart" project, rooted in user-centric design, offers a seamless interface and secure checkout, providing a strong foundation for the future.</p>
+    <p>The "Town Kart" project, rooted in user-centric design, offers a seamless interface and secure checkout, providing a strong foundation for the future.</p>
 </body>
 </html>
+#   T o w n - K a r t  
+ 
